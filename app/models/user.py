@@ -10,6 +10,17 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.VARCHAR(50))
+    last_name = db.Column(db.VARCHAR(50))
+    profile_image = db.Column(db.Text)
+
+    playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
+    #Child
+
+    following_user = db.relationship("User", secondary = "user_follows", back_populates="followed_user")
+    followed_user = db.relationship("User", secondary = "user_follows", back_populates="following_user")
+
+    liking_user = db.relationship("User", secondary="playlist_like", back_populates="liked_playlist")
 
     @property
     def password(self):
@@ -24,7 +35,11 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+            "id": self.id,
+            "username": self.username,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "profile_image": self.profile_image,
+            "hashed_password": self.hashed_password,
+            "created_at": self.created_at
         }

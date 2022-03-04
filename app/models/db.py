@@ -2,38 +2,38 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
-    __tablename__ = "users"
+# class User(db.Model):
+#     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key= True, nullable=False)
-    username = db.Column(db.VARCHAR(50), nullable=False)
-    first_name = db.Column(db.VARCHAR(50))
-    last_name = db.Column(db.VARCHAR(50))
-    profile_image = db.Column(db.Text)
-    bio = db.Column(db.Text)
-    hashed_password = db.Column(db.VARCHAR(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable = False)
-    #Parent
-    playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
-    #Child
+#     # id = db.Column(db.Integer, primary_key= True, nullable=False)
+#     username = db.Column(db.VARCHAR(50), nullable=False)
+#     first_name = db.Column(db.VARCHAR(50))
+#     last_name = db.Column(db.VARCHAR(50))
+#     profile_image = db.Column(db.Text)
+    
+#     hashed_password = db.Column(db.VARCHAR(255), nullable=False)
+#     created_at = db.Column(db.DateTime, nullable = False)
+#     #Parent
+#     playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
+#     #Child
 
-    following_user = db.relationship("User", secondary = "user_follows", back_populates="followed_user")
-    followed_user = db.relationship("User", secondary = "user_follows", back_populates="following_user")
+#     following_user = db.relationship("User", secondary = "user_follows", back_populates="followed_user")
+#     followed_user = db.relationship("User", secondary = "user_follows", back_populates="following_user")
 
-    liking_user = db.relationship("User", secondary="playlist_like", back_populates="liked_playlist")
+#     liking_user = db.relationship("User", secondary="playlist_like", back_populates="liked_playlist")
 
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "profile_image": self.profile_image,
-            "bio": self.bio,
-            "hashed_password": self.hashed_password,
-            "created_at": self.created_at
-        }
+#     def to_dict(self):
+#         return {
+#             "id": self.id,
+#             "username": self.username,
+#             "first_name": self.first_name,
+#             "last_name": self.last_name,
+#             "profile_image": self.profile_image,
+#             "bio": self.bio,
+#             "hashed_password": self.hashed_password,
+#             "created_at": self.created_at
+#         }
 
 
 class Artist(db.Model):
