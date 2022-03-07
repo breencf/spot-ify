@@ -1,1 +1,154 @@
 /* TODO Add site wide styles */
+/* Global */
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Raleway", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --sp-gray: #b3b3b3;
+  --sp-dark: rgb(19, 19, 19);
+  --sp-green: #1db954;
+  --background-noise: #04240f;
+}
+
+/* Header Styles */
+h1 {
+  font-weight: 700;
+  color: white;
+  font-size: 6rem;
+}
+
+h2 {
+  font-weight: 600;
+  color: white;
+  font-size: 32px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+}
+
+h4 {
+  font-size: 14px;
+  color: var(--sp-gray);
+  font-weight: 600;
+}
+
+h4:active {
+  color: white;
+}
+
+h6 {
+  font-weight: 500;
+  color: var(--sp-gray);
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+p {
+  font-weight: 500;
+  color: var(--sp-gray);
+  font-size: 13px;
+}
+
+/* Main Div Styling */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  /* overflow-y: scroll; */
+}
+
+#ui {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--sp-dark);
+  /* border: 2px solid white; */
+  flex: 1 1 auto;
+  height: inherit;
+  /* overflow-y: scroll; */
+}
+
+#sidebar {
+  background-color: black;
+  width: 241px;
+  height: inherit;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* overflow-y: scroll; */
+}
+
+#player {
+  flex: 0 1 90px;
+  height: 90px;
+  width: 100%;
+  padding: 0px 16px;
+  /* position: fixed;
+    bottom: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--sp-dark);
+  border: 1px solid #282828;
+}
+
+#topbar {
+  padding: 0px 20px;
+  width: 100%;
+  height: 332px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-image: linear-gradient(var(--background-noise) 1%, var(--sp-dark));
+}
+
+.button-green {
+  border: none;
+  padding: 8px 34px;
+  border-radius: 16px;
+  background-color: var(--sp-green);
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin: 2px;
+}
+
+.button-green:hover {
+  font-size: 14.5px;
+  margin: 1.5px;
+}
+
+.button-white {
+  padding: 13px 31px;
+  border: 1px solid var(--sp-dark);
+  border-radius: 500px;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px;
+  font-size: 14px !important;
+  color: var(--sp-dark);
+  width: 100%;
+}
+
+.button-white:hover {
+  border: 1px solid black;
+}
