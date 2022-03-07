@@ -48,3 +48,10 @@ def user_playlists_form(id):
 
     # return {"err": "Was not able to add new playlist"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@user_routes.route('/<int:userId>/playlists/<int:playlistId>')
+@login_required
+def edit_playlist(userId,playlistId):
+    playlist = Playlist.query.filter(Playlist.id == playlistId).first()
+    return {"playlist": playlist.to_dict()}
