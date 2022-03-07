@@ -15,6 +15,7 @@ class Song(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     #Parent
     #Child
+    songs_library = db.relationship("Library", back_populates='songs_lib')
     artist = db.relationship("Artist", back_populates='songs')
     album = db.relationship("Album", back_populates='songs' )
     playlists = db.relationship("Playlist", secondary=songs_playlist, back_populates="songs")

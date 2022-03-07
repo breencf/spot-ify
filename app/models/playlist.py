@@ -15,6 +15,7 @@ class Playlist(db.Model):
     #Parent
     #Child
     user = db.relationship("User", back_populates="playlists")
+    playlist_library = db.relationship('Library', back_populates='playlists_lib')
     songs = db.relationship("Song", secondary=songs_playlist, back_populates="playlists")
 
     liked_playlist = db.relationship("User", secondary=playlist_like, back_populates="liking_user")
