@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, redirect, request
 from flask_login import login_required
-from app.models import User, Playlist, db
+from app.models import User, Playlist, db, Song
 from app.forms import PlayListForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -28,7 +28,6 @@ def user_playlists(id):
     print(user_playlists, 'are the playlsits printing out? ')
     return {'user_playlists': [playlist.to_dict() for playlist in user_playlists]}
 
-
 @user_routes.route('/<int:id>/playlists', methods=['POST'])
 @login_required
 def user_playlists_form(id):
@@ -45,6 +44,13 @@ def user_playlists_form(id):
         )
         db.session.add(playlist)
         db.session.commit()
+
+@user_routes.route('/songs')
+def all_songs():
+    songs = Song.query.all()
+
+    print(songs)
+    return { 'song_array': [song.to_dict() for song in songs] }
 
     # return {"err": "Was not able to add new playlist"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
