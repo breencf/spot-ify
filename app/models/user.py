@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     profile_image = db.Column(db.Text)
     created_at = db.Column(db.DateTime)
 
+    users_library = db.relationship('Library', back_populates='users_lib')
     playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
     #Child
 

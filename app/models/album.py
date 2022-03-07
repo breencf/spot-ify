@@ -11,6 +11,7 @@ class Album(db.Model):
     created_at = db.Column(db.DateTime)
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
     #Parent
+    albums_library = db.relationship("Library", back_populates='albums_lib')
     songs = db.relationship("Song", back_populates="album", cascade='all, delete, delete-orphan' )
     #Child
     artist = db.relationship("Artist", back_populates='albums')
