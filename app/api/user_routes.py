@@ -45,8 +45,12 @@ def user_playlists_form(id):
         )
         db.session.add(playlist)
         db.session.commit()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
     # return {"err": "Was not able to add new playlist"}
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -55,3 +59,4 @@ def user_playlists_form(id):
 def edit_playlist(userId,playlistId):
     playlist = Playlist.query.filter(Playlist.id == playlistId).first()
     return {"playlist": playlist.to_dict()}
+
