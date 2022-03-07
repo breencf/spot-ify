@@ -27,6 +27,7 @@ const UserPlaylists = () => {
 
       const value = await dispatch(add_Playlist(playList)).catch(async (err) => {
         console.log(err, ' what is this err')
+        const errors = await err.json()
         if (errors) {
           return errors;
         }
@@ -47,7 +48,7 @@ const UserPlaylists = () => {
       <h2>hello from playlists</h2>
       {playLists?.map((list, index) => {
         return <div key={index}>
-            <p>{list?.name}</p>
+            <p>{list.name}</p>
         </div>;
       })}
       <form onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const UserPlaylists = () => {
             type='text'
             name='description'
         />
-        <button type='submit'>Add Playlist</button>
+        <button type='submit' >Add Playlist</button>
       </form>
     </div>
   );
