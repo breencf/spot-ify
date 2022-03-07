@@ -2,7 +2,7 @@ from .db import db
 from .tables import playlist_like, user_follows
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.VARCHAR(50))
     last_name = db.Column(db.VARCHAR(50))
     profile_image = db.Column(db.Text)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
     users_library = db.relationship('Library', back_populates='users_lib')
     playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')

@@ -2,6 +2,7 @@ from .db import db
 # from .user import User
 from .tables import playlist_like, songs_playlist
 from .song import Song
+from datetime import datetime
 
 class Playlist(db.Model):
 
@@ -11,7 +12,7 @@ class Playlist(db.Model):
     image = db.Column(db.String(255), nullable= False)
     description = db.Column(db.String(255), nullable= False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     #Parent
     #Child
     user = db.relationship("User", back_populates="playlists")
