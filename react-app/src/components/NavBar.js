@@ -1,9 +1,12 @@
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { NavLink, useParams } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import UserPlaylists from './userPlaylists/UserPlaylists';
 
 const NavBar = () => {
+  const userId = useSelector((state) => state.session?.user?.id)
   return (
     <nav>
       <ul>
@@ -25,6 +28,11 @@ const NavBar = () => {
         <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={`/users/${userId}/playlists`}>
+            playlists
           </NavLink>
         </li>
         <li>
