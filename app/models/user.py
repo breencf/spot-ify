@@ -1,6 +1,8 @@
 from .db import db
+from .tables import playlist_like, user_follows
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
 
 
 class User(db.Model, UserMixin):
@@ -13,14 +15,15 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.VARCHAR(50))
     last_name = db.Column(db.VARCHAR(50))
     profile_image = db.Column(db.Text)
+    created_at = db.Column(db.DateTime)
 
     playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
     #Child
 
-    following_user = db.relationship("User", secondary = "user_follows", back_populates="followed_user")
-    followed_user = db.relationship("User", secondary = "user_follows", back_populates="following_user")
+    following_user = db.relationship("User", foreign_keys=user_follows.c.following_user_id, secondary=user_follows, back_populates="followed_user")
+    followed_user = db.relationship("User",  foreign_keys=user_follows.c.followed_user_id, secondary=user_follows, back_populates="following_user")
 
-    liking_user = db.relationship("User", secondary="playlist_like", back_populates="liked_playlist")
+    liking_user = db.relationship("Playlist", secondary=playlist_like, back_populates="liked_playlist")
 
     @property
     def password(self):
@@ -37,6 +40,7 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
+            "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "profile_image": self.profile_image,
