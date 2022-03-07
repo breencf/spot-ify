@@ -1,6 +1,7 @@
 from .db import db
 from .tables import songs_playlist
 from .artist import Artist
+from datetime import datetime
 
 class Song(db.Model):
 
@@ -12,7 +13,7 @@ class Song(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey("artists.id"), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey("albums.id"), nullable=False)
     album_track_number = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     #Parent
     #Child
     songs_library = db.relationship("Library", back_populates='songs_lib')

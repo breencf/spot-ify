@@ -1,5 +1,6 @@
 from .db import db
 from .album import Album
+from datetime import datetime
 
 class Artist(db.Model):
     __tablename__ = 'artists'
@@ -8,10 +9,10 @@ class Artist(db.Model):
     name = db.Column(db.String(50), nullable=False)
     image = db.Column(db.Text)
     bio = db.Column(db.Text)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     #Parent
     albums = db.relationship('Album', back_populates="artist", cascade='all, delete, delete-orphan')
-    artists_library = db.relationship('Library', back_populates='songs_lib')
+    artists_library = db.relationship('Library', back_populates='artists_lib')
     songs = db.relationship("Song", back_populates="artist", cascade='all, delete, delete-orphan')
     #Child
 
