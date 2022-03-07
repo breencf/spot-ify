@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import UserPlaylists from './components/userPlaylists/UserPlaylists';
+import EditPlayList from './components/editPlayList/EditPlayList';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,8 +42,11 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/playlists'>
+        <ProtectedRoute path='/users/:userId/playlists'  exact={true}>
           <UserPlaylists />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/playlists/:playlistId' exact={true}>
+          <EditPlayList />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>

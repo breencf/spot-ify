@@ -25,19 +25,20 @@ const UserPlaylists = () => {
           description
       };
 
-      const value = await dispatch(add_Playlist(playList)).catch(async (err) => {
-        console.log(err, ' what is this err')
-        const errors = await err.json()
-        if (errors) {
-          return errors;
+
+      const value = await dispatch(add_Playlist(playList)).catch(async(err)=>{
+        if (err){
+          return err;
+
         }
-      });
+      })
       if (value.errors) {
         return setErrors(value.errors);
       }
 
       history.push(`/users/${userId}/playlists'`);
-  }
+    }
+
 
   useEffect(() => {
     dispatch(load_Playlists(userId));
@@ -54,7 +55,7 @@ const UserPlaylists = () => {
       <form onSubmit={handleSubmit}>
         <ul>
             {errors?.map((error, index) => {
-                <li key={index}>{error}</li>
+              return  <li key={index}>{error}</li>
             })}
         </ul>
         <label htmlFor='name'>Name</label>
