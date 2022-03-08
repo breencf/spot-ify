@@ -1,18 +1,50 @@
 #songslist {
   width: 100%;
+  padding: 0px 10px;
+  max-height: 800px;
+  overflow-y: scroll;
 }
 
-#songslist td {
-  border: 1px solid red;
-  background-color: #bebebe;
+
+.songListing {
+  padding: 5px 16px;
+  height: 50px;
+  background-color: transparent;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-#optionsMenu {
-  z-index: 1;
+.songListing span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0px 16px 0px 0px;
+}
+
+.song_track_number {
+  width: 40px;
+}
+
+.song_name_artist {
+  width: 30%;
+}
+
+.song_album {
+  width: 30%;
+}
+
+.contextMenu {
+  z-index: 100;
   background-color: aqua;
   position: fixed;
-  left: 0;
+  right: 0;
+  margin-right: 10px;
+}
+
+.contextMenu * {
+  background-color: aqua;
 }
 
 .song_album_image {
