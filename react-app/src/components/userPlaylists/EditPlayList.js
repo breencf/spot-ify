@@ -34,7 +34,6 @@ const PlaylistsEdit = ({playList, closeModal}) => {
           image,
           description
       };
-      console.log(playList, ' what is this value')
       const value = await dispatch(edit_Playlist(playList)).catch(async(err)=>{
         if (err){
           return err;
@@ -43,7 +42,8 @@ const PlaylistsEdit = ({playList, closeModal}) => {
       if (value.errors) {
         return setErrors(value.errors);
       }
-    //   history.push(`/users/${userId}/playlists'`);
+      closeModal()
+    history.push(`/users/${userId}/playlists/${playlistId}`);
   }
 
 
@@ -77,7 +77,7 @@ const PlaylistsEdit = ({playList, closeModal}) => {
             type='text'
             name='description'
         />
-        <button type='submit' >Edit Playlist</button>
+        <button type='submit'>Edit Playlist</button>
         <button onClick={closeModal}>close</button>
       </form>
     </div>
