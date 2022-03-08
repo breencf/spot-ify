@@ -8,6 +8,7 @@ const NavBar = () => {
   const userId = useSelector((state) => state.session?.user?.id);
   return (
     <nav id="sidebar">
+      <i class="fa-brands fa-spotify"/>
       <h2>Spotify</h2>
       <ul>
         <li>
