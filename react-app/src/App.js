@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
-import { authenticate } from './store/session';
-import UserPlaylists from './components/userPlaylists/UserPlaylists';
-<<<<<<< HEAD
-import EditPlayList from './components/viewOnePlayList/ViewOnePlaylist';
-=======
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -26,11 +11,7 @@ import { authenticate } from "./store/session";
 import UserPlaylists from "./components/userPlaylists/UserPlaylists";
 import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
->>>>>>> add-songs
-=======
-import { SongsList } from './components/songList';
-import EditPlayList from './components/viewOnePlayList/ViewOnePlaylist';
->>>>>>> e2985411b29eac5a3a56c23d01ab9d0584d44c9c
+import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -48,37 +29,6 @@ function App() {
   }
 
   return (
-<<<<<<< HEAD
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/playlists'  exact={true}>
-          <UserPlaylists />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/playlists/:playlistId' exact={true}>
-          <EditPlayList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/playlists/:playlistId/edit' exact={true}>
-          {/* <EditPlayList /> */}
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
-=======
     <>
       <BrowserRouter>
         <div id="top">
@@ -115,7 +65,6 @@ function App() {
         <AudioPlayer />
       </BrowserRouter>
     </>
->>>>>>> add-songs
   );
 }
 
