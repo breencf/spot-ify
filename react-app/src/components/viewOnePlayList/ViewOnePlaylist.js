@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { one_Playlists} from "../../store/playlists";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, NavLink } from "react-router-dom";
 
-const EditPlayList = () => {
+const ViewOnePlaylist = () => {
     const dispatch = useDispatch();
     const { userId, playlistId } = useParams();
     const history = useHistory();
@@ -43,11 +43,11 @@ const EditPlayList = () => {
                 <p>hello from playlists</p>
                 <p>hello from playlists</p>
                 <p>route is not hitting</p>
-                <p>{playList?.name}</p>
                 <p>{playList?.image}</p>
                 <p>{playList?.description}</p>
+                <NavLink to={`/users/:userId/playlists/:playlistId/edit`}>{playList?.name}</NavLink>
             </div>
         )
     }
 
- export default EditPlayList
+ export default ViewOnePlaylist
