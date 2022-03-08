@@ -30,7 +30,6 @@ const UserPlaylists = () => {
       const value = await dispatch(add_Playlist(playList)).catch(async(err)=>{
         if (err){
           return err;
-
         }
       })
       if (value.errors) {
