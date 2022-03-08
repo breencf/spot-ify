@@ -2,7 +2,8 @@ const ONE_PLAYLIST = "user/ONE_PLAYLIST";
 const USER_PLAYLISTS = "user/USER_PLAYLISTS";
 const ADD_PLAYLIST = "user/ADD_PLAYLIST";
 const DELETE_PLAYLIST = "user/DELETE_PLAYLIST";
-const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
+const ADD_TO_PLAYLIST = "user/ADD_TO_PLAYLISDT";
+
 
 const deletePlaylist = (playlistId) => {
   return {
@@ -39,7 +40,9 @@ export const one_Playlists = (userId, id) => async (dispatch) => {
   // console.log(userId, id)
   const response = await fetch(`/api/users/${userId}/playlists/${id}`);
   const playList = await response.json();
-//   console.log(playList, " am i getting data back in the thunkk??");
+
+console.log(playList, " am i getting data back in the thunkk??");
+
   dispatch(onePlaylists(playList));
   return playList;
 };
@@ -144,8 +147,8 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_PLAYLIST:
       newState = { ...state };
-    //   console.log(action.playlist.playlist.id, ' what is the playlist')
-      newState.playLists[action.playlist.playlist.id] = action.playlist.playlist;
+
+      newState.playLists[action.playlist.id] = action.playlist;
       return newState;
     case ONE_PLAYLIST:
       newState = { ...state };
@@ -155,6 +158,12 @@ const playListReducer = (state = initialState, action) => {
     case DELETE_PLAYLIST:
       newState = { ...state };
       delete newState.playLists[action.playlistId];
+      return newState;
+    case ADD_TO_PLAYLIST:
+      newState = { ...state };
+      console.log(action.updatedPlaylist.id);
+      newState.playLists[action.updatedPlaylist.id] =
+        newState.playLists[action.updatedPlaylist];
       return newState;
     default:
       return state;

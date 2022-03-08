@@ -69,10 +69,12 @@ h6 {
 
 p {
   font-weight: 500;
+
   /* color: var(--sp-gray); */
   color: white;
   font-size: 14px;
   margin: 0px;
+
 }
 
 /* Main Div Styling */
