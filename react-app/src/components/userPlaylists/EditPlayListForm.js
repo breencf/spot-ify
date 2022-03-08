@@ -1,15 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { load_Playlists, add_Playlist } from "../../store/playlists";
+import { one_Playlists, add_Playlist } from "../../store/playlists";
 import { useHistory, useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 
-const UserPlaylists = () => {
+const UserPlaylistsEdit = () => {
   const dispatch = useDispatch();
-  const { userId } = useParams();
+  const { userId, playlistId } = useParams();
   const history = useHistory();
 
-  const playLists = useSelector((state) => Object?.values(state?.playListReducer?.playLists));
+  
+
+  const playList = useSelector((state) => state.playListReducer.playLists);
+  const play = Object.values(playList)
+  console.log(playList, 'this is the one object')
+  useEffect(() => {
+    dispatch(one_Playlists( userId, playlistId ));
+  }, [dispatch]);
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -26,37 +32,35 @@ const UserPlaylists = () => {
           description
       };
 
-
       const value = await dispatch(add_Playlist(playList)).catch(async(err)=>{
         if (err){
           return err;
-
         }
       })
       if (value.errors) {
         return setErrors(value.errors);
       }
 
-      history.push(`/users/${userId}/playlists'`);
-    }
 
+    //   history.push(`/users/${userId}/playlists'`);
+  }
 
-  useEffect(() => {
-    dispatch(load_Playlists(userId));
-  }, [dispatch]);
+  
 
   return (
     <div>
-      <h2>hello from playlists</h2>
-      {playLists?.map((list, index) => {
+      <p>hello from playlists</p>
+      <button>EDIT</button>
+      
+      {/* {playLists?.map((list, index) => {
         return <div key={index}>
-            <NavLink to={`/users/${userId}/playlists/${list.id}`}>{list.name}</NavLink>
-        </div>
+            <p>{list.name}</p>
+        </div>;
       })}
       <form onSubmit={handleSubmit}>
         <ul>
             {errors?.map((error, index) => {
-              return  <li key={index}>{error}</li>
+                return <li key={index}>{error}</li>
             })}
         </ul>
         <label htmlFor='name'>Name</label>
@@ -80,10 +84,10 @@ const UserPlaylists = () => {
             type='text'
             name='description'
         />
-        <button type='submit' >Add Playlist</button>
-      </form>
+        <button type='submit' >Edit Playlist</button>
+      </form> */}
     </div>
   );
 };
 
-export default UserPlaylists;
+export default UserPlaylistsEdit;
