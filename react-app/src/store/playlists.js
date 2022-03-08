@@ -1,8 +1,8 @@
-
 const ONE_PLAYLIST = 'user/ONE_PLAYLIST';
 const USER_PLAYLISTS = 'user/USER_PLAYLISTS';
 const ADD_PLAYLIST = 'user/ADD_PLAYLIST';
 const DELETE_PLAYLIST = 'user/DELETE_PLAYLIST';
+
 
 const deletePlaylist = (playlistId) => {
     return ({
@@ -49,6 +49,11 @@ const addPlaylist = (playlist) => {
     })
 }
 
+const add = (updatedPlaylist) => ({
+    type: ADD_TO_PLAYLIST,
+    updatedPlaylist,
+  });
+
 export const add_Playlist = (playlist) => async dispatch => {
     const response = await fetch(`/api/users/${playlist.userId}/playlists`, {
         method: 'POST',
@@ -60,6 +65,25 @@ export const add_Playlist = (playlist) => async dispatch => {
         if (data) return data
 
 }
+
+export const addToPlaylist =
+  ({ song_id, user_id, playlist_id }) =>
+  async (dispatch) => {
+    const response = await fetch(`api/playlists/${playlist_id}/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        song_id,
+        user_id,
+        playlist_id,
+      }),
+    });
+
+    if (response.ok) {
+      const updatedPlaylist = await response.json();
+      dispatch(add(updatedPlaylist));
+    }
+  };
 
 
 const loadPlaylists = (id) => {
