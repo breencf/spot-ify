@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { load_Playlists } from '../../store/playlists';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -16,6 +17,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+    dispatch(load_Playlists(data.id))
   };
 
   const demo = async (e) => {
