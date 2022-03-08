@@ -14,6 +14,7 @@ import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
 import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
+import { AlbumPage } from "./components/AlbumPage";
 
 
 function App() {
@@ -69,6 +70,9 @@ function App() {
                 </ProtectedRoute>
                 <Route path="/songs" exact={true}>
                   <SongsList />
+                </Route>
+                <Route path='/albums/:albumId'>
+                  <AlbumPage />
                 </Route>
                </div>
              </div>

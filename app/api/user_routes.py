@@ -115,10 +115,8 @@ def add_to_playlist(user_id, playlist_id, song_id):
     db.session.commit()
 
     playlist_to_return = playlist.to_dict()
-    print("========================")
-    print(playlist_to_return["songs"]['dict'])
-    print("========================")
-
-
+    # print("========================")
+    # print(playlist_to_return["songs"]['dict'])
+    # print("========================")
 
     return playlist_to_return

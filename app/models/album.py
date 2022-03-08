@@ -17,10 +17,18 @@ class Album(db.Model):
     artist = db.relationship("Artist", back_populates='albums')
 
     def to_dict(self):
+
+        dict_songs = []
+        for song in self.songs:
+            dict_songs.append(song.to_dict())
+
         return {
             "id": self.id,
             "name": self.name,
             "image": self.image,
             "year": self.year,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "artist": self.artist.name,
+            "artist_image": self.artist.image,
+            "songs": {"dict": dict_songs}
         }
