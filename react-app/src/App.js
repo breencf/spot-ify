@@ -59,6 +59,12 @@ function App() {
                 <ProtectedRoute path="/" exact={true}>
                   <h1>My Home Page</h1>
                 </ProtectedRoute>
+                <ProtectedRoute
+                  path="/users/:userId/playlists/:playlistId"
+                  exact={true}
+                >
+                  <EditPlayList />
+                </ProtectedRoute>
                 <Route path="/songs" exact={true}>
                   <SongsList />
                 </Route>
