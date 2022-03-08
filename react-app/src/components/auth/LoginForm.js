@@ -20,6 +20,15 @@ const LoginForm = () => {
     dispatch(load_Playlists(data.id))
   };
 
+  const demo = async (e) => {
+    e.preventDefault();
+    setEmail("demo@aa.io")
+    setPassword("password")
+    const data = await dispatch(login(email, password));
+    if (data) {
+      setErrors(data);
+    }
+  };
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -59,6 +68,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button type='submit' onClick={demo}>Demo</button>
       </div>
     </form>
   );
