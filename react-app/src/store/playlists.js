@@ -3,6 +3,28 @@ const USER_PLAYLISTS = "user/USER_PLAYLISTS";
 const ADD_PLAYLIST = "user/ADD_PLAYLIST";
 const DELETE_PLAYLIST = "user/DELETE_PLAYLIST";
 const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
+const EDIT_PLAYLIST = 'user/EDIT_PLAYLIST';
+
+const editPlaylist = (playlist) => {
+    return {
+        type: EDIT_PLAYLIST,
+        playlist
+    }
+}
+
+export const edit_Playlist = (playlist) => async (dispatch) => {
+    const response = await fetch(`/api/users/${playlist.userId}/playlists/${playlist.playlistId}/edit`, {
+        method: 'POST',
+        headers: {"Content-Type": "applicaition/json"},
+        body: JSON.stringify(
+            playlist
+        )
+    })
+    console.log(playlist, ' did the edit work correctly?')
+    const data = await response.json()
+    dispatch(editPlaylist(data))
+    return data
+}
 
 const deletePlaylist = (playlistId) => {
   return {
@@ -110,7 +132,6 @@ const playListReducer = (state = initialState, action) => {
     case USER_PLAYLISTS:
       newState = { ...state };
       newState.playLists = {};
-      // console.log('waht is ', action.id)
       if (action.id.user_playlists) {
         action.id.user_playlists.forEach(
           (playList) => (newState.playLists[playList.id] = playList)
@@ -119,12 +140,10 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_PLAYLIST:
       newState = { ...state };
-    //   console.log(action.playlist.playlist.id, ' what is the playlist')
       newState.playLists[action.playlist.playlist.id] = action.playlist.playlist;
       return newState;
     case ONE_PLAYLIST:
       newState = { ...state };
-      // console.log(action.playList, ' action playlist')
       newState.playLists[action.playList.playlist.id] = action.playList;
       return newState;
     case DELETE_PLAYLIST:

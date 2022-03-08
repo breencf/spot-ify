@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
 from app.models import User, Playlist, db, Album, Artist, Song
-from app.forms import PlayListForm
+from app.forms import PlayListForm, EditPlayList
 from app.api.auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
@@ -46,7 +46,7 @@ def user_playlists_form(id):
         db.session.add(playlist)
         db.session.commit()
         return {'playlist': playlist.to_dict()}
-    
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -68,6 +68,7 @@ def edit_playlist(userId,playlistId):
     else:
         return {"playlist": "deleted"}
 
+
 @user_routes.route('/<int:userId>/playlists/<int:playlistId>/delete', methods=['POST'])
 @login_required
 def delete_playlist(userId, playlistId):
@@ -76,3 +77,28 @@ def delete_playlist(userId, playlistId):
     db.session.delete(playlist)
     db.session.commit()
     return {"deleted": "playlist delete success"}
+
+
+
+@user_routes.route('/<int:userId>/playlists/<int:playlistId>/edit', methods=['POST'])
+@login_required
+def edit_user_playlist(userId, playlistId):
+    form = EditPlayList()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    playlist = Playlist.query.get(playlistId)
+    print('what is this --------', playlist.name)
+    testdata = form.data
+    print('what is this --------', testdata)
+    if form.validate_on_submit():
+        data=form.data
+        print('inside submit', data)
+        playlist.name=data['name'],
+        playlist.image=data['image'],
+        playlist.description=data['description'],
+        playlist.user_id=id
+
+        # db.session.add(playlist)
+        db.session.commit(playlist)
+        return {"playlist": playlist.to_dict()}
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
