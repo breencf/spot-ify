@@ -87,19 +87,15 @@ def edit_user_playlist(userId, playlistId):
     form = EditPlayList()
     form['csrf_token'].data = request.cookies['csrf_token']
     playlist = Playlist.query.get(playlistId)
-    print('what is this --------', playlist.name)
-    testdata = form.data
-    print('what is this --------', testdata)
     if form.validate_on_submit():
         data=form.data
-        print('inside submit', data)
         playlist.name=data['name'],
         playlist.image=data['image'],
         playlist.description=data['description'],
-        playlist.user_id=id
+        playlist.user_id=userId
 
-        # db.session.add(playlist)
-        db.session.commit(playlist)
+        db.session.add(playlist)
+        db.session.commit()
         return {"playlist": playlist.to_dict()}
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -120,4 +116,3 @@ def add_to_playlist(user_id, playlist_id, song_id):
 
 
     return playlist_to_return
-

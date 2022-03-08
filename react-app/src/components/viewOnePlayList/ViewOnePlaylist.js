@@ -10,8 +10,7 @@ const ViewOnePlaylist = () => {
     const history = useHistory();
 
     const playList = useSelector((state) => state.playListReducer?.playLists[playlistId]?.playlist);
-    // console.log(playList.id, 'playlist from state front end? ')
-    // console.log(playlistId)
+
     // const [name, setName] = useState("");
     // const [image, setImage] = useState("");
     // const [description, setDescription] = useState("");

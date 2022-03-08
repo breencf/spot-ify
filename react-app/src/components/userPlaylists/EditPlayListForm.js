@@ -16,13 +16,13 @@ const UserPlaylistsEdit = () => {
 
   const playList = useSelector((state) => state.playListReducer.playLists);
   const play = Object.values(playList)
+  const [modalIsOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     dispatch(one_Playlists( userId, playlistId ));
-  }, [dispatch]);
+  }, [dispatch, modalIsOpen]);
 
 
-  const [modalIsOpen, setIsOpen] = useState(false)
 
   function openModal() {
     setIsOpen(true);

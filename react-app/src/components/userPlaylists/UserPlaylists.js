@@ -28,10 +28,12 @@ const UserPlaylists = () => {
 
 
       const value = await dispatch(add_Playlist(playList)).catch(async(err)=>{
+        console.log(err, 'waht is the errors of err')
         if (err){
           return err;
         }
       })
+      console.log(value, ' what happened to our errors')
       if (value.errors) {
         return setErrors(value.errors);
       }
