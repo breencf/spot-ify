@@ -46,8 +46,15 @@ def user_playlists_form(id):
         db.session.add(playlist)
         db.session.commit()
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
+=======
+
+    # return {"err": "Was not able to add new playlist"}
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+>>>>>>> e2985411b29eac5a3a56c23d01ab9d0584d44c9c
 
 @user_routes.route('/songs')
 def all_songs():
@@ -56,11 +63,14 @@ def all_songs():
     print(songs)
     return { 'song_array': [song.to_dict() for song in songs] }
 
+<<<<<<< HEAD
     # return {"err": "Was not able to add new playlist"}
 >>>>>>> add-songs
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+=======
+>>>>>>> e2985411b29eac5a3a56c23d01ab9d0584d44c9c
 
 @user_routes.route('/<int:userId>/playlists/<int:playlistId>')
 @login_required

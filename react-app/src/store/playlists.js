@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> e2985411b29eac5a3a56c23d01ab9d0584d44c9c
 const ONE_PLAYLIST = 'user/ONE_PLAYLIST';
 const USER_PLAYLISTS = 'user/USER_PLAYLISTS';
 const ADD_PLAYLIST = 'user/ADD_PLAYLIST';
 const DELETE_PLAYLIST = 'user/DELETE_PLAYLIST';
+
 
 const deletePlaylist = (playlistId) => {
     return ({
@@ -41,11 +45,14 @@ export const one_Playlists = (userId, id) => async dispatch => {
     dispatch(onePlaylists(playList))
     return playList
 }
+<<<<<<< HEAD
 =======
 const USER_PLAYLISTS = 'user/USER_PLAYLISTS';
 const ADD_PLAYLIST = 'user/ADD_PLAYLIST';
 const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
 >>>>>>> add-songs
+=======
+>>>>>>> e2985411b29eac5a3a56c23d01ab9d0584d44c9c
 
 
 const addPlaylist = (playlist) => {
