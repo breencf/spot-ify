@@ -88,11 +88,15 @@ export const add_Playlist = (playlist) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(playlist),
   });
-  const data = await response.json();
-  console.log(data, "data being returned ? ");
-  dispatch(addPlaylist(data));
-  if (data) return data;
-};
+  if(response.ok){
+      const data = await response.json();
+      dispatch(addPlaylist(data));
+  }else {
+    const data = await response.json();
+    return data
+  }
+}
+
 
 export const addToPlaylist =
   ({ song, user_id, playlist_id }) =>
@@ -169,7 +173,6 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_PLAYLIST:
       newState = { ...state };
-      console.log(action.playlist.playlist.id, ' id undefiend now?')
       newState.playLists[action.playlist.playlist.id] = action.playlist.playlist;
       return newState;
     // case EDIT_PLAYLIST:
