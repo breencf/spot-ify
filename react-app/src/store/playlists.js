@@ -100,9 +100,10 @@ const playListReducer = (state = initialState, action) => {
         case ADD_PLAYLIST:
             newState = {...state}
             newState.playLists[action.playlist.id] = action.playlist
+            return newState
         case ONE_PLAYLIST:
             newState = {...state}
-            console.log(action.playList, ' action playlist')
+            // console.log(action.playList, ' action playlist')
             newState.playLists[action.playList.playlist.id] = action.playList
             return newState
         case DELETE_PLAYLIST:
