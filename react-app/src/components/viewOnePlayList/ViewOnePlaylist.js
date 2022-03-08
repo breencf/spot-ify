@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { one_Playlists} from "../../store/playlists";
+import { one_Playlists, delete_Playlist} from "../../store/playlists";
 import { useHistory, useParams, NavLink } from "react-router-dom";
 
 const ViewOnePlaylist = () => {
@@ -9,8 +9,8 @@ const ViewOnePlaylist = () => {
     const history = useHistory();
 
     const playList = useSelector((state) => state.playListReducer?.playLists[playlistId]?.playlist);
-    console.log(playList, 'playlist from state front end? ')
-
+    // console.log(playList.id, 'playlist from state front end? ')
+    // console.log(playlistId)
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
@@ -46,6 +46,9 @@ const ViewOnePlaylist = () => {
                 <p>{playList?.image}</p>
                 <p>{playList?.description}</p>
                 <NavLink to={`/users/:userId/playlists/:playlistId/edit`}>{playList?.name}</NavLink>
+                {playList &&
+                <button onClick={() => dispatch(delete_Playlist(userId, playlistId))}>Delete playlist here</button>
+                }
             </div>
         )
     }
