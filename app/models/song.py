@@ -30,5 +30,8 @@ class Song(db.Model):
             "artist_id": self.artist_id,
             "album_id": self.album_id,
             "album_track_number": self.album_track_number,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "artist": self.artist.name,
+            "album": self.album.name,
+            "album_image" : self.album.image
         }

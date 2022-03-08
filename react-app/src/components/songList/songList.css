@@ -1,0 +1,21 @@
+#songslist {
+  width: 100%;
+}
+
+#songslist td {
+  border: 1px solid red;
+  background-color: #bebebe;
+  display: flex;
+}
+
+#optionsMenu {
+  z-index: 1;
+  background-color: aqua;
+  position: fixed;
+  left: 0;
+}
+
+.song_album_image {
+  width: 40px;
+  height: 40px;
+}

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, redirect, request
+from sqlalchemy.orm import joinedload
 from flask_login import login_required
-from app.models import User, Playlist, db, Song
+from app.models import User, Playlist, db, Album, Artist, Song
 from app.forms import PlayListForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
