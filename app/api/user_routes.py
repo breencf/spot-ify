@@ -110,6 +110,8 @@ def add_to_playlist(user_id, playlist_id, song_id):
 
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
+    playlist.songs.append(song)
+
     db.session.commit()
 
     playlist_to_return = playlist.to_dict()
@@ -120,4 +122,3 @@ def add_to_playlist(user_id, playlist_id, song_id):
 
 
     return playlist_to_return
-
