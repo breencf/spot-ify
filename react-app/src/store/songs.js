@@ -29,8 +29,8 @@ export default function songsReducer(state = initialState, action) {
         newState.songs[song.id] = song;
       });
       return newState;
-    case ADD_TO_PLAYLIST:
-      newState = { ...state };
+    // case ADD_TO_PLAYLIST:
+    //   newState = { ...state };
     default:
       return state;
   }

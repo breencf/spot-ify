@@ -29,4 +29,5 @@ class Playlist(db.Model):
             "description": self.description,
             "user_id": self.user_id,
             "created_at": self.created_at,
+            "songs": self.songs
         }

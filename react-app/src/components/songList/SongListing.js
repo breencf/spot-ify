@@ -14,6 +14,9 @@ export const SongListing = ({ song }) => {
       <span>
         <img src={song.album_image} className="song_album_image" />
       </span>
+      <audio controls src={song.audio}>
+        audio
+      </audio>
       <span>
         {song.name}
         <Link to={`/artists/${song.artist_id}`}>{song.artist}</Link>
