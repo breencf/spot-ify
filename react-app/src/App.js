@@ -41,44 +41,6 @@ function App() {
   }
 
   return (
-<<<<<<< HEAD
-    <>
-      <BrowserRouter>
-        <div id="top">
-          <NavBar />
-          <Switch>
-            <Route path="/login" exact={true}>
-              <LoginForm />
-            </Route>
-            <Route path="/sign-up" exact={true}>
-              <SignUpForm />
-            </Route>
-            <div id="ui">
-              <div id="topbar"></div>
-              <div id="main">
-                <ProtectedRoute path="/users" exact={true}>
-                  <UsersList />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId" exact={true}>
-                  <User />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId/playlists">
-                  <UserPlaylists />
-                </ProtectedRoute>
-                <ProtectedRoute path="/" exact={true}>
-                  <h1>My Home Page</h1>
-                </ProtectedRoute>
-                <Route path="/songs" exact={true}>
-                  <SongsList />
-                </Route>
-              </div>
-            </div>
-          </Switch>
-        </div>
-        <AudioPlayer />
-      </BrowserRouter>
-    </>
-=======
     <BrowserRouter>
       <NavBar />
       <Switch>
@@ -111,7 +73,6 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
->>>>>>> 129dad0a7b02172ee0ef0afca5038a65311cd5f3
   );
 }
 
