@@ -4,14 +4,14 @@ const ADD_PLAYLIST = "user/ADD_PLAYLIST";
 const DELETE_PLAYLIST = "user/DELETE_PLAYLIST";
 
 const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
-const EDIT_PLAYLIST = 'user/EDIT_PLAYLIST';
+const EDIT_PLAYLIST = "user/EDIT_PLAYLIST";
 
 const editPlaylist = (playlist) => {
-    return {
-        type: EDIT_PLAYLIST,
-        playlist
-    }
-}
+  return {
+    type: EDIT_PLAYLIST,
+    playlist,
+  };
+};
 
 export const edit_Playlist = (playlist) => async (dispatch) => {
     const response = await fetch(`/api/users/${playlist.userId}/playlists/${playlist.playlistId}/edit`, {
@@ -25,8 +25,6 @@ export const edit_Playlist = (playlist) => async (dispatch) => {
     dispatch(editPlaylist(data))
     return data
 }
-
-
 
 
 
@@ -66,7 +64,7 @@ export const one_Playlists = (userId, id) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/playlists/${id}`);
   const playList = await response.json();
 
-console.log(playList, " am i getting data back in the thunkk??");
+  console.log(playList, " am i getting data back in the thunkk??");
 
   dispatch(onePlaylists(playList));
   return playList;
@@ -97,7 +95,8 @@ export const add_Playlist = (playlist) => async (dispatch) => {
     const data = await response.json();
     return data
   }
-};
+}
+
 
 export const addToPlaylist =
   ({ song, user_id, playlist_id }) =>
@@ -191,8 +190,7 @@ const playListReducer = (state = initialState, action) => {
     case ADD_TO_PLAYLIST:
       newState = { ...state };
       console.log(action.updatedPlaylist.id);
-      newState.playLists[action.updatedPlaylist.id] =
-        newState.playLists[action.updatedPlaylist];
+      newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
       return newState;
     default:
       return state;
