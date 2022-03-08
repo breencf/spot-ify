@@ -2,6 +2,27 @@
 const ONE_PLAYLIST = 'user/ONE_PLAYLIST';
 const USER_PLAYLISTS = 'user/USER_PLAYLISTS';
 const ADD_PLAYLIST = 'user/ADD_PLAYLIST';
+const DELETE_PLAYLIST = 'user/DELETE_PLAYLIST';
+
+const deletePlaylist = (playlistId) => {
+    return ({
+        type: DELETE_PLAYLIST,
+        playlistId
+    })
+}
+
+export const delete_Playlist = (userId,playlistId) => async dispatch => {
+    const response = await fetch(`/api/users/${userId}/playlists/${playlistId}/delete`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            userId, playlistId
+        }),
+    })
+    const success = await response.json()
+    dispatch(deletePlaylist(playlistId))
+    return success
+}
 
 
 const onePlaylists = (playList) => {
@@ -83,6 +104,10 @@ const playListReducer = (state = initialState, action) => {
             newState = {...state}
             console.log(action.playList, ' action playlist')
             newState.playLists[action.playList.playlist.id] = action.playList
+            return newState
+        case DELETE_PLAYLIST:
+            newState = {...state}
+            delete newState.playLists[action.playlistId]
             return newState
         default:
             return state;

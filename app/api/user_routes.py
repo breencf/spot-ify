@@ -57,6 +57,17 @@ def user_playlists_form(id):
 @user_routes.route('/<int:userId>/playlists/<int:playlistId>')
 @login_required
 def edit_playlist(userId,playlistId):
-    playlist = Playlist.query.filter(Playlist.id == playlistId).first()
-    return {"playlist": playlist.to_dict()}
+    playlist = Playlist.query.get(playlistId)
+    if playlist:
+        return {"playlist": playlist.to_dict()}
+    else:
+        return {"playlist": "deleted"}
 
+@user_routes.route('/<int:userId>/playlists/<int:playlistId>/delete', methods=['POST'])
+@login_required
+def delete_playlist(userId, playlistId):
+    print('am i hitting above this dang route...')
+    playlist = Playlist.query.get(playlistId)
+    db.session.delete(playlist)
+    db.session.commit()
+    return {"deleted": "playlist delete success"}
