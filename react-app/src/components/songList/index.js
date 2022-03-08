@@ -16,10 +16,13 @@ export const SongsList = () => {
   }, [dispatch]);
 
   return (
-    <div id="songslist">
-      {songs.map((song) => {
-        return <SongListing key={song.id} song={song} />;
-      })}
-    </div>
+    <>
+      <h1>Songs</h1>
+      <div id="songslist">
+        {songs.map((song) => {
+          return <SongListing key={song.id} song={song} />;
+        })}
+      </div>
+    </>
   );
 };
