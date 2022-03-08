@@ -45,10 +45,11 @@ def user_playlists_form(id):
         )
         db.session.add(playlist)
         db.session.commit()
-
-    # return {"err": "Was not able to add new playlist"}
-
+        return {'playlist': playlist.to_dict()}
+    
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
 
 @user_routes.route('/songs')
 def all_songs():
