@@ -1,38 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { one_Playlists, add_Playlist } from "../../store/playlists";
+import { edit_Playlist } from "../../store/playlists";
 import { useHistory, useParams } from "react-router-dom";
 
 
-const PlaylistsEdit = ({playList}) => {
+
+const PlaylistsEdit = ({playList, closeModal}) => {
   const dispatch = useDispatch();
   const { userId, playlistId } = useParams();
   const history = useHistory();
+  const editPlaylist = playList[playlistId].playlist
 
-//   const playList = useSelector((state) => state.playListReducer.playLists);
-//   const play = Object.values(playList)
-//   console.log(playList, 'this is the one object')
-//   useEffect(() => {
-//     dispatch(one_Playlists( userId, playlistId ));
-//   }, [dispatch]);
-
-  const [name, setName] = useState(playList.name);
-  const [image, setImage] = useState(playList.image);
-  const [description, setDescription] = useState(playList.description);
+  const [name, setName] = useState(editPlaylist.name);
+  const [image, setImage] = useState(editPlaylist.image);
+  const [description, setDescription] = useState(editPlaylist.description);
   const [errors, setErrors] = useState([]);
+
+  // const playList = useSelector((state) => state.playListReducer.playLists);
+  // const play = Object.values(playList)
+  // console.log(playList, 'this is the one object')
+  // useEffect(() => {
+  //   dispatch(one_Playlists( userId, playlistId ));
+  // }, [dispatch]);
+
 
   const handleSubmit = async(e) => {
       e.preventDefault();
 
       const playList = {
-          ...playList,
           userId,
+          playlistId,
           name,
           image,
           description
       };
-
-      const value = await dispatch(add_Playlist(playList)).catch(async(err)=>{
+      console.log(playList, ' what is this value')
+      const value = await dispatch(edit_Playlist(playList)).catch(async(err)=>{
         if (err){
           return err;
         }
@@ -40,19 +43,13 @@ const PlaylistsEdit = ({playList}) => {
       if (value.errors) {
         return setErrors(value.errors);
       }
-
-
     //   history.push(`/users/${userId}/playlists'`);
   }
 
-  
+
 
   return (
     <div>
-      <p>hello from edit playlists</p>
-      
-      
-      
       <form onSubmit={handleSubmit}>
         <ul>
             {errors?.map((error, index) => {
@@ -81,7 +78,8 @@ const PlaylistsEdit = ({playList}) => {
             name='description'
         />
         <button type='submit' >Edit Playlist</button>
-      </form> 
+        <button onClick={closeModal}>close</button>
+      </form>
     </div>
   );
 };
