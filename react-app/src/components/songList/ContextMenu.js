@@ -44,18 +44,18 @@ export const ContextMenu = ({ song }) => {
             playlistArr?.map((playlist) => {
               return (
                 <MenuItem
+                  key={playlist?.id}
                   onClick={(e) => {
                     dispatch(
                       addToPlaylist({
                         user_id: id,
-                        playlist_id: playlist.id,
+                        playlist_id: playlist?.id,
                         song,
                       })
                     );
                   }}
-                  key={playlist.id}
                 >
-                  {playlist.name}
+                  {playlist?.name}
                 </MenuItem>
               );
             })
