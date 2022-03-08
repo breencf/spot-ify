@@ -12,6 +12,7 @@ import UserPlaylists from "./components/userPlaylists/UserPlaylists";
 import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
 import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
+import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,8 +50,11 @@ function App() {
                 <ProtectedRoute path="/users/:userId" exact={true}>
                   <User />
                 </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId/playlists">
+                <ProtectedRoute path="/users/:userId/playlists" exact={true}>
                   <UserPlaylists />
+                </ProtectedRoute>
+                <ProtectedRoute path="/users/:userId/playlists/:playlistId" exact={true}>
+                  <ViewOnePlaylist />
                 </ProtectedRoute>
                 <ProtectedRoute path="/" exact={true}>
                   <h1>My Home Page</h1>
@@ -58,8 +62,8 @@ function App() {
                 <Route path="/songs" exact={true}>
                   <SongsList />
                 </Route>
-              </div>
-            </div>
+               </div>
+             </div>
           </Switch>
         </div>
         <AudioPlayer />

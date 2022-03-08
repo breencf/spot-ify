@@ -45,7 +45,7 @@ const ViewOnePlaylist = () => {
                 <p>route is not hitting</p>
                 <p>{playList?.image}</p>
                 <p>{playList?.description}</p>
-                <NavLink to={`/users/:userId/playlists/:playlistId/edit`}>{playList?.name}</NavLink>
+                <NavLink to={`/users/${userId}/playlists/${playlistId}`}>{playList?.name}</NavLink>
                 {playList &&
                 <button onClick={() => dispatch(delete_Playlist(userId, playlistId))}>Delete playlist here</button>
                 }

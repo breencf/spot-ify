@@ -39,7 +39,7 @@ export const one_Playlists = (userId, id) => async (dispatch) => {
   // console.log(userId, id)
   const response = await fetch(`/api/users/${userId}/playlists/${id}`);
   const playList = await response.json();
-  console.log(playList, " am i getting data back in the thunkk??");
+//   console.log(playList, " am i getting data back in the thunkk??");
   dispatch(onePlaylists(playList));
   return playList;
 };
@@ -63,7 +63,8 @@ export const add_Playlist = (playlist) => async (dispatch) => {
     body: JSON.stringify(playlist),
   });
   const data = await response.json();
-  dispatch(addPlaylist(playlist));
+  console.log(data, 'data being returned ? ')
+  dispatch(addPlaylist(data));
   if (data) return data;
 };
 
@@ -118,7 +119,8 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_PLAYLIST:
       newState = { ...state };
-      newState.playLists[action.playlist.id] = action.playlist;
+    //   console.log(action.playlist.playlist.id, ' what is the playlist')
+      newState.playLists[action.playlist.playlist.id] = action.playlist.playlist;
       return newState;
     case ONE_PLAYLIST:
       newState = { ...state };

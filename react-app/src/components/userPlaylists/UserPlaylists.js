@@ -36,7 +36,7 @@ const UserPlaylists = () => {
         return setErrors(value.errors);
       }
 
-      history.push(`/users/${userId}/playlists'`);
+      // history.push(`/users/${userId}/playlists'`);
     }
 
 
