@@ -1,0 +1,18 @@
+.artistIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.albumImage {
+    width: 192px;
+    height: 192px;
+}
+
+.albumTop {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    padding: 0px 25px;
+}
