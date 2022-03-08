@@ -2,6 +2,7 @@ const ONE_PLAYLIST = "user/ONE_PLAYLIST";
 const USER_PLAYLISTS = "user/USER_PLAYLISTS";
 const ADD_PLAYLIST = "user/ADD_PLAYLIST";
 const DELETE_PLAYLIST = "user/DELETE_PLAYLIST";
+
 const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
 const EDIT_PLAYLIST = 'user/EDIT_PLAYLIST';
 
@@ -25,6 +26,10 @@ export const edit_Playlist = (playlist) => async (dispatch) => {
     dispatch(editPlaylist(data))
     return data
 }
+
+
+
+
 
 const deletePlaylist = (playlistId) => {
   return {
@@ -61,7 +66,9 @@ export const one_Playlists = (userId, id) => async (dispatch) => {
   // console.log(userId, id)
   const response = await fetch(`/api/users/${userId}/playlists/${id}`);
   const playList = await response.json();
-//   console.log(playList, " am i getting data back in the thunkk??");
+
+console.log(playList, " am i getting data back in the thunkk??");
+
   dispatch(onePlaylists(playList));
   return playList;
 };
@@ -91,20 +98,45 @@ export const add_Playlist = (playlist) => async (dispatch) => {
 };
 
 export const addToPlaylist =
-  ({ song_id, user_id, playlist_id }) =>
+  ({ song, user_id, playlist_id }) =>
   async (dispatch) => {
-    const response = await fetch(`api/playlists/${playlist_id}/add`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        song_id,
-        user_id,
-        playlist_id,
-      }),
-    });
+    // if (!playlist_id) {
+    //   const newPlaylist = add_Playlist({
+    //     name: song.name,
+    //     image: null,
+    //     description: null,
+    //     userId: user_id,
+    //   });
+    //   console.log("==================", newPlaylist);
+
+    //   const response = await fetch(`/api/users/playlists/${playlist_id}/add`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       song_id: song.id,
+    //       user_id,
+    //       playlist_id: newPlaylist.id,
+    //     }),
+    //   });
+    //   console.log(response.json());
+    // }
+    const response = await fetch(
+      // /playlists/<int:user_id>/<int:playlist_id>/<int:song_id>/add
+      `api/users/playlists//${user_id}/${playlist_id}/${song.id}/add`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          song_id: song.id,
+          user_id,
+          playlist_id,
+        }),
+      }
+    );
 
     if (response.ok) {
       const updatedPlaylist = await response.json();
+      console.log(updatedPlaylist);
       dispatch(add(updatedPlaylist));
     }
   };
@@ -149,6 +181,12 @@ const playListReducer = (state = initialState, action) => {
     case DELETE_PLAYLIST:
       newState = { ...state };
       delete newState.playLists[action.playlistId];
+      return newState;
+    case ADD_TO_PLAYLIST:
+      newState = { ...state };
+      console.log(action.updatedPlaylist.id);
+      newState.playLists[action.updatedPlaylist.id] =
+        newState.playLists[action.updatedPlaylist];
       return newState;
     default:
       return state;

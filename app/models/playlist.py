@@ -21,7 +21,15 @@ class Playlist(db.Model):
 
     liked_playlist = db.relationship("User", secondary=playlist_like, back_populates="liking_user")
 
+
+
+
     def to_dict(self):
+
+        dict_songs = []
+        for song in self.songs:
+            dict_songs.append(song.to_dict())
+
         return {
             "id": self.id,
             "name": self.name,
@@ -29,5 +37,5 @@ class Playlist(db.Model):
             "description": self.description,
             "user_id": self.user_id,
             "created_at": self.created_at,
-            "songs": self.songs
+            "songs": {"dict": dict_songs}
         }
