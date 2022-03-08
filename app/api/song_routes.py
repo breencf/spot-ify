@@ -1,8 +1,7 @@
-# from copyreg import constructor
-# from flask import Blueprint, jsonify, request
-# from app.models import User, Playlist, Song, Album, Artist, db
+from flask import Blueprint, jsonify, request
+from app.models import User, Playlist, Song, Album, Artist, db
 
-# song_routes = Blueprint('songs', __name__)
+song_routes = Blueprint('songs', __name__)
 
 # @song_routes.route('/')
 # def all_songs():
