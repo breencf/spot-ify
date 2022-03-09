@@ -14,6 +14,7 @@ import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
 import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
+import Search from "./components/search/Search";
 
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
               <div id="main">
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
+                </ProtectedRoute>
+                <ProtectedRoute path="/search" exact={true}>
+                  <Search />
                 </ProtectedRoute>
                 <ProtectedRoute path="/users/:userId" exact={true}>
                   <User />
