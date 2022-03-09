@@ -13,6 +13,8 @@
 .content-card .albumImage{
     width: 166px;
     height: 166px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 
