@@ -38,6 +38,11 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+
+        dict_playlists = []
+        for playlist in self.playlists:
+            dict_playlists.append(playlist.to_dict())
+
         return {
             "id": self.id,
             "username": self.username,
@@ -46,5 +51,6 @@ class User(db.Model, UserMixin):
             "last_name": self.last_name,
             "profile_image": self.profile_image,
             "hashed_password": self.hashed_password,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "playlists": {"dict": dict_playlists}
         }

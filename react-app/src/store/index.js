@@ -5,15 +5,15 @@ import playListReducer from './playlists';
 import songsReducer from './songs';
 import searchReducer from './search';
 import albumReducer from './album';
-
+import artistReducer from './artist';
 
 const rootReducer = combineReducers({
   session,
   playListReducer,
   songsReducer,
   searchReducer,
-  albumReducer
-
+  albumReducer,
+  artistReducer
 });
 
 

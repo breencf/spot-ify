@@ -42,7 +42,7 @@ const UserPlaylists = () => {
 
 
   useEffect(() => {
-    dispatch(load_Playlists(userId));
+    // dispatch(load_Playlists(userId));
   }, [dispatch]);
 
   return (
