@@ -5,6 +5,7 @@ import playListReducer from './playlists';
 import songsReducer from './songs';
 import searchReducer from './search';
 import albumReducer from './album';
+import libraryReducer from './library';
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   playListReducer,
   songsReducer,
   searchReducer,
-  albumReducer
+  albumReducer,
+  libraryReducer
 
 });
 

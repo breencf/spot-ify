@@ -18,6 +18,7 @@ import Search from "./components/TopBar/search/Search";
 import { AlbumPage } from "./components/AlbumPage";
 import { LoginMenu } from "./components/TopBar/LoginMenu";
 import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
+import Library from "./components/library/Library";
 
 
 
@@ -55,6 +56,9 @@ function App() {
               <div id="main">
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
+                </ProtectedRoute>
+                <ProtectedRoute path="/:userId/library" exact={true}>
+                  <Library />
                 </ProtectedRoute>
                 <ProtectedRoute path="/search" exact={true}>
                   <Search />
