@@ -6,6 +6,7 @@ import songsReducer from './songs';
 import searchReducer from './search';
 import albumReducer from './album';
 import libraryReducer from './library';
+import artistReducer from './artist';
 
 
 const rootReducer = combineReducers({
@@ -14,8 +15,8 @@ const rootReducer = combineReducers({
   songsReducer,
   searchReducer,
   albumReducer,
-  libraryReducer
-
+  libraryReducer,
+  artistReducer
 });
 
 

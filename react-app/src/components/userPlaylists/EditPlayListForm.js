@@ -44,7 +44,7 @@ const UserPlaylistsEdit = () => {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button className="button-green" onClick={openModal}>Edit</button>
       <Modal isOpen={modalIsOpen} style={customStyles}>
         <PlaylistsEdit playList={play} closeModal={closeModal} />
       </Modal>

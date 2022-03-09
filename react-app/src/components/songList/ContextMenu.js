@@ -12,7 +12,6 @@ import {
   useMenuState,
 } from "@szhsin/react-menu";
 
-
 export const ContextMenu = ({ song }) => {
   const { id } = useSelector((state) => state.session.user);
   const { playLists } = useSelector((state) => state.playListReducer);
@@ -20,16 +19,21 @@ export const ContextMenu = ({ song }) => {
   const dispatch = useDispatch();
   const playlistArr = Object.values(playLists);
 
-
   const onClickAddNew = () => {
     console.log({ user_id: id, song_id: song.id, playlist_id: null });
     dispatch(addToPlaylist({ user_id: id, song, playlist_id: null }));
   };
 
-
   return (
     <>
-      <Menu className="contextMenu" menuButton={<MenuButton>...</MenuButton>}>
+      <Menu
+        className="contextMenu"
+        menuButton={
+          <MenuButton className="button-none">
+            <h4>...</h4>
+          </MenuButton>
+        }
+      >
         <MenuItem>Add to queue</MenuItem>
         <hr />
 
@@ -44,11 +48,10 @@ export const ContextMenu = ({ song }) => {
         <MenuItem>Save to your liked songs</MenuItem>
         <MenuItem>Remove from this playlist</MenuItem>
         <SubMenu label="Add to playlist">
-
           <MenuItem onClick={onClickAddNew}>Add to new playlist</MenuItem>
           {
             // playLists &&
-            playlistArr?.map((playlist) => {  
+            playlistArr?.map((playlist) => {
               return (
                 <MenuItem
                   key={playlist?.id}

@@ -40,7 +40,7 @@ export const CreatePlaylistForm = ({closeModal}) => {
     // if (value.errors) {
     //   return setErrors(value.errors);
     // }
-    dispatch(load_Playlists(id));
+    // dispatch(load_Playlists(id));
 
     closeModal();
     history.push(`/users/${id}/playlists/${value.playlist.id}`);
