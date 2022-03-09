@@ -9,7 +9,7 @@ const UserPlaylists = () => {
   const { userId } = useParams();
   const history = useHistory();
 
-  const playLists = useSelector((state) => state?.playListReducer?.playLists);
+  const playLists = useSelector((state) => Object?.values(state?.playListReducer?.playLists));
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");

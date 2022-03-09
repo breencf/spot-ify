@@ -1,0 +1,31 @@
+.create-playlist-form {
+  padding: 20px;
+  background-color: var(--sp-dark);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.create-container {
+  display: flex;
+}
+
+.create-container > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-playlist-form input,
+textarea {
+  margin: 10px 20px;
+  padding: 5px;
+  width: 100%;
+  background-color: #ffffff1a;
+  border: none;
+  border-radius: 4px;
+}
+
+.create-playlist-form textarea {
+  height: 100px;
+}

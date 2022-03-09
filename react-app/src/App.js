@@ -66,7 +66,7 @@ function App() {
                   <ViewOnePlaylist />
                 </ProtectedRoute>
                 <ProtectedRoute path="/" exact={true}>
-                  <h1>My Home Page</h1>
+                  <h2>Good Evening</h2>
                 </ProtectedRoute>
                 <Route path="/songs" exact={true}>
                   <SongsList />
