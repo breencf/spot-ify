@@ -16,7 +16,7 @@ export const AlbumPage = () => {
     }, [dispatch])
 
     const albumObj= useSelector(state => state.albumReducer);
-    console.log('albumObj:      ')
+
     console.log(albumObj?.album?.songs?.dict)
     let songs = albumObj?.album?.songs?.dict;
 

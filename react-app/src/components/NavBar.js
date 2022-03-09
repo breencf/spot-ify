@@ -1,12 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
+import { load_Playlists } from "../store/playlists";
 import LogoutButton from "./auth/LogoutButton";
-import UserPlaylists from "./userPlaylists/UserPlaylists";
+
 
 const NavBar = () => {
   const userId = useSelector((state) => state.session?.user?.id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId) dispatch(load_Playlists(userId));
+  }, [dispatch, userId]);
+
+  const playLists = useSelector((state) => Object?.values(state?.playListReducer?.playLists));
+
   return (
+   <>
     <nav id="sidebar">
       <h2>Spotify</h2>
       <ul>
@@ -37,7 +47,17 @@ const NavBar = () => {
           <LogoutButton />
         </li>
       </ul>
+      <hr/>
+      <div>
+        {playLists?.map((list, index) => {
+          return <div key={index}>
+              <NavLink to={`/users/${userId}/playlists/${list.id}`}>{list.name}</NavLink>
+          </div>
+        })}
+      </div>
     </nav>
+  </>
+
   );
 };
 

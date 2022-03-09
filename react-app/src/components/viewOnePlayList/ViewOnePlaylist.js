@@ -1,57 +1,63 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { one_Playlists, delete_Playlist} from "../../store/playlists";
-import { useHistory, useParams, NavLink } from "react-router-dom";
+// import { one_Playlists, delete_Playlist } from "../../store/playlists";
+import { useHistory, useParams, NavLink, Link } from "react-router-dom";
 import UserPlaylistsEdit from "../userPlaylists/EditPlayListForm";
+import { SongsList } from "../songList";
 
 const ViewOnePlaylist = () => {
     const dispatch = useDispatch();
     const { userId, playlistId } = useParams();
     const history = useHistory();
 
-    const playList = useSelector((state) => state.playListReducer?.playLists[playlistId]?.playlist);
+    const playLists = useSelector((state) => state?.playListReducer?.playLists);
+    const currPlaylist = playLists[playlistId];
+    const playlistProp = currPlaylist?.songs?.dict;
 
-    // const [name, setName] = useState("");
-    // const [image, setImage] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [errors, setErrors] = useState([]);
+    // let defaultImage;
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     const playList = {
-    //         userId,
-    //         name,
-    //         image,
-    //         description
-    //     };
-
-    //     const value = await dispatch(one_Playlists(playList)).catch(async (err) => {
-    //         if (err) {
-    //             return err;
-    //         }
-    //     })
-    //     if (value.errors) {
-    //         return setErrors(value.errors);
+    // useEffect(() => {
+    //     if (!currPlaylist?.image) {
+    //         if (playlistProp) defaultImage = playlistProp[0]?.album_image;
     //     }
-        useEffect(() => {
-            dispatch(one_Playlists(userId, playlistId));
-        }, [dispatch]);
+    // }, [playlistProp])
 
-        return (
-            <div>
-                <p>hello from playlists</p>
-                <p>hello from playlists</p>
-                <p>route is not hitting</p>
-                <p>{playList?.image}</p>
-                <p>{playList?.description}</p>
-                <UserPlaylistsEdit />
-                <NavLink to={`/users/${userId}/playlists/${playlistId}`}>{playList?.name}</NavLink>
-                {playList &&
-                <button onClick={() => dispatch(delete_Playlist(userId, playlistId))}>Delete playlist here</button>
-                }
+    // console.log('-----------------', playlistId)
+    // console.log('----------', playlistProp[0]?.album_image)
+    // useEffect(() => {
+    //     dispatch(one_Playlists(userId, playlistId));
+    // }, [dispatch, playlistId, userId]);
+
+    // return (
+    //     <div>
+    //         <p>hello from playlists</p>
+    //         <p>hello from playlists</p>
+    //         <p>route is not hitting</p>
+    //         <p>{playList?.image}</p>
+    //         <p>{playList?.description}</p>
+    //         <UserPlaylistsEdit />
+    //         <NavLink to={`/users/${userId}/playlists/${playlistId}`}>{playList?.name}</NavLink>
+    //         {playList &&
+    //         <button onClick={() => dispatch(delete_Playlist(userId, playlistId))}>Delete playlist here</button>
+    //         }
+    //     </div>
+    // )
+    return (
+        <>
+            <div className="albumTop">
+                <div>
+                    <img className='albumImage' src={currPlaylist?.image} />
+                </div>
+                <div>
+                    <h4>ALBUM</h4>
+                    <h1>{currPlaylist?.name}</h1>
+                    <p>{currPlaylist?.description}</p>
+                    <Link to={`/users/${currPlaylist?.userId}`}>USERNAME</Link>
+                </div>
             </div>
-        )
-    }
+            <SongsList songProp={playlistProp} />
+        </>
+    )
+}
 
- export default ViewOnePlaylist
+export default ViewOnePlaylist
