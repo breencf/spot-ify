@@ -1,7 +1,9 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
+from .library_seed import seed_library
 from .seed_playlists import seed_playlists, undo_playlists
 from .seed_songs import seed_artists, seed_albums, seed_songs, undo_albums, undo_artists, undo_songs
+
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -15,6 +17,7 @@ def seed():
     seed_playlists()
     seed_artists()
     seed_albums()
+    seed_library()
     seed_songs()
     # Add other seed functions here
 

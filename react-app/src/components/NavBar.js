@@ -74,7 +74,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/library" exact={true} activeClassName="active">
+            <NavLink to={`/${userId}/library`} exact={true} activeClassName="active">
               <h3>Your Library</h3>
             </NavLink>
           </li>
