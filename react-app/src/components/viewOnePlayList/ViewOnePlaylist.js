@@ -29,6 +29,11 @@ const ViewOnePlaylist = () => {
     return history.push("/");
   };
 
+  // useEffect(() => {
+  //   dispatch(load_Playlists(id))
+  //   // console.log('ANGRY USE EFFECT ====================== SO MAD!!!')
+  // }, [dispatch, playlistProp])
+
   // return (
   //     <div>
 

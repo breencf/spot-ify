@@ -114,23 +114,24 @@ def add_to_playlist(user_id, playlist_id, song_id):
     return playlist_to_return
 
 
-@user_routes.route('/search', methods=["GET", "POST"])
+@user_routes.route('/search', methods=["POST"])
 @login_required
 def search():
-    form = Search()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    search_value = form.data['value']
-    search = "%{}%".format(search_value)
-    if form.validate_on_submit():
-        artists = Artist.query.filter(Artist.name.like(search)).all()
-        playlists = Playlist.query.filter(Playlist.name.like(search)).all()
-        albums = Album.query.filter(Album.name.like(search)).all()
-        songs = Song.query.filter(Song.name.like(search)).all()
+    search_value = request.json
+    result = search_value['value']
+    search = "%{}%".format(result)
+    users = User.query.filter(User.username.ilike(search)).all()
+    artists = Artist.query.filter(Artist.name.ilike(search)).all()
+    playlists = Playlist.query.filter(Playlist.name.ilike(search)).all()
+    albums = Album.query.filter(Album.name.ilike(search)).all()
+    songs = Song.query.filter(Song.name.ilike(search)).all()
 
-        return {'Artist': [artist.to_dict() for artist in artists]}
-
-
-    return {"broken", "not working"}
+    return {'Artist': [artist.to_dict() for artist in artists],
+            'Playlist': [playlist.to_dict() for playlist in playlists],
+            'Album': [album.to_dict() for album in albums],
+            'User': [user.to_dict() for user in users],
+            'Song': [song.to_dict() for song in songs],
+            }
 
 
 @user_routes.route('/playlists/<int:playlist_id>/<int:song_id>/delete', methods=['POST'])
@@ -138,11 +139,13 @@ def search():
 def delete_from_playlist(playlist_id, song_id):
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
+    index = 0
     for playlist_song in playlist.songs:
         if playlist_song == song:
-            print('=============popped=========')
-            print(playlist_song)
-            playlist.songs.pop(playlist_song.id)
+            # print('\n \n', song, '\n \n')
+            playlist.songs.pop(index)
+        index += 1
+
     db.session.commit()
 
     playlist_to_return = playlist.to_dict()

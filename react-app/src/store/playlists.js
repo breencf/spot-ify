@@ -163,6 +163,7 @@ export const delete_from_playlist =
     const updatedPlaylist = await response.json();
     console.log("updated playlist", updatedPlaylist);
     dispatch(deleteOne(updatedPlaylist));
+    // dispatch(loadPlaylists(updatedPlaylist.user_id))
     return updatedPlaylist;
   };
 
@@ -220,6 +221,9 @@ const playListReducer = (state = initialState, action) => {
     case DELETE_FROM_PLAYLIST:
       newState = { ...state };
       newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
+      console.log(action.updatedPlaylist.id)
+      console.log('==========================')
+      console.log(newState)
       return newState;
     default:
       return state;
