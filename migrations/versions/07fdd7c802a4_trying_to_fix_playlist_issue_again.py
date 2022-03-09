@@ -1,8 +1,8 @@
-"""db changes
+"""trying to fix playlist issue again
 
-Revision ID: 639d31687791
+Revision ID: 07fdd7c802a4
 Revises: 
-Create Date: 2022-03-07 09:49:52.731224
+Create Date: 2022-03-09 10:32:20.450389
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '639d31687791'
+revision = '07fdd7c802a4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -52,8 +52,8 @@ def upgrade():
     op.create_table('playlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
-    sa.Column('image', sa.String(length=255), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('image', sa.Text(), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { load_Playlists, add_Playlist } from "../../store/playlists";
-import { useHistory, useParams } from "react-router-dom";
+import { StaticRouter, useHistory, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "./CreatePlaylistForm.css";
 
-export const CreatePlaylistForm = () => {
+export const CreatePlaylistForm = ({closeModal}) => {
   const dispatch = useDispatch();
-  const { userId } = useParams();
+  const { id } = useSelector(state => state.session.user);
+  // const { userId } = useParams();
   const history = useHistory();
 
   const playLists = useSelector((state) =>
@@ -23,7 +24,7 @@ export const CreatePlaylistForm = () => {
     e.preventDefault();
 
     const playList = {
-      userId,
+      'userId': id,
       name,
       image,
       description,
@@ -35,11 +36,14 @@ export const CreatePlaylistForm = () => {
       }
     });
 
-    if (value.errors) {
-      return setErrors(value.errors);
-    }
-    dispatch(load_Playlists(userId));
-    // history.push(`/users/${userId}/playlists'`);
+    console.log('value    :', value)
+    // if (value.errors) {
+    //   return setErrors(value.errors);
+    // }
+    dispatch(load_Playlists(id));
+
+    closeModal();
+    history.push(`/users/${id}/playlists/${value.playlist.id}`);
   };
 
   return (

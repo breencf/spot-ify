@@ -92,7 +92,7 @@ const NavBar = () => {
           onRequestClose={closeModal}
           style={customStyles}
         >
-          <CreatePlaylistForm />
+          <CreatePlaylistForm closeModal={closeModal}/>
         </Modal>
 
         <hr />

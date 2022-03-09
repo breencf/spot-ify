@@ -90,6 +90,7 @@ export const add_Playlist = (playlist) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addPlaylist(data));
+    return data;
   } else {
     const data = await response.json();
     return data;

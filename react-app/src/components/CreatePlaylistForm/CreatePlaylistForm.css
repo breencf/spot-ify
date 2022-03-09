@@ -28,4 +28,6 @@ textarea {
 
 .create-playlist-form textarea {
   height: 100px;
+  resize: none;
+  overflow-y: scroll;
 }
