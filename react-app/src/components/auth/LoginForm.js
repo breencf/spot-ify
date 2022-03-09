@@ -17,9 +17,6 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
-
-    // dispatch(load_Playlists(data.id))
-
   };
 
   const demo = async (e) => {
