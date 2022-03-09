@@ -2,10 +2,9 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import LoginForm from "./components/auth/LoginForm";
-import SignUpForm from "./components/auth/SignUpForm";
+import LoginForm from "./components/TopBar/auth/LoginForm";
+import SignUpForm from "./components/TopBar/auth/SignUpForm";
 import NavBar from "./components/NavBar";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
@@ -14,9 +13,11 @@ import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
 import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
-import Search from "./components/search/Search";
+import Search from "./components/TopBar/search/Search";
 
 import { AlbumPage } from "./components/AlbumPage";
+import { LoginMenu } from "./components/TopBar/LoginMenu";
+import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
 
 
 
@@ -48,7 +49,9 @@ function App() {
               <SignUpForm />
             </Route>
             <div id="ui">
-              <div id="topbar"></div>
+              <div id="topbar">
+                <LoginMenu/>
+                </div>
               <div id="main">
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />

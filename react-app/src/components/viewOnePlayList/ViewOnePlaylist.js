@@ -1,38 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 // import { one_Playlists, delete_Playlist } from "../../store/playlists";
-import { useHistory, useParams, NavLink, Link } from "react-router-dom";
+import {
+  useHistory,
+  useParams,
+  NavLink,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import UserPlaylistsEdit from "../userPlaylists/EditPlayListForm";
 import { SongsList } from "../songList";
+import { delete_Playlist, load_Playlists } from "../../store/playlists";
 
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
-  const { userId, playlistId } = useParams();
+  const { playlistId } = useParams();
   const history = useHistory();
 
   const playLists = useSelector((state) => state?.playListReducer?.playLists);
+  const { id } = useSelector((state) => state.session.user);
   const currPlaylist = playLists[playlistId];
   const playlistProp = currPlaylist?.songs?.dict;
 
-  // let defaultImage;
-
-  // useEffect(() => {
-  //     if (!currPlaylist?.image) {
-  //         if (playlistProp) defaultImage = playlistProp[0]?.album_image;
-  //     }
-  // }, [playlistProp])
-
-  // console.log('-----------------', playlistId)
-  // console.log('----------', playlistProp[0]?.album_image)
-  // useEffect(() => {
-  //     dispatch(one_Playlists(userId, playlistId));
-  // }, [dispatch, playlistId, userId]);
+  const handleDelete = () => {
+    dispatch(delete_Playlist({ userId: id, playlistId: currPlaylist.id }));
+    dispatch(load_Playlists(id));
+    return history.push("/");
+  };
 
   // return (
   //     <div>
-  //         <p>hello from playlists</p>
-  //         <p>hello from playlists</p>
-  //         <p>route is not hitting</p>
+
   //         <p>{playList?.image}</p>
   //         <p>{playList?.description}</p>
   //         <UserPlaylistsEdit />
@@ -49,10 +47,10 @@ const ViewOnePlaylist = () => {
           <img
             className="albumImage"
             src={
-            //   currPlaylist?.image
-            //     ? currPlaylist?.image
-            //     :
-                "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2"
+              //   currPlaylist?.image
+              //     ? currPlaylist?.image
+              //     :
+              "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2"
             }
           />
         </div>
@@ -60,9 +58,20 @@ const ViewOnePlaylist = () => {
           <h4>ALBUM</h4>
           <h1>{currPlaylist?.name}</h1>
           <p>{currPlaylist?.description}</p>
-          <Link to={`/users/${currPlaylist?.userId}`}>USERNAME</Link>
+          {/* <Link to={`/users/${currPlaylist?.user_id}`}>
+            {currPlaylist.user_id}
+          </Link> */}
         </div>
       </div>
+      <br />
+      <hr />
+      {currPlaylist?.user_id == id && (
+        <>
+          <UserPlaylistsEdit playList={currPlaylist} />
+          <button onClick={handleDelete}>Delete playlist here</button>
+        </>
+      )}
+      <br />
       <SongsList songProp={playlistProp} />
     </>
   );

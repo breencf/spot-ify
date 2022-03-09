@@ -53,7 +53,8 @@ h2 {
   font-size: 32px;
 }
 
-h3, .h3-icon * {
+h3,
+.h3-icon * {
   font-weight: 600;
   font-size: 16px;
   color: white;
@@ -150,6 +151,7 @@ body,
 
 #topbar {
   padding: 0px 20px;
+  padding-top: 10px;
   width: 100%;
   height: 332px;
   display: flex;

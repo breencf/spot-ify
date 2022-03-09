@@ -37,5 +37,9 @@ class Playlist(db.Model):
             "description": self.description,
             "user_id": self.user_id,
             "created_at": self.created_at,
+            "user_first": self.user.first_name,
+            "user_last": self.user.last_name,
+            "user_image": self.user.profile_image,
+            "user_username": self.user.username,
             "songs": {"dict": dict_songs}
         }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { searchVal } from "../../store/search";
+import { searchVal } from "../../../store/search";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Search = () => {
   const handleSubmit = async(e) => {
       e.preventDefault()
 
-    
+
      const test = await dispatch(searchVal(input)).catch(async(err)=>{
         if (err){
           return err;

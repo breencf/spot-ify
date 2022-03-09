@@ -69,14 +69,13 @@ def edit_playlist(userId,playlistId):
         return {"playlist": "deleted"}
 
 
-@user_routes.route('/<int:userId>/playlists/<int:playlistId>/delete', methods=['POST'])
+@user_routes.route('/playlists/<int:playlistId>/delete', methods=['POST'])
 @login_required
-def delete_playlist(userId, playlistId):
-    print('am i hitting above this dang route...')
+def delete_playlist(playlistId):
     playlist = Playlist.query.get(playlistId)
     db.session.delete(playlist)
     db.session.commit()
-    return {"deleted": "playlist delete success"}
+    return {"deleted": playlistId}
 
 
 

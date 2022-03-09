@@ -34,22 +34,21 @@ const deletePlaylist = (playlistId) => {
   };
 };
 
-export const delete_Playlist = (userId, playlistId) => async (dispatch) => {
-  const response = await fetch(
-    `/api/users/${userId}/playlists/${playlistId}/delete`,
-    {
+export const delete_Playlist =
+  ({ userId, playlistId }) =>
+  async (dispatch) => {
+    const response = await fetch(`/api/users/playlists/${playlistId}/delete`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId,
         playlistId,
       }),
-    }
-  );
-  const success = await response.json();
-  dispatch(deletePlaylist(playlistId));
-  return success;
-};
+    });
+    const {deleted} = await response.json();
+    dispatch(deletePlaylist(deleted));
+    return deleted;
+  };
 
 // const onePlaylists = (playList) => {
 //   return {
