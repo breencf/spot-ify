@@ -1,4 +1,4 @@
-from app.models import db, Song, Artist, Album
+from app.models import db, Song, Artist, Album, Playlist
 
 def seed_artists():
     a1=Artist(name="Chance the Rapper", image="https://media.pitchfork.com/photos/5d3b4641e82cca0008d4d2fc/16:9/w_4080,h_2295,c_limit/Chance-the-Rapper.jpg", bio="Chancelor Johnathan Bennett, known professionally as Chance the Rapper, is an American rapper, singer, and record producer. Born in Chicago, Bennett released his debut mixtape 10 Day in 2012. He began to gain mainstream recognition in 2013 after releasing his second mixtape, Acid Rap.")
@@ -60,6 +60,27 @@ def seed_songs():
     s31= Song(name="Loft Music", audio="https://res.cloudinary.com/jadecabbage/video/upload/v1646670545/spotify-clone/The%20Weeknd%20-%20House%20Of%20Balloons%20%28DatPiff.com%29/08_-_Loft_Music_gqj1g3.mp3", artist_id=3, album_id=3, album_track_number=8)
     s32= Song(name="The Knowing", audio="https://res.cloudinary.com/jadecabbage/video/upload/v1646670671/spotify-clone/The%20Weeknd%20-%20House%20Of%20Balloons%20%28DatPiff.com%29/09_-_The_Knowing_yhuiok.mp3", artist_id=3, album_id=3, album_track_number=9)
 
+
+    sMod2 = Song.query.filter(Song.id %2 == 0).all()
+    sMod3 = Song.query.filter(Song.id %3 == 0).all()
+    sInt5g = Song.query.filter((Song.id%3 == 0)).all()
+    sInt5l = Song.query.filter((Song.id%4 == 0)).all()
+    sInt2= Song.query.filter(Song.id%1 == 0).all()
+    sInt3= Song.query.filter(Song.id%5 == 0).all()
+
+    p1 = Playlist.query.get(1)
+    p2 = Playlist.query.get(2)
+    p3 = Playlist.query.get(3)
+    p4 = Playlist.query.get(4)
+    p5 = Playlist.query.get(5)
+    p6 = Playlist.query.get(6)
+
+    p1.songs=sMod2
+    p2.songs=sMod3
+    p3.songs=sInt2
+    p4.songs=sInt3
+    p5.songs=sInt5g
+    p6.songs=sInt5l
 
 
 
