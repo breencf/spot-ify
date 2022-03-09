@@ -16,6 +16,9 @@ import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
 import Search from "./components/search/Search";
 
+import { AlbumPage } from "./components/AlbumPage";
+
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,6 +70,9 @@ function App() {
                 </ProtectedRoute>
                 <Route path="/songs" exact={true}>
                   <SongsList />
+                </Route>
+                <Route path='/albums/:albumId'>
+                  <AlbumPage />
                 </Route>
                </div>
              </div>

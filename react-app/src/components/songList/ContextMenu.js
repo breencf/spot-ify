@@ -48,7 +48,7 @@ export const ContextMenu = ({ song }) => {
           <MenuItem onClick={onClickAddNew}>Add to new playlist</MenuItem>
           {
             // playLists &&
-            playlistArr?.map((playlist) => {
+            playlistArr?.map((playlist) => {  
               return (
                 <MenuItem
                   key={playlist?.id}
