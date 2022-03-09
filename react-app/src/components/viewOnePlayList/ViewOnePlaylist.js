@@ -11,6 +11,7 @@ import {
 import UserPlaylistsEdit from "../userPlaylists/EditPlayListForm";
 import { SongsList } from "../songList";
 import { delete_Playlist, load_Playlists } from "../../store/playlists";
+import { CompoundAlbumImage } from "./CompoundAlbumImage";
 
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
@@ -45,22 +46,23 @@ const ViewOnePlaylist = () => {
   //         }
   //     </div>
   // )
+
+  let imag;
+
+  if (currPlaylist?.image) {
+    imag = <img className="albumImage" src={currPlaylist?.image}/>;
+  } else {
+    imag = <CompoundAlbumImage songs={playlistProp} />;
+  }
+
   return (
     <>
       <div className="albumTop">
         <div>
-          <img
-            className="albumImage"
-            src={
-              //   currPlaylist?.image
-              //     ? currPlaylist?.image
-              //     :
-              "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2"
-            }
-          />
+          {imag}
         </div>
         <div>
-          <h4>ALBUM</h4>
+          <h4>PLAYLIST</h4>
           <h1>{currPlaylist?.name}</h1>
           <p>{currPlaylist?.description}</p>
           {/* <Link to={`/users/${currPlaylist?.user_id}`}>
@@ -69,13 +71,14 @@ const ViewOnePlaylist = () => {
         </div>
       </div>
       <br />
-      <hr />
       {currPlaylist?.user_id == id && (
-        <>
+        <div>
           <UserPlaylistsEdit playList={currPlaylist} />
-          <button onClick={handleDelete}>Delete playlist here</button>
-        </>
+          <button className="button-green" onClick={handleDelete}>Delete</button>
+        </div>
       )}
+      <hr />
+
       <br />
       <SongsList songProp={playlistProp} playlistId={currPlaylist?.id} />
     </>

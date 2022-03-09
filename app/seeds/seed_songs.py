@@ -90,3 +90,32 @@ def seed_songs():
 
 
     db.session.commit()
+
+
+# Uses a raw SQL query to TRUNCATE the users table.
+# SQLAlchemy doesn't have a built in function to do this
+# TRUNCATE Removes all the data from the table, and RESET IDENTITY
+# resets the auto incrementing primary key, CASCADE deletes any
+# dependent entities
+def undo_artists():
+    db.session.execute('TRUNCATE artists RESTART IDENTITY CASCADE;')
+    db.session.commit()
+
+
+# Uses a raw SQL query to TRUNCATE the users table.
+# SQLAlchemy doesn't have a built in function to do this
+# TRUNCATE Removes all the data from the table, and RESET IDENTITY
+# resets the auto incrementing primary key, CASCADE deletes any
+# dependent entities
+def undo_albums():
+    db.session.execute('TRUNCATE albums RESTART IDENTITY CASCADE;')
+    db.session.commit()
+
+# Uses a raw SQL query to TRUNCATE the users table.
+# SQLAlchemy doesn't have a built in function to do this
+# TRUNCATE Removes all the data from the table, and RESET IDENTITY
+# resets the auto incrementing primary key, CASCADE deletes any
+# dependent entities
+def undo_songs():
+    db.session.execute('TRUNCATE songs RESTART IDENTITY CASCADE;')
+    db.session.commit()

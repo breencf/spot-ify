@@ -1,0 +1,14 @@
+.multi-image-container {
+  max-height: 192px;
+  max-width: 192px;
+  min-height: 192px;
+  min-width: 192px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.multi-image img {
+  object-fit: fill;
+  height: 96px;
+  width: 96px;
+}
