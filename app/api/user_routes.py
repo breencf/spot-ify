@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
 from app.models import User, Playlist, db, Album, Artist, Song
-from app.forms import PlayListForm, EditPlayList
+from app.forms import PlayListForm, EditPlayList, Search
 from app.api.auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
@@ -116,3 +116,27 @@ def add_to_playlist(user_id, playlist_id, song_id):
     # print("========================")
 
     return playlist_to_return
+
+
+
+
+
+
+
+@user_routes.route('/search', methods=["GET", "POST"])
+@login_required
+def search():
+    form = Search()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    search_value = form.data['value']
+    search = "%{}%".format(search_value)
+    if form.validate_on_submit():
+        artists = Artist.query.filter(Artist.name.like(search)).all()
+        playlists = Playlist.query.filter(Playlist.name.like(search)).all()
+        albums = Album.query.filter(Album.name.like(search)).all()
+        songs = Song.query.filter(Song.name.like(search)).all()
+
+        return {'Artist': [artist.to_dict() for artist in artists]}
+
+
+    return {"broken", "not working"}
