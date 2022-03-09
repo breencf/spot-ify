@@ -14,19 +14,18 @@ const editPlaylist = (playlist) => {
 };
 
 export const edit_Playlist = (playlist) => async (dispatch) => {
-    const response = await fetch(`/api/users/${playlist.userId}/playlists/${playlist.playlistId}/edit`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(
-            playlist
-        )
-    })
-    const data = await response.json()
-    dispatch(editPlaylist(data))
-    return data
-}
-
-
+  const response = await fetch(
+    `/api/users/${playlist.userId}/playlists/${playlist.playlistId}/edit`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(playlist),
+    }
+  );
+  const data = await response.json();
+  dispatch(editPlaylist(data));
+  return data;
+};
 
 const deletePlaylist = (playlistId) => {
   return {
@@ -88,15 +87,14 @@ export const add_Playlist = (playlist) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(playlist),
   });
-  if(response.ok){
-      const data = await response.json();
-      dispatch(addPlaylist(data));
-  }else {
+  if (response.ok) {
     const data = await response.json();
-    return data
+    dispatch(addPlaylist(data));
+  } else {
+    const data = await response.json();
+    return data;
   }
-}
-
+};
 
 export const addToPlaylist =
   ({ song, user_id, playlist_id }) =>
@@ -122,8 +120,7 @@ export const addToPlaylist =
     //   console.log(response.json());
     // }
     const response = await fetch(
-      // /playlists/<int:user_id>/<int:playlist_id>/<int:song_id>/add
-      `api/users/playlists//${user_id}/${playlist_id}/${song.id}/add`,
+      `/api/users/playlists/${user_id}/${playlist_id}/${song.id}/add`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -134,7 +131,6 @@ export const addToPlaylist =
         }),
       }
     );
-
     if (response.ok) {
       const updatedPlaylist = await response.json();
       console.log(updatedPlaylist);
@@ -173,7 +169,8 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_PLAYLIST:
       newState = { ...state };
-      newState.playLists[action.playlist.playlist.id] = action.playlist.playlist;
+      newState.playLists[action.playlist.playlist.id] =
+        action.playlist.playlist;
       return newState;
     // case EDIT_PLAYLIST:
     //   newState = { ...state };

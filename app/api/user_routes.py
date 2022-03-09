@@ -100,10 +100,10 @@ def edit_user_playlist(userId, playlistId):
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@user_routes.route('/playlists/<int:user_id>/<int:playlist_id>/<int:song_id>/add', methods=["POST"])
-# @login_required
-def add_to_playlist(user_id, playlist_id, song_id):
 
+
+@user_routes.route('/playlists/<int:user_id>/<int:playlist_id>/<int:song_id>/add', methods=["POST"])
+def add_to_playlist(user_id, playlist_id, song_id):
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
     playlist.songs.append(song)
@@ -111,16 +111,8 @@ def add_to_playlist(user_id, playlist_id, song_id):
     db.session.commit()
 
     playlist_to_return = playlist.to_dict()
-    # print("========================")
-    # print(playlist_to_return["songs"]['dict'])
-    # print("========================")
 
     return playlist_to_return
-
-
-
-
-
 
 
 @user_routes.route('/search', methods=["GET", "POST"])
