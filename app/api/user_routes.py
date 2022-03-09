@@ -131,3 +131,20 @@ def search():
 
 
     return {"broken", "not working"}
+
+
+@user_routes.route('/playlists/<int:playlist_id>/<int:song_id>/delete', methods=['POST'])
+@login_required
+def delete_from_playlist(playlist_id, song_id):
+    playlist = Playlist.query.get(playlist_id)
+    song = Song.query.get(song_id)
+    for playlist_song in playlist.songs:
+        if playlist_song == song:
+            print('=============popped=========')
+            print(playlist_song)
+            playlist.songs.pop(playlist_song.id)
+    db.session.commit()
+
+    playlist_to_return = playlist.to_dict()
+
+    return playlist_to_return

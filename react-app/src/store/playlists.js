@@ -4,6 +4,7 @@ const ADD_PLAYLIST = "user/ADD_PLAYLIST";
 const DELETE_PLAYLIST = "user/DELETE_PLAYLIST";
 
 const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
+const DELETE_FROM_PLAYLIST = "songs/DELETE_FROM_PLAYLIST";
 const EDIT_PLAYLIST = "user/EDIT_PLAYLIST";
 
 const editPlaylist = (playlist) => {
@@ -45,7 +46,7 @@ export const delete_Playlist =
         playlistId,
       }),
     });
-    const {deleted} = await response.json();
+    const { deleted } = await response.json();
     dispatch(deletePlaylist(deleted));
     return deleted;
   };
@@ -137,6 +138,33 @@ export const addToPlaylist =
     }
   };
 
+const deleteOne = (updatedPlaylist) => {
+  return {
+    type: DELETE_FROM_PLAYLIST,
+    updatedPlaylist,
+  };
+};
+
+export const delete_from_playlist =
+  ({ playlist_id, song_id }) =>
+  async (dispatch) => {
+    const response = await fetch(
+      `/api/users/playlists/${playlist_id}/${song_id}/delete`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          song_id,
+          playlist_id,
+        }),
+      }
+    );
+    const updatedPlaylist = await response.json();
+    console.log("updated playlist", updatedPlaylist);
+    dispatch(deleteOne(updatedPlaylist));
+    return updatedPlaylist;
+  };
+
 const loadPlaylists = (id) => {
   return {
     type: USER_PLAYLISTS,
@@ -186,6 +214,10 @@ const playListReducer = (state = initialState, action) => {
     case ADD_TO_PLAYLIST:
       newState = { ...state };
       console.log(action.updatedPlaylist.id);
+      newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
+      return newState;
+    case DELETE_FROM_PLAYLIST:
+      newState = { ...state };
       newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
       return newState;
     default:

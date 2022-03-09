@@ -72,7 +72,7 @@ const ViewOnePlaylist = () => {
         </>
       )}
       <br />
-      <SongsList songProp={playlistProp} />
+      <SongsList songProp={playlistProp} playlistId={currPlaylist?.id} />
     </>
   );
 };

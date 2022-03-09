@@ -4,7 +4,7 @@ import { loadSongs } from "../../store/songs";
 import { SongListing } from "./SongListing";
 import { load_Playlists } from "../../store/playlists";
 
-export const SongsList = ({songProp}) => {
+export const SongsList = ({ songProp, playlistId }) => {
   const dispatch = useDispatch();
   const songsObj = useSelector((state) => state.songsReducer);
   let songs = Object.values(songsObj.songs);
@@ -19,10 +19,15 @@ export const SongsList = ({songProp}) => {
     <>
       <div id="songslist">
         {(songProp ? songProp : songs).map((song) => {
-          return <SongListing key={song.id} song={song} />;
+          return (
+            <SongListing
+              key={song.id}
+              song={song}
+              playlistId={playlistId ? playlistId : null}
+            />
+          );
         })}
       </div>
     </>
-
   );
 };

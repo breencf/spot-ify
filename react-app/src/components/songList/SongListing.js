@@ -2,13 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, SubMenu } from "@szhsin/react-menu";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { load_Playlists, delete_from_playlist } from "../../store/playlists";
 
-export const SongListing = ({ song }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const songRef = useRef(null);
-  let selectedSong;
+export const SongListing = ({ song, playlistId }) => {
   const { playLists } = useSelector((state) => state.playListReducer);
+  const {id} = useSelector((state) => state.session.user)
+  const dispatch = useDispatch()
+
+  useEffect(()=> console.log(playlistId),[playlistId])
+
+  const handleDelete = () => {
+    console.log(playlistId)
+    dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id }))
+    dispatch(load_Playlists(id))
+  }
 
   return (
     <div className="songListing">
@@ -28,6 +36,7 @@ export const SongListing = ({ song }) => {
       </span>
       <span className="song_duration"><p>0:00</p></span>
       <span className="song_...">
+        <button className="none-button" onClick={handleDelete}>X</button>
         <ContextMenu song={song} />
       </span>
     </div>
