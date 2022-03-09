@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { edit_Playlist, load_Playlists } from "../../store/playlists";
 import { useHistory, useParams } from "react-router-dom";
 import "../CreatePlaylistForm/CreatePlaylistForm.css";
+import "../viewOnePlayList/CompoundAlbumImage.css"
+import { CompoundAlbumImage } from "../viewOnePlayList/CompoundAlbumImage";
 
 const PlaylistsEdit = ({ playList, closeModal }) => {
   const dispatch = useDispatch();
@@ -53,7 +55,9 @@ const PlaylistsEdit = ({ playList, closeModal }) => {
           })}
         </ul>
         <div className="create-container">
-          <img src="https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2" />
+          <div>
+          <CompoundAlbumImage songs={playList.songs?.dict} />
+          </div>
           <div>
             <div className="form-div">
               <ul>

@@ -7,20 +7,24 @@ import { load_Playlists, delete_from_playlist } from "../../store/playlists";
 
 export const SongListing = ({ song, playlistId }) => {
   const { playLists } = useSelector((state) => state.playListReducer);
-  const {id} = useSelector((state) => state.session.user)
-  const dispatch = useDispatch()
+  const { id } = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
-  useEffect(()=> console.log(playlistId),[playlistId])
+  useEffect(() => console.log(playlistId), [playlistId]);
 
   const handleDelete = () => {
-    console.log(playlistId)
-    dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id }))
-    dispatch(load_Playlists(id))
-  }
+    console.log(playlistId);
+    dispatch(
+      delete_from_playlist({ playlist_id: playlistId, song_id: song.id })
+    );
+    dispatch(load_Playlists(id));
+  };
 
   return (
     <div className="songListing">
-      <span className="song_track_number"><p>{song.album_track_number}</p></span>
+      <span className="song_track_number">
+        <p>{song.album_track_number}</p>
+      </span>
       <span className="song_image">
         <img src={song.album_image} className="song_album_image" />
       </span>
@@ -34,10 +38,17 @@ export const SongListing = ({ song, playlistId }) => {
       <span className="song_album">
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
-      <span className="song_duration"><p>0:00</p></span>
+      <span className="song_duration">
+        <p>0:00</p>
+      </span>
+
       <span className="song_...">
-        <button className="none-button" onClick={handleDelete}>X</button>
         <ContextMenu song={song} />
+      </span>
+      <span className="song_...">
+        <button className="button-none" onClick={handleDelete}>
+          <h4>x</h4>
+        </button>
       </span>
     </div>
   );
