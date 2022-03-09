@@ -12,10 +12,8 @@ export const SongListing = ({ song, playlistId }) => {
 
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(()=> console.log(playlistId),[playlistId])
-
   useEffect(() => {
-    dispatch(load_Playlists(id))
+    if (deleting) dispatch(load_Playlists(id));
     setDeleting(false)
   }, [dispatch, deleting])
 

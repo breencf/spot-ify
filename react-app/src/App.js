@@ -18,6 +18,8 @@ import Search from "./components/TopBar/search/Search";
 import { AlbumPage } from "./components/AlbumPage";
 import { LoginMenu } from "./components/TopBar/LoginMenu";
 import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
+import { ArtistPage } from "./components/ArtistPage";
+import { ProfilePage } from "./components/ProfilePage";
 
 
 
@@ -60,7 +62,7 @@ function App() {
                   <Search />
                 </ProtectedRoute>
                 <ProtectedRoute path="/users/:userId" exact={true}>
-                  <User />
+                  <ProfilePage />
                 </ProtectedRoute>
                 <ProtectedRoute path="/users/:userId/playlists" exact={true}>
                   <UserPlaylists />
@@ -74,8 +76,11 @@ function App() {
                 <Route path="/songs" exact={true}>
                   <SongsList />
                 </Route>
-                <Route path='/albums/:albumId'>
+                <Route path='/albums/:albumId' exact={true}>
                   <AlbumPage />
+                </Route>
+                <Route path='/artists/:artistId' exact={true}>
+                  <ArtistPage />
                 </Route>
                </div>
              </div>

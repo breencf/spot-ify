@@ -16,11 +16,26 @@ class Artist(db.Model):
     songs = db.relationship("Song", back_populates="artist", cascade='all, delete, delete-orphan')
     #Child
 
+
+
     def to_dict(self):
+
+        dict_songs = []
+        for song in self.songs:
+            dict_songs.append(song.to_dict())
+
+        dict_albums = []
+        for album in self.albums:
+            dict_albums.append(album.to_dict())
+
+
         return {
             "id": self.id,
             "name": self.name,
             "image": self.image,
             "bio": self.bio,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "songs": {"dict": dict_songs},
+            "albums": {"dict": dict_albums},
+
         }

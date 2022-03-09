@@ -12,7 +12,7 @@ export const SongsList = ({ songProp, playlistId }) => {
 
   useEffect(() => {
     dispatch(loadSongs());
-    dispatch(load_Playlists(id));
+    // dispatch(load_Playlists(id));
   }, [dispatch]);
 
   return (
