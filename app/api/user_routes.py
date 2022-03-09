@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
-from app.models import User, Playlist, db, Album, Artist, Song
+from app.models import User, Playlist, db, Album, Artist, Song, Library
 from app.forms import PlayListForm, EditPlayList, Search
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -151,3 +151,24 @@ def delete_from_playlist(playlist_id, song_id):
     playlist_to_return = playlist.to_dict()
 
     return playlist_to_return
+
+
+@user_routes.route('/<int:userId>/library')
+@login_required
+def load_library(userId):
+    library_data = Library.query.filter(Library.user_id == userId).first()
+
+
+    # array= []
+    # for data in library_data:
+    #     if data.playlist_id:
+    #         array.append(data.playlist_id)
+    # playlist = library_data.filter(lambda:)
+
+    # user_playlists = Playlist.query.filter(Playlist.id == library_data.playlist_id).all()
+
+
+    # print('\n', user_playlists, 'testing out user playlists   \n \n')
+    # print('\n', array, 'library data in the backend   \n \n')
+
+    return {"test": library_data.to_dict()}

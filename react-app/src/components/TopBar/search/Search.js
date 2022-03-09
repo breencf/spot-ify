@@ -8,7 +8,7 @@ const Search = ()=>{
     const [name, setName] = useState('')
 
     const searchValue = useSelector((state)=> state.searchReducer)
-    console.log(searchValue, ' what is vvalue on initial load')
+    // console.log(searchValue, ' what is vvalue on initial load')
     const handelsubmit = async (e)=>{
         e.preventDefault();
 
