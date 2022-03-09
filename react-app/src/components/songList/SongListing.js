@@ -10,12 +10,22 @@ export const SongListing = ({ song, playlistId }) => {
   const {id} = useSelector((state) => state.session.user)
   const dispatch = useDispatch()
 
+  const [deleting, setDeleting] = useState(false);
+
   useEffect(()=> console.log(playlistId),[playlistId])
+
+  useEffect(() => {
+    dispatch(load_Playlists(id))
+    setDeleting(false)
+  }, [dispatch, deleting])
 
   const handleDelete = () => {
     console.log(playlistId)
+    console.log('--------------------')
+    console.log(song.id)
     dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id }))
-    dispatch(load_Playlists(id))
+    setDeleting(true)
+    console.log(deleting, '-------------')
   }
 
   return (

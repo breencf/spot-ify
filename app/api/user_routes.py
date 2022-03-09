@@ -141,11 +141,13 @@ def search():
 def delete_from_playlist(playlist_id, song_id):
     playlist = Playlist.query.get(playlist_id)
     song = Song.query.get(song_id)
+    index = 0
     for playlist_song in playlist.songs:
         if playlist_song == song:
-            print('=============popped=========')
-            print(playlist_song)
-            playlist.songs.pop(playlist_song.id)
+            # print('\n \n', song, '\n \n')
+            playlist.songs.pop(index)
+        index += 1
+
     db.session.commit()
 
     playlist_to_return = playlist.to_dict()
