@@ -1,4 +1,5 @@
 const PLAY_SONG = "songs/PLAY_SONG";
+const ADD_TO_QUEUE = "songs/ADD_TO_QUEUE"
 
 const play = (songObj) => ({
     type: PLAY_SONG,
@@ -16,7 +17,7 @@ export const playSong = (id) => async (dispatch) => {
 
 
 
-const initialState = { queue: [], currSong: {} };
+const initialState = { queue: [], currSong: null};
 let newState;
 
 export default function songsReducer(state = initialState, action) {
@@ -24,7 +25,6 @@ export default function songsReducer(state = initialState, action) {
         case PLAY_SONG:
             newState = { ...state };
             newState.currSong = action.songObj;
-            // console.log('songObj', songObj)
             return newState;
         // case ADD_TO_PLAYLIST:
         //   newState = { ...state };
