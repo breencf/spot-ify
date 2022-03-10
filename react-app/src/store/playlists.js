@@ -16,7 +16,7 @@ const editPlaylist = (playlist) => {
 
 export const edit_Playlist = (playlist) => async (dispatch) => {
   const response = await fetch(
-    `/api/users/${playlist.userId}/playlists/${playlist.playlistId}/edit`,
+    `/api/playlists/${playlist.playlistId}/edit`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,7 +38,7 @@ const deletePlaylist = (playlistId) => {
 export const delete_Playlist =
   ({ userId, playlistId }) =>
   async (dispatch) => {
-    const response = await fetch(`/api/users/playlists/${playlistId}/delete`, {
+    const response = await fetch(`/api/playlists/${playlistId}/delete`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -100,28 +100,8 @@ export const add_Playlist = (playlist) => async (dispatch) => {
 export const addToPlaylist =
   ({ song, user_id, playlist_id }) =>
   async (dispatch) => {
-    // if (!playlist_id) {
-    //   const newPlaylist = add_Playlist({
-    //     name: song.name,
-    //     image: null,
-    //     description: null,
-    //     userId: user_id,
-    //   });
-    //   console.log("==================", newPlaylist);
-
-    //   const response = await fetch(`/api/users/playlists/${playlist_id}/add`, {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       song_id: song.id,
-    //       user_id,
-    //       playlist_id: newPlaylist.id,
-    //     }),
-    //   });
-    //   console.log(response.json());
-    // }
     const response = await fetch(
-      `/api/users/playlists/${user_id}/${playlist_id}/${song.id}/add`,
+      `/api/playlists/${playlist_id}/${song.id}/add`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -150,7 +130,7 @@ export const delete_from_playlist =
   ({ playlist_id, song_id }) =>
   async (dispatch) => {
     const response = await fetch(
-      `/api/users/playlists/${playlist_id}/${song_id}/delete`,
+      `/api/playlists/${playlist_id}/${song_id}/delete`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

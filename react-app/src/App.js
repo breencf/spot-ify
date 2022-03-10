@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,13 +16,10 @@ import Search from "./components/TopBar/search/Search";
 
 import { AlbumPage } from "./components/AlbumPage";
 import { LoginMenu } from "./components/TopBar/LoginMenu";
-import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
+import ProtectedRoute from "../src/components/TopBar/auth/ProtectedRoute";
 import Library from "./components/library/Library";
 import { ArtistPage } from "./components/ArtistPage";
 import { ProfilePage } from "./components/ProfilePage";
-
-
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,8 +50,8 @@ function App() {
             </Route>
             <div id="ui">
               <div id="topbar">
-                <LoginMenu/>
-                </div>
+                <LoginMenu />
+              </div>
               <div id="main">
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
@@ -72,7 +68,7 @@ function App() {
                 <ProtectedRoute path="/users/:userId/playlists" exact={true}>
                   <UserPlaylists />
                 </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId/playlists/:playlistId" exact={true}>
+                <ProtectedRoute path="/playlists/:playlistId" exact={true}>
                   <ViewOnePlaylist />
                 </ProtectedRoute>
                 <ProtectedRoute path="/" exact={true}>
@@ -81,14 +77,14 @@ function App() {
                 <Route path="/songs" exact={true}>
                   <SongsList />
                 </Route>
-                <Route path='/albums/:albumId' exact={true}>
+                <Route path="/albums/:albumId" exact={true}>
                   <AlbumPage />
                 </Route>
-                <Route path='/artists/:artistId' exact={true}>
+                <Route path="/artists/:artistId" exact={true}>
                   <ArtistPage />
                 </Route>
-               </div>
-             </div>
+              </div>
+            </div>
           </Switch>
         </div>
         <AudioPlayer />

@@ -74,7 +74,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/${userId}/library`} exact={true} activeClassName="active">
+            <NavLink
+              to={`/${userId}/library`}
+              exact={true}
+              activeClassName="active"
+            >
               <h3>Your Library</h3>
             </NavLink>
           </li>
@@ -92,7 +96,7 @@ const NavBar = () => {
           onRequestClose={closeModal}
           style={customStyles}
         >
-          <CreatePlaylistForm closeModal={closeModal}/>
+          <CreatePlaylistForm closeModal={closeModal} />
         </Modal>
 
         <hr />
@@ -102,7 +106,7 @@ const NavBar = () => {
               <div key={index} className="navbar-playlist">
                 <NavLink
                   activeClassName="activeNav"
-                  to={`/users/${userId}/playlists/${list.id}`}
+                  to={`/playlists/${list.id}`}
                 >
                   <h4>{list.name}</h4>
                 </NavLink>
