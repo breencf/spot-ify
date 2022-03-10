@@ -1,4 +1,5 @@
 from .db import db
+from .tables import songs_library, albums_library, artist_library
 
 
 class Library(db.Model):
@@ -13,6 +14,29 @@ class Library(db.Model):
 
     users_lib = db.relationship("User", back_populates='users_library')
     playlists_lib = db.relationship("Playlist", back_populates='playlist_library' )
-    albums_lib = db.relationship("Album", back_populates='albums_library' )
-    artists_lib = db.relationship("Artist", back_populates='artists_library' )
-    songs_lib = db.relationship("Song", back_populates='songs_library' )
+    albums_lib = db.relationship("Album", back_populates='albums_library', secondary=albums_library )
+    artists_lib = db.relationship("Artist", back_populates='artists_library', secondary=artist_library )
+    songs_lib = db.relationship("Song", back_populates='songs_library', secondary=songs_library )
+
+    def to_dict(self):
+        # songs = []
+        # for song in self.songs_lib:
+        #     songs.append(song.to_dict())
+
+        songs = [song.to_dict() for song in self.songs_lib]
+        albums = [album.to_dict() for album in self.albums_lib]
+        artists = [artist.to_dict() for artist in self.artists_lib]
+
+
+        return{
+            "id": self.id,
+            "user_id": self.user_id,
+            "playlist_id": self.playlist_id,
+            "album_id": self.album_id,
+            "artist_id": self.artist_id,
+            "song_id": self.song_id,
+            "songs": songs,
+            "albums": albums,
+            "artists": artists
+
+        }

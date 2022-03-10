@@ -29,6 +29,7 @@ class Album(db.Model):
             "year": self.year,
             "created_at": self.created_at,
             "artist": self.artist.name,
+            "artist_id": self.artist.id,
             "artist_image": self.artist.image,
             "songs": {"dict": dict_songs}
         }

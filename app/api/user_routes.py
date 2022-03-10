@@ -1,27 +1,28 @@
 from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
-from app.models import User, Playlist, db, Album, Artist, Song
+from app.models import User, Playlist, db, Album, Artist, Song, Library
 from app.forms import PlayListForm, EditPlayList, Search
 from app.api.auth_routes import validation_errors_to_error_messages
 
+
+
 user_routes = Blueprint('users', __name__)
 
+# @user_routes.route('/')
+# @login_required
+# def users():
+#     users = User.query.all()
+#     return {'users': [user.to_dict() for user in users]}
 
-@user_routes.route('/')
-@login_required
-def users():
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
-
-
+#GET A PROFILE
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-
+#GET A USER'S PLAYLISTS
 @user_routes.route('/<int:id>/playlists')
 @login_required
 def user_playlists(id):
@@ -29,6 +30,7 @@ def user_playlists(id):
     print(user_playlists, 'are the playlsits printing out? ')
     return {'user_playlists': [playlist.to_dict() for playlist in user_playlists]}
 
+#A USER CREATES A PLAYLIST
 @user_routes.route('/<int:id>/playlists', methods=['POST'])
 @login_required
 def user_playlists_form(id):
@@ -50,15 +52,7 @@ def user_playlists_form(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-
-@user_routes.route('/songs')
-def all_songs():
-    songs = Song.query.all()
-
-    print(songs)
-    return { 'song_array': [song.to_dict() for song in songs] }
-
-
+#GET A PLAYLIST
 @user_routes.route('/<int:userId>/playlists/<int:playlistId>')
 @login_required
 def edit_playlist(userId,playlistId):
@@ -69,6 +63,7 @@ def edit_playlist(userId,playlistId):
         return {"playlist": "deleted"}
 
 
+#DELETE A PLAYLIST
 @user_routes.route('/playlists/<int:playlistId>/delete', methods=['POST'])
 @login_required
 def delete_playlist(playlistId):
@@ -79,7 +74,7 @@ def delete_playlist(playlistId):
 
 
 
-
+#EDIT A PLAYLIST
 @user_routes.route('/<int:userId>/playlists/<int:playlistId>/edit', methods=['POST'])
 @login_required
 def edit_user_playlist(userId, playlistId):
@@ -100,7 +95,7 @@ def edit_user_playlist(userId, playlistId):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-
+#ADD A SONG TO A PLAYLIST
 @user_routes.route('/playlists/<int:user_id>/<int:playlist_id>/<int:song_id>/add', methods=["POST"])
 def add_to_playlist(user_id, playlist_id, song_id):
     playlist = Playlist.query.get(playlist_id)
@@ -133,7 +128,7 @@ def search():
             'Song': [song.to_dict() for song in songs],
             }
 
-
+#DELETE FROM PLAYLIST
 @user_routes.route('/playlists/<int:playlist_id>/<int:song_id>/delete', methods=['POST'])
 @login_required
 def delete_from_playlist(playlist_id, song_id):
@@ -151,3 +146,24 @@ def delete_from_playlist(playlist_id, song_id):
     playlist_to_return = playlist.to_dict()
 
     return playlist_to_return
+
+
+@user_routes.route('/<int:userId>/library')
+@login_required
+def load_library(userId):
+    library_data = Library.query.filter(Library.user_id == userId).first()
+
+
+    # array= []
+    # for data in library_data:
+    #     if data.playlist_id:
+    #         array.append(data.playlist_id)
+    # playlist = library_data.filter(lambda:)
+
+    # user_playlists = Playlist.query.filter(Playlist.id == library_data.playlist_id).all()
+
+
+    # print('\n', user_playlists, 'testing out user playlists   \n \n')
+    # print('\n', array, 'library data in the backend   \n \n')
+
+    return {"test": library_data.to_dict()}

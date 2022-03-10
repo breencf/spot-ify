@@ -9,9 +9,9 @@ const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
 
-    const searchValue = useSelector((state) => state.searchReducer)
-    console.log(searchValue, ' what is vvalue on initial load')
-    const handelsubmit = async (e) => {
+    const searchValue = useSelector((state)=> state.searchReducer)
+    // console.log(searchValue, ' what is vvalue on initial load')
+    const handelsubmit = async (e)=>{
         e.preventDefault();
 
         const value = await dispatch(searchVal(name))

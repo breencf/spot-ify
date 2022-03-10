@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,12 +16,11 @@ import Search from "./components/TopBar/search/Search";
 
 import { AlbumPage } from "./components/AlbumPage";
 import { LoginMenu } from "./components/TopBar/LoginMenu";
-import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
+import ProtectedRoute from "../src/components/TopBar/auth/ProtectedRoute";
+import Library from "./components/library/Library";
 import { ArtistPage } from "./components/ArtistPage";
 import { ProfilePage } from "./components/ProfilePage";
 import { CarrotButtons } from "./components/TopBar/CarrotButtons";
-
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,6 +58,9 @@ function App() {
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
                 </ProtectedRoute>
+                <ProtectedRoute path="/:userId/library" exact={true}>
+                  <Library />
+                </ProtectedRoute>
                 <ProtectedRoute path="/search" exact={true}>
                   <Search />
                 </ProtectedRoute>
@@ -69,7 +70,7 @@ function App() {
                 <ProtectedRoute path="/users/:userId/playlists" exact={true}>
                   <UserPlaylists />
                 </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId/playlists/:playlistId" exact={true}>
+                <ProtectedRoute path="/playlists/:playlistId" exact={true}>
                   <ViewOnePlaylist />
                 </ProtectedRoute>
                 <ProtectedRoute path="/" exact={true}>
@@ -78,10 +79,10 @@ function App() {
                 <Route path="/songs" exact={true}>
                   <SongsList />
                 </Route>
-                <Route path='/albums/:albumId' exact={true}>
+                <Route path="/albums/:albumId" exact={true}>
                   <AlbumPage />
                 </Route>
-                <Route path='/artists/:artistId' exact={true}>
+                <Route path="/artists/:artistId" exact={true}>
                   <ArtistPage />
                 </Route>
               </div>
