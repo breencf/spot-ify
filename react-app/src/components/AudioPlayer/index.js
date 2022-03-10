@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export const AudioPlayer = () => {
 
-  const { queue } = useSelector(state => state.songsReducer)
+  const { currSong } = useSelector(state => state.songsReducer)
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -16,18 +16,25 @@ export const AudioPlayer = () => {
   const progressBar = useRef();
   const progressRef = useRef();
 
-  
+  const index = 0;
+  console.log('===========', currSong)
 
   // useEffect(() => {
-  //   audioPlayer.current.play();
-  // }, [queue])
+  // }, [currSong])
 
   useEffect(() => {
     // total duration of song
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readystate]) // properties provided by audio tag
+
+    if (currSong) {
+      audioPlayer.current.src = currSong?.audio;
+      const seconds = Math.floor(audioPlayer.current.duration);
+      setDuration(seconds);
+      progressBar.current.max = seconds;
+      // tracks.push(currSong.audio);
+      setCurrentTime(0);
+      // audioPlayer.current.play();
+    }
+  }, [currSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readystate]) // properties provided by audio tag
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -77,7 +84,7 @@ export const AudioPlayer = () => {
   return (
     <>
       <div id="player">
-        <audio ref={audioPlayer} src={queue ? queue[0]?.audio : null}></audio>
+        <audio ref={audioPlayer} src={currSong?.audio}></audio>
         <div className='current-time'>
           <h4>{calculateTime(currentTime)}</h4>
         </div>
