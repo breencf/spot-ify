@@ -68,6 +68,7 @@ def seed_songs():
     sInt2= Song.query.filter(Song.id%1 == 0).all()
     sInt3= Song.query.filter(Song.id%5 == 0).all()
 
+    
     p1 = Library.query.get(1)
     p2 = Library.query.get(2)
     p3 = Library.query.get(3)
