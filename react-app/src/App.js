@@ -20,6 +20,7 @@ import { LoginMenu } from "./components/TopBar/LoginMenu";
 import ProtectedRoute from '../src/components/TopBar/auth/ProtectedRoute'
 import { ArtistPage } from "./components/ArtistPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { CarrotButtons } from "./components/TopBar/CarrotButtons";
 
 
 
@@ -52,8 +53,9 @@ function App() {
             </Route>
             <div id="ui">
               <div id="topbar">
-                <LoginMenu/>
-                </div>
+                <CarrotButtons />
+                <LoginMenu />
+              </div>
               <div id="main">
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
@@ -82,8 +84,8 @@ function App() {
                 <Route path='/artists/:artistId' exact={true}>
                   <ArtistPage />
                 </Route>
-               </div>
-             </div>
+              </div>
+            </div>
           </Switch>
         </div>
         <AudioPlayer />

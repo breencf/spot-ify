@@ -42,37 +42,25 @@ const Search = () => {
 
             </form>
             {name && <div>
-                {searchValue?.Artist ? <div>
-                    {/* {searchValue?.Artist[0] && (
-                        <ContentCard content={searchValue?.Artist[0]} heading={'Artists'} />
-                    )}
+                {searchValue?.Artist ?
+                    <div>
+                        {searchValue?.Artist[0] && (
+                            <ContentList array={searchValue?.Artist} heading={'Artists'} />
+                        )}
+                        {searchValue?.Album[0] && (
+                            <ContentList array={searchValue?.Album} heading={'Albums'} />
+                        )}
+                        {searchValue?.Song[0] && (
+                            <ContentList array={searchValue?.Song} heading={'Songs'} />
+                        )}
+                        {searchValue?.Playlist[0] && (
+                            <ContentList array={searchValue?.Playlist} heading={'Playlist'} />
+                        )}
+                        {searchValue?.User[0] && (
+                            <ContentList array={searchValue?.User} heading={'User'} />
+                        )}
 
-                    {searchValue?.Album[0] && (
-                        <ContentCard content={searchValue?.Album[0]} heading={'Albums'} />
-                    )} */}
-
-                    {searchValue?.Artist[0] && (
-                        <ContentList array={searchValue?.Artist} heading={'Artists'} />
-                    )}
-
-                    {searchValue?.Album[0] && (
-                        <ContentList array={searchValue?.Album} heading={'Albums'} />
-                    )}
-
-                    {searchValue?.Song[0] && (
-                        <ContentList array={searchValue?.Song} heading={'Songs'} />
-                    )}
-
-                    {/* <h4>{JSON.stringify(searchValue?.Artist)}</h4> */}
-
-                    {/* {searchValue?.Artist[0] && (
-                        <ContentCard content={searchValue?.Song[0]} heading={'Songs'} />
-                    )} */}
-
-
-                    {/* {searchValue?.Artist[0] && <h3>Songs</h3>}
-                    <p>{searchValue.Song[0]?.name}</p> */}
-                </div>
+                    </div>
                     : <h4>notworking</h4>}
             </div>
             }

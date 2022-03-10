@@ -46,7 +46,11 @@ export const LoginMenu = () => {
 
 
     return(
-        ret
+        <>
+        <div id="top-right-button">
+            {ret}
+        </div>
+        </>
     )
 
 

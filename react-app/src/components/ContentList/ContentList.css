@@ -3,16 +3,18 @@
 .content-card {
     background: #FFFFFF1A;
     border-radius: 5px;
-    padding: 15px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: 196px;
-
+    align-items: center;
+    /* width: 211px;
+    height: 290px; */
+    width: 291px;
+    height: 400px;
+    justify-content: center;
 }
 .content-card .albumImage{
-    width: 166px;
-    height: 166px;
+    width: 229px;
+    height: 229px;
     object-fit: cover;
     border-radius: 5px;
 }
