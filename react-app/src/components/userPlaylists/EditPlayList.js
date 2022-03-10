@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch} from "react-redux";
+import { useState } from "react";
 import { edit_Playlist, load_Playlists } from "../../store/playlists";
-import { useHistory, useParams } from "react-router-dom";
 import "../CreatePlaylistForm/CreatePlaylistForm.css";
 import "../viewOnePlayList/CompoundAlbumImage.css"
 import { CompoundAlbumImage } from "../viewOnePlayList/CompoundAlbumImage";
 
 const PlaylistsEdit = ({ playList, closeModal }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   console.log(playList);
   const [name, setName] = useState(playList.name);

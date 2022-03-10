@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { load_Playlists, add_Playlist } from "../../store/playlists";
-import { StaticRouter, useHistory, useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import {useState } from "react";
+import { add_Playlist } from "../../store/playlists";
+import {useHistory } from "react-router-dom";
 import "./CreatePlaylistForm.css";
 
 export const CreatePlaylistForm = ({closeModal}) => {
@@ -10,10 +9,6 @@ export const CreatePlaylistForm = ({closeModal}) => {
   const { id } = useSelector(state => state.session.user);
   // const { userId } = useParams();
   const history = useHistory();
-
-  const playLists = useSelector((state) =>
-    Object?.values(state?.playListReducer?.playLists)
-  );
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");

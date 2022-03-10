@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { load_artist } from "../../store/artist";
 import { ContentList } from "../ContentList";
 import { SongsList } from "../songList";

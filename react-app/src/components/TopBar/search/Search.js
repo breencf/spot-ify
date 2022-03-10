@@ -8,7 +8,6 @@ import { ContentList } from "../../ContentList";
 const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
-    const [showAll, setShowAll] = useState(false);
 
     const searchValue = useSelector((state)=> state.searchReducer)
     // console.log(searchValue, ' what is vvalue on initial load')

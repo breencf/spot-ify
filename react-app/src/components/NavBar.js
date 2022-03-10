@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
-import { add_Playlist, load_Playlists } from "../store/playlists";
-import LogoutButton from "./TopBar/auth/LogoutButton";
+import { NavLink } from "react-router-dom";
+import { load_Playlists } from "../store/playlists";
 import Modal from "react-modal";
 import { CreatePlaylistForm } from "./CreatePlaylistForm";
 import { load_Library } from "../store/library";

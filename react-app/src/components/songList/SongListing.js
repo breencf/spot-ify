@@ -1,35 +1,43 @@
 import { useEffect, useRef, useState } from "react";
 import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
-import { Menu, MenuButton, MenuItem, SubMenu } from "@szhsin/react-menu";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
-import { playSong } from "../../store/songs";
+import { loadSong, pause, play } from "../../store/songs";
 
 export const SongListing = ({ song, playlistId }) => {
-  const { playLists } = useSelector((state) => state.playListReducer);
+  const { currSong } = useSelector((state) => state.songsReducer);
+  const { toggleState } = useSelector((state) => state.songsReducer.isPlaying);
   const { id } = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (deleting) dispatch(load_Playlists(id));
-    setDeleting(false)
-  }, [dispatch, deleting])
+    setDeleting(false);
+  }, [dispatch, deleting]);
 
   const handleDelete = () => {
-    console.log(playlistId)
-    console.log('--------------------')
-    console.log(song.id)
-    dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id }))
-    setDeleting(true)
-    console.log(deleting, '-------------')
-  }
+    console.log(playlistId);
+    console.log("--------------------");
+    console.log(song.id);
+    dispatch(
+      delete_from_playlist({ playlist_id: playlistId, song_id: song.id })
+    );
+    setDeleting(true);
+    console.log(deleting, "-------------");
+  };
 
   const onClickPlay = () => {
-    dispatch(playSong(song.id));
-  }
+    if (currSong?.id !== song.id) {
+      dispatch(loadSong(song.id));
+    }
+    // else if (currSong?.id === song.id && toggleState === false)
+    //   dispatch(play());
+    else {
+      dispatch(pause());
+    }
+  };
 
   return (
     <div className="songListing">
