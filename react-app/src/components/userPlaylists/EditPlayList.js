@@ -41,7 +41,7 @@ const PlaylistsEdit = ({ playList, closeModal }) => {
       return setErrors(value.errors);
     }
     closeModal();
-    // dispatch(load_Playlists(playList.user_id));
+    dispatch(load_Playlists(playList.user_id));
     // history.push(`/users/${playList.user_Id}/playlists/${playList.id}`);
   };
 

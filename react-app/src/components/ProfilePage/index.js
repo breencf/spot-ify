@@ -17,7 +17,7 @@ export const ProfilePage = () => {
     const user = useSelector(state => state.session.profile);
     const playlists = user?.playlists?.dict;
 
-    console.log('-------USER-------', user)
+    // console.log('-------USER-------', user)
 
     return (
         <>
