@@ -22,7 +22,7 @@ class Library(db.Model):
         # songs = []
         # for song in self.songs_lib:
         #     songs.append(song.to_dict())
-
+        #  add playlists here------------------
         songs = [song.to_dict() for song in self.songs_lib]
         albums = [album.to_dict() for album in self.albums_lib]
         artists = [artist.to_dict() for artist in self.artists_lib]

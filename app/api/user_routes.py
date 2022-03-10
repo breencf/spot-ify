@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
-from app.models import User, Playlist, db, Album, Artist, Song, Library
+from app.models import User, Playlist, db, Album, Artist, Song, Library, songs_library
 from app.forms import PlayListForm, EditPlayList, Search
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -166,4 +166,20 @@ def load_library(userId):
     # print('\n', user_playlists, 'testing out user playlists   \n \n')
     # print('\n', array, 'library data in the backend   \n \n')
 
-    return {"test": library_data.to_dict()}
+    return library_data.to_dict()
+
+
+@user_routes.route('/library/<int:songId>/delete', methods=["POST"])
+@login_required
+def delete_library_song(songId):
+    value = request.json
+    library = Library.query.get(value['libraryId'])
+    user_song = Song.query.get(songId)
+    index = 0
+    for song in library.songs_lib:
+        if song == user_song:
+            library.songs_lib.pop(index)
+        index += 1
+
+    db.session.commit()
+    return {"test": "testing route to delete"}
