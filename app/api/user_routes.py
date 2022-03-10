@@ -169,16 +169,87 @@ def load_library(userId):
     return library_data.to_dict()
 
 
-@user_routes.route('/library/<int:songId>/delete', methods=["POST"])
+@user_routes.route('/library/<int:albumId>/delete', methods=["POST"])
 @login_required
-def delete_library_song(songId):
+def delete_library_album(albumId):
     value = request.json
     library = Library.query.get(value['libraryId'])
-    user_song = Song.query.get(songId)
+    user_album = Album.query.get(albumId)
     index = 0
-    for song in library.songs_lib:
-        if song == user_song:
-            library.songs_lib.pop(index)
+    for album in library.albums_lib:
+        if album == user_album:
+            library.albums_lib.pop(index)
+        index += 1
+
+    db.session.commit()
+    return {"test": "testing route to delete"}
+
+
+@user_routes.route('/library/album/add', methods=['POST'])
+@login_required
+def add_library_album():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    album = Album.query.get(value['albumId'])
+
+    library.albums_lib.append(album)
+    db.session.commit()
+
+    return {'test': 'is album added'}
+
+
+@user_routes.route('/library/artist/add', methods=['POST'])
+@login_required
+def add_library_artist():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    artist = Artist.query.get(value['artistId'])
+
+    library.artists_lib.append(artist)
+    db.session.commit()
+
+    return {'test': 'is album added'}
+
+
+@user_routes.route('/library/artist/delete', methods=["POST"])
+@login_required
+def delete_library_artist():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    user_artist = Artist.query.get(value['artistId'])
+    index = 0
+    for artist in library.artists_lib:
+        if artist == user_artist:
+            library.artists_lib.pop(index)
+        index += 1
+
+    db.session.commit()
+    return {"test": "testing route to delete"}
+
+
+@user_routes.route('/library/playlist/add', methods=['POST'])
+@login_required
+def add_library_playlist():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    playlist = Playlist.query.get(value['playlistId'])
+
+    library.playlists_lib.append(playlist)
+    db.session.commit()
+
+    return {'test': 'is album added'}
+
+
+@user_routes.route('/library/playlist/delete', methods=["POST"])
+@login_required
+def delete_library_playlist():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    user_playlist = Playlist.query.get(value['playlistId'])
+    index = 0
+    for playlist in library.playlists_lib:
+        if playlist == user_playlist:
+            library.playlists_lib.pop(index)
         index += 1
 
     db.session.commit()

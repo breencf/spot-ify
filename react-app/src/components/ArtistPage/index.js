@@ -5,6 +5,7 @@ import { load_artist } from "../../store/artist";
 import { ContentList } from "../ContentList";
 import { SongsList } from "../songList";
 import "./ArtistPage.css";
+import { add_Library_Artist } from "../../store/library";
 
 export const ArtistPage = () => {
     const { artistId } = useParams();
@@ -16,6 +17,7 @@ export const ArtistPage = () => {
       }, [dispatch]);
 
       const artistObj = useSelector((state) => state?.artistReducer?.artist);
+      const userId = useSelector((state) => state.session.user.id)
     //   console.log('-------------------', artistObj)
 
       let albums = artistObj?.albums?.dict;
@@ -33,6 +35,7 @@ export const ArtistPage = () => {
                 </div>
                 <div>
                     <h1>{artistObj?.name}</h1>
+                    <button onClick={(() => dispatch(add_Library_Artist(userId, artistObj.id)))}>Add artist to library</button>
                     {/* <img className="artistIcon" src={artistObj?.image} /> */}
                     {/* <Link to={`/albums/${artistObj?.id}`}>
                         {artistObj?.album?.artist}
