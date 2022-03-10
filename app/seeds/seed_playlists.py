@@ -2,12 +2,12 @@ from app.models import db, Playlist, Song
 
 def seed_playlists():
 
-    # sMod2 = Song.query.filter(Song.id %2 == 0).all()
-    # sMod3 = Song.query.filter(Song.id %3 == 0).all()
-    # sInt5g = Song.query.filter((Song.id%3 == 0)).all()
-    # sInt5l = Song.query.filter((Song.id%4 == 0)).all()
-    # sInt2= Song.query.filter(Song.id%1 == 0).all()
-    # sInt3= Song.query.filter(Song.id%5 == 0).all()
+    sMod2 = Song.query.filter(Song.id %2 == 0).all()
+    sMod3 = Song.query.filter(Song.id %3 == 0).all()
+    sInt5g = Song.query.filter((Song.id%3 == 0)).all()
+    sInt5l = Song.query.filter((Song.id%4 == 0)).all()
+    sInt2= Song.query.filter(Song.id%1 == 0).all()
+    sInt3= Song.query.filter(Song.id%5 == 0).all()
 
 
     p1 = Playlist(name="Is This Thing on?", image='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.fineartamerica.com%2Fimages-medium-large-5%2F1950s-cartoon-mic-semmick-photo.jpg&f=1&nofb=1', description='samplelistdescription1', user_id=1)
@@ -17,12 +17,12 @@ def seed_playlists():
     p5 = Playlist(name="Music", description='samplelistdescription5', user_id=3)
     p6 = Playlist(name="Music 2.0", description='samplelistdescription6', user_id=3)
 
-    # p1.songs=sMod2
-    # p2.songs=sMod3
-    # p3.songs=sInt2
-    # p4.songs=sInt3
-    # p5.songs=sInt5g
-    # p6.songs=sInt5l
+    p1.songs=sMod2
+    p2.songs=sMod3
+    p3.songs=sInt2
+    p4.songs=sInt3
+    p5.songs=sInt5g
+    p6.songs=sInt5l
 
 
     db.session.add(p1)

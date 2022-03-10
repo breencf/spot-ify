@@ -68,17 +68,17 @@ def seed_songs():
     sInt2= Song.query.filter(Song.id%1 == 0).all()
     sInt3= Song.query.filter(Song.id%5 == 0).all()
 
-    p1 = Library.query.get(1)
-    p2 = Library.query.get(2)
-    p3 = Library.query.get(3)
-    a1 = Album.query.get(1)
+    # p1 = Library.query.get(1)
+    # p2 = Library.query.get(2)
+    # p3 = Library.query.get(3)
+    # a1 = Album.query.get(1)
 
-    p1.songs_lib=sMod2
-    p2.songs_lib=sMod3
-    p3.songs_lib=sInt2
-    p1.albums_lib.append(a1)
-    p2.albums_lib.append(a1)
-    p3.albums_lib.append(a1)
+    # p1.songs_lib=sMod2
+    # p2.songs_lib=sMod3
+    # p3.songs_lib=sInt2
+    # p1.albums_lib.append(a1)
+    # p2.albums_lib.append(a1)
+    # p3.albums_lib.append(a1)
 
 
     songs = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32]

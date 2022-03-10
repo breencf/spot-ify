@@ -14,11 +14,11 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_playlists()
     seed_artists()
     seed_albums()
     seed_library()
     seed_songs()
+    seed_playlists()
     # Add other seed functions here
 
 
