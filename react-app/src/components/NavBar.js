@@ -5,11 +5,13 @@ import { add_Playlist, load_Playlists } from "../store/playlists";
 import LogoutButton from "./TopBar/auth/LogoutButton";
 import Modal from "react-modal";
 import { CreatePlaylistForm } from "./CreatePlaylistForm";
+import { load_Library } from "../store/library";
 
 const NavBar = () => {
   const userId = useSelector((state) => state.session?.user?.id);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
 
   const openModal = () => {
     setIsOpen(true);
@@ -24,12 +26,23 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    if (userId) dispatch(load_Playlists(userId));
+    if (userId) dispatch(load_Playlists(userId))
+    if(userId) dispatch(load_Library(userId))
+
   }, [dispatch, userId]);
+
+
+  const data = useSelector((state) => state.libraryReducer)
+  let lists = data?.playlists
 
   const playLists = useSelector((state) =>
     Object?.values(state?.playListReducer?.playLists)
   );
+
+  let allPlayLists = playLists?.concat(lists)
+
+
+
 
   const customStyles = {
     content: {
@@ -101,14 +114,14 @@ const NavBar = () => {
 
         <hr />
         <div id="playlists-nav">
-          {playLists?.map((list, index) => {
+          {allPlayLists.length > 0 && allPlayLists?.map((list, index) => {
             return (
               <div key={index} className="navbar-playlist">
                 <NavLink
                   activeClassName="activeNav"
-                  to={`/playlists/${list.id}`}
-                >
-                  <h4>{list.name}</h4>
+                  to={`/playlists/${list?.id}`}
+                  >
+                  <h4>{list?.name}</h4>
                 </NavLink>
               </div>
             );

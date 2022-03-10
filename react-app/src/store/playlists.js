@@ -46,6 +46,7 @@ export const delete_Playlist =
         playlistId,
       }),
     });
+    console.log(userId, playlistId, 'ids in the backend')
     const { deleted } = await response.json();
     dispatch(deletePlaylist(deleted));
     return deleted;
