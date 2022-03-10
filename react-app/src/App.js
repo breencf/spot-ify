@@ -20,6 +20,7 @@ import ProtectedRoute from "../src/components/TopBar/auth/ProtectedRoute";
 import Library from "./components/library/Library";
 import { ArtistPage } from "./components/ArtistPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { CarrotButtons } from "./components/TopBar/CarrotButtons";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +51,7 @@ function App() {
             </Route>
             <div id="ui">
               <div id="topbar">
+                <CarrotButtons />
                 <LoginMenu />
               </div>
               <div id="main">
