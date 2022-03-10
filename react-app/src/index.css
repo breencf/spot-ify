@@ -125,8 +125,8 @@ body,
 
 #sidebar {
   background-color: black;
-  min-width: 241px;
-  max-width: 241px;
+  min-width: 330px;
+  max-width: 330px;
   height: inherit;
   padding-top: 20px;
   display: flex;
@@ -143,6 +143,9 @@ body,
   padding: 0px 16px;
   /* position: fixed;
     bottom: 0; */
+  position: absolute;
+  bottom: 0;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -162,7 +165,8 @@ body,
   justify-content: space-between;
   background-image: linear-gradient(var(--background-noise) 1%, var(--sp-dark));
   z-index: 0; */
-  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -181,7 +185,7 @@ body,
   float: right;
 }
 #top-left-buttons button {
- 
+
 }
 
 .button-green {

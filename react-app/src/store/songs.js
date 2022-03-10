@@ -1,37 +1,34 @@
-// const LOAD_SONGS = "songs/LOAD_SONGS";
+const PLAY_SONG = "songs/PLAY_SONG";
 
-// const load = (songsObj) => ({
-//   type: LOAD_SONGS,
-//   songsObj,
-// });
-
-
-
-// // // export const loadSongs = () => async (dispatch) => {
-// // //   const response = await fetch("/api/users/songs");
-// // //   // console.log('thunk after fetch: ' + response.json())
-// // //   const { song_array } = await response.json();
-// // //   // console.log(song_array)
-// // //   dispatch(load(Object.values(song_array)));
-// // };
+const play = (songObj) => ({
+    type: PLAY_SONG,
+    songObj,
+});
 
 
 
-// const initialState = { songs: {}, currentSong: {} };
-// let newState;
+export const playSong = (id) => async (dispatch) => {
+    const response = await fetch(`/api/songs/${id}`);
 
-// export default function songsReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case LOAD_SONGS:
-//       newState = { ...state };
-//       action.songsObj.forEach((song) => {
-//         // console.log(song)
-//         newState.songs[song.id] = song;
-//       });
-//       return newState;
-//     // case ADD_TO_PLAYLIST:
-//     //   newState = { ...state };
-//     default:
-//       return state;
-//   }
-// }
+    const {song} = await response.json();
+    dispatch(play(song));
+};
+
+
+
+const initialState = { queue: [], currSong: {} };
+let newState;
+
+export default function songsReducer(state = initialState, action) {
+    switch (action.type) {
+        case PLAY_SONG:
+            newState = { ...state };
+            newState.currSong = action.songObj;
+            // console.log('songObj', songObj)
+            return newState;
+        // case ADD_TO_PLAYLIST:
+        //   newState = { ...state };
+        default:
+            return state;
+    }
+}

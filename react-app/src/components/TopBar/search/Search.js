@@ -8,6 +8,7 @@ import { ContentList } from "../../ContentList";
 const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
+    const [showAll, setShowAll] = useState(false);
 
     const searchValue = useSelector((state)=> state.searchReducer)
     // console.log(searchValue, ' what is vvalue on initial load')
@@ -24,6 +25,15 @@ const Search = () => {
     //     dispatch(searchVal(name));
     // }, [name]);
 
+    // const showAllButton = () => {
+    //     setShowAll(!showAll)
+    //     console.log('showAll:       ', showAll)
+    //     return (
+    //         <>
+
+    //         </>
+    //     )
+    // }
 
     return (
         <div>
@@ -39,7 +49,6 @@ const Search = () => {
                     type='text'
                     name='name'
                 />
-
             </form>
             {name && <div>
                 {searchValue?.Artist ?
@@ -52,7 +61,8 @@ const Search = () => {
                         )}
                         {searchValue?.Song[0] && (
                             <ContentList array={searchValue?.Song} heading={'Songs'} />
-                        )}
+                        )}{/*  <button onClick={() => showAllButton()}>See all</button> */}
+
                         {searchValue?.Playlist[0] && (
                             <ContentList array={searchValue?.Playlist} heading={'Playlist'} />
                         )}
