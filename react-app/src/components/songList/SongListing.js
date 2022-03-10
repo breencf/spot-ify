@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, SubMenu } from "@szhsin/react-menu";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
+import { playSong } from "../../store/songs";
 
 export const SongListing = ({ song, playlistId }) => {
   const { playLists } = useSelector((state) => state.playListReducer);
@@ -26,6 +27,10 @@ export const SongListing = ({ song, playlistId }) => {
     console.log(deleting, '-------------')
   }
 
+  const onClickPlay = () => {
+    dispatch(playSong(song.id));
+  }
+
   return (
     <div className="songListing">
       <span className="song_track_number">
@@ -34,9 +39,6 @@ export const SongListing = ({ song, playlistId }) => {
       <span className="song_image">
         <img src={song.album_image} className="song_album_image" />
       </span>
-      {/* <audio controls src={song.audio}>
-        audio
-      </audio> */}
       <span className="song_name_artist">
         <p>{song.name}</p>
         <Link to={`/artists/${song.artist_id}`}>{song.artist}</Link>
@@ -56,6 +58,8 @@ export const SongListing = ({ song, playlistId }) => {
           <h4>x</h4>
         </button>
       </span>
+
+      <button onClick={onClickPlay}>Play</button>
     </div>
   );
 };

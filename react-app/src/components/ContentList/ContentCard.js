@@ -14,7 +14,7 @@ export const ContentCard = ({ content, heading }) => {
         route = `/albums/${content.album_id}`
     }
     else if (heading === 'Playlist') {
-        route = `/users/${content.user_id}/playlists/${content.id}`
+        route = `/playlists/${content.id}`
         if (!content.image) source = "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2";
     }
     else if (heading === 'Artists') {
