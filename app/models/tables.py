@@ -33,3 +33,8 @@ artist_library = db.Table('artists_library',
     db.Column('artist_id', db.Integer, db.ForeignKey('artists.id'), primary_key=True, nullable=False),
     db.Column('library_id', db.Integer, db.ForeignKey('library.id'), primary_key=True, nullable=False)
 )
+
+playlist_library = db.Table('playlist_library',
+    db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id'), primary_key=True, nullable=False),
+    db.Column('library_id', db.Integer, db.ForeignKey('library.id'), primary_key=True, nullable=False)
+)

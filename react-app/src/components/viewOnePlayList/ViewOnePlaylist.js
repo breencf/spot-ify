@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { add_Library_Playlist } from "../../store/library";
 // import { one_Playlists, delete_Playlist } from "../../store/playlists";
 import {
   useHistory,
@@ -63,6 +64,7 @@ const ViewOnePlaylist = () => {
         </div>
         <div>
           <h4>PLAYLIST</h4>
+          <button onClick={(() => dispatch(add_Library_Playlist(id, playlistId)))}>add playlist to library</button>
           <h1>{currPlaylist?.name}</h1>
           <p>{currPlaylist?.description}</p>
           {/* <Link to={`/users/${currPlaylist?.user_id}`}>
