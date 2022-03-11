@@ -111,10 +111,12 @@ const NavBar = () => {
               <FaPlus /> Create Playlist
             </h3>
           </button>
-          <NavLink to="/library" exact={true} activeClassName="active">
-            <h3>
-              <FaRegHeart /> Liked Songs
-            </h3>
+              
+          <NavLink to="/songs" exact={true} activeClassName="active">
+            <h3><FaRegHeart /> Liked Songs</h3>
+          </NavLink>
+          <NavLink to="/followers" exact={true} activeClassName="active">
+            <h3>Following</h3>
           </NavLink>
         </ul>
         <Modal

@@ -11,6 +11,7 @@ import {
   play,
   toggle_play,
 } from "../../store/songs";
+import { add_Library_Song } from "../../store/library";
 
 export const SongListing = ({ song, playlistId }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
@@ -100,6 +101,7 @@ export const SongListing = ({ song, playlistId }) => {
           <h4>x</h4>
         </button>
       </span>
+      <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button>
     </div>
   );
 };

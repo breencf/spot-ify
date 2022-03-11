@@ -3,18 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { get_a_user } from "../../store/session";
 import { ContentList } from "../ContentList";
-
+import { add_Followers } from "../../store/follows";
 
 export const ProfilePage = () => {
 
     const { userId } = useParams();
     const dispatch = useDispatch();
 
+
     useEffect(() => {
         dispatch(get_a_user(userId))
     }, [dispatch, userId]);
 
     const user = useSelector(state => state.session.profile);
+    const loggedUser = useSelector(state => state.session.user);
+    console.log(userId, ' userid from use params', loggedUser.id)
+
     const playlists = user?.playlists?.dict;
 
     // console.log('-------USER-------', user)
@@ -35,6 +39,7 @@ export const ProfilePage = () => {
                 </div>
             </div>
             <div>
+                <button onClick={(() => dispatch(add_Followers(loggedUser.id, userId)))}>Follow this user</button>
                 <h4>Following</h4>
             </div>
             {playlists && <ContentList array={playlists} heading={'Playlists'}/>}
