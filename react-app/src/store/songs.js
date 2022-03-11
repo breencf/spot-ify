@@ -37,6 +37,13 @@ export const play = () => {
   };
 };
 
+export const getSong = () => async (dispatch) => {
+  const response = await fetch(`/api/songs`);
+
+  const {songs} = await response.json();
+  dispatch(song(songs));
+};
+
 export const loadSong = (id) => async (dispatch) => {
   const response = await fetch(`/api/songs/${id}`);
 
