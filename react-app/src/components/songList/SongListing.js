@@ -3,6 +3,7 @@ import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
+import { FaPlay, FaList, FaEllipsisH } from "react-icons/fa";
 import {
   addToQueue,
   loadSong,
@@ -71,7 +72,9 @@ export const SongListing = ({ song, playlistId }) => {
 
       <span className="song_...">
         <button className="button-none" onClick={onClickPlay}>
-          <h4>pl</h4>
+          <div className="icon-div">
+            <i className="fa-solid fa-play"></i>
+          </div>
         </button>
       </span>
       <span className="song_...">
@@ -79,7 +82,9 @@ export const SongListing = ({ song, playlistId }) => {
           className="button-none"
           onClick={() => dispatch(addToQueue(song.id))}
         >
-          <h4>q</h4>
+          <h4>
+            <FaList />
+          </h4>
         </button>{" "}
       </span>
 

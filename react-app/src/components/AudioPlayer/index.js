@@ -1,26 +1,32 @@
 import { useEffect, useState, useRef, useDebugValue } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadSong, play, pause, toggle_play } from "../../store/songs";
-
+import songsReducer, {
+  loadSong,
+  play,
+  pause,
+  toggle_play,
+} from "../../store/songs";
+import "./AudioPlayer.css";
+import { FaPlay } from "react-icons/fa";
 
 export const AudioPlayer = () => {
-  const {queue} = useSelector((state) => state.songsReducer)
+  const { queue } = useSelector((state) => state.songsReducer);
   const newSong = useSelector((state) => state.songsReducer.newSong);
   const newSid = useSelector((state) => state.songsReducer.newSong?.id);
   const toggleState = useSelector((state) => state.songsReducer.isPlaying);
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentSong, setCurrentSong] = useState(false);
-  const [lastSong, setLastSong] = useState(null)
+  const [lastSong, setLastSong] = useState(null);
   const audioPlayer = useRef();
   const progressBar = useRef();
   const progressRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('new song loaded from state')
-    setLastSong(currentSong)
+    console.log("new song loaded from state");
+    setLastSong(currentSong);
     setCurrentSong(newSong);
   }, [newSid]);
 
@@ -30,22 +36,22 @@ export const AudioPlayer = () => {
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
       // progressBar.current.max = seconds;
-        }
+    }
   }, [
     audioPlayer?.current?.loadedmetadata,
     audioPlayer?.current?.readyState,
     currentSong,
   ]);
 
-  useEffect(()=> {
-    console.log(duration)
-    if(duration) {
-      progressBar.current.max = duration
-      dispatch(play())
-      audioPlayer.current.play()
+  useEffect(() => {
+    console.log(duration);
+    if (duration) {
+      progressBar.current.max = duration;
+      dispatch(play());
+      audioPlayer.current.play();
       progressRef.current = requestAnimationFrame(whilePlaying);
     }
-  },[duration])
+  }, [duration]);
 
   // useEffect(() => {
   //   if(toggleState !== isPlaying) setIsPlaying(toggleState)
@@ -57,11 +63,10 @@ export const AudioPlayer = () => {
     console.log(progressBar.current.max, progressBar.current.value);
     if (progressBar?.current?.value === progressBar?.current?.max) {
       let nextSong = queue.shift();
-      console.log(nextSong.id)
+      console.log(nextSong.id);
       dispatch(loadSong(nextSong.id));
     }
   }, [progressBar?.current?.value]);
-
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -89,7 +94,6 @@ export const AudioPlayer = () => {
     setCurrentTime(progressBar?.current?.value);
   };
 
-
   const togglePlay = () => {
     if (!toggleState === true) {
       console.log("playing that song!");
@@ -107,26 +111,49 @@ export const AudioPlayer = () => {
   return (
     <>
       <div id="player">
-        <audio ref={audioPlayer} src={currentSong?.audio}></audio>
-        <div className="current-time">
-          <h4>{calculateTime(currentTime)}</h4>
+        <div className="player-left">
+          <div>
+            <img className="player-image" src={currentSong?.album_image} />
+          </div>
+          <div>
+            <p>{currentSong?.name}</p>
+            <p>{currentSong?.artist}</p>
+          </div>
         </div>
-        <div>
-          <input
-            ref={progressBar}
-            type="range"
-            defaultValue={0}
-            onChange={changeRange}
-          />
+
+        <div className="player-center">
+          <div className="player-center-top">
+            <button
+              className="button-green"
+              onClick={() => {
+                togglePlay();
+                dispatch(toggle_play());
+              }}
+            >
+              <FaPlay />
+            </button>
+          </div>
+          <div className="player-center-bottom">
+            <audio ref={audioPlayer} src={currentSong?.audio}></audio>
+            <div className="current-time">
+              <h4>{calculateTime(currentTime)}</h4>
+            </div>
+              <input
+                ref={progressBar}
+                type="range"
+                defaultValue={0}
+                onChange={changeRange}
+              />
+            <div className="current-time">
+              <h4>
+                {duration && !isNaN(duration)
+                  ? calculateTime(duration)
+                  : "0:00"}
+              </h4>
+            </div>
+          </div>
         </div>
-        <div className="current-time">
-          <h4>
-            {duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}
-          </h4>
-        </div>
-        {/* <button onClick={rewindOneSong}>rewind</button> */}
-        <button onClick={() => {togglePlay(); dispatch(toggle_play())}}>Play/Pause</button>
-        {/* <button onClick={forwardOneSong}>forward</button> */}
+        <div className="player-right"></div>
       </div>
     </>
   );
