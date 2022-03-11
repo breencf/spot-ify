@@ -152,7 +152,7 @@ export const SongListing = ({ song, playlistId }) => {
         </button>
 
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
-      </span>
+      
 
     </div>
   );

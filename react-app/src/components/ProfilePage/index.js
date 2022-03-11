@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { get_a_user } from "../../store/session";
 import { ContentList } from "../ContentList";
-import { add_Followers } from "../../store/follows";
+import { add_Followers, remove_Follower, load_Followers } from "../../store/follows";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem, Divider } from "rc-menu";
 import "rc-dropdown/assets/index.css";
@@ -11,24 +11,24 @@ import "./menu.css";
 import { FaEllipsisH} from "react-icons/fa";
 
 export const ProfilePage = () => {
+    const { userId } = useParams();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.profile);
+    const loggedUser = useSelector((state) => state.session.user);
+
   const menu = (
     <Menu id='user-menu-style'>
       <MenuItem id="testing_menu" onClick={() => dispatch(add_Followers(loggedUser.id, userId))} key="1">Follow User</MenuItem>
 
-      <MenuItem id="testing_menu" key="2">Unfollow</MenuItem>
+      <MenuItem id="testing_menu" onClick={() => dispatch(remove_Follower(loggedUser.id, userId))} key="2">Unfollow</MenuItem>
     </Menu>
   );
 
-  const { userId } = useParams();
-  const dispatch = useDispatch();
-
   useEffect(() => {
+      dispatch(load_Followers(userId))
     dispatch(get_a_user(userId));
   }, [dispatch, userId]);
 
-  const user = useSelector((state) => state.session.profile);
-  const loggedUser = useSelector((state) => state.session.user);
-  console.log(userId, " userid from use params", loggedUser.id);
 
   const playlists = user?.playlists?.dict;
 
@@ -59,9 +59,6 @@ export const ProfilePage = () => {
         </div>
       </div>
       <div>
-        <button onClick={() => dispatch(add_Followers(loggedUser.id, userId))}>
-          Follow this user
-        </button>
         <h4>Following</h4>
         <div style={{ margin: 20 }}>
           <div style={{ height: 100 }} />
@@ -79,7 +76,7 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
-      {playlists && <ContentList array={playlists} heading={"Playlist"} />}
+      {playlists && <ContentList array={playlists} heading={"Playlists"} />}
     </>
   );
 };

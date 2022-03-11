@@ -21,7 +21,7 @@ export const remove_Follower = (userId, otherUserId) => async dispatch => {
         body: JSON.stringify({userId, otherUserId}),
     })
     const data = await response.json()
-    // dispatch(removeFollower(userId, otherUserId))
+    dispatch(removeFollower(userId, otherUserId))
 }
 
 
@@ -58,13 +58,7 @@ export const load_Followers = ( userId ) => async dispatch => {
           return newState
         case REMOVE_FOLLOWERS:
             newState = {...state}
-            let followers = newState.followers
-            for(let i = 0; i < followers.length; i++){
-                let userFollowers = followers[i]
-                if(userFollowers.id === action.followerId){
-                    followers.pop(i)
-                }
-            }
+            newState.follows = newState.follows.filter(ele => ele.id !== action.otherUserId);
             return newState
       default:
         return state;
