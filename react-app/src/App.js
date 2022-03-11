@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
 import LoginForm from "./components/TopBar/auth/LoginForm";
 import SignUpForm from "./components/TopBar/auth/SignUpForm";
 import NavBar from "./components/NavBar";
@@ -29,12 +29,23 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
+  
+  const [music, setmusic] = useState(false);
+
+  const user = useSelector((state) => state.session?.user?.id);
+
+  
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
       setLoaded(true);
+      if(user){
+        setmusic(true)
+      }else{
+        setmusic(false)
+      }
     })();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   if (!loaded) {
     return null;
@@ -57,7 +68,7 @@ function App() {
             <MainInfo />
           </Switch>
         </div>
-        <AudioPlayer />
+        {music && <AudioPlayer />}
       </BrowserRouter>
     </>
   );

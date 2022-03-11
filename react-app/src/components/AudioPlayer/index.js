@@ -25,6 +25,9 @@ export const AudioPlayer = () => {
   const progressRef = useRef();
   const dispatch = useDispatch();
 
+
+
+  
   useEffect(() => {
     console.log("new song loaded from state");
     setLastSong(currentSong);

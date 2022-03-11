@@ -7,6 +7,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [dmo, setDmo]= useState(true)
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -16,16 +17,18 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+    setDmo(true)
   };
 
   const demo = async (e) => {
     e.preventDefault();
     setEmail("demo@aa.io");
     setPassword("password");
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    setDmo(false)
+    // const data = await dispatch(login(email, password));
+    // if (data) {
+    //   setErrors(data);
+    // }
   };
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -66,9 +69,9 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type="submit">Login</button>
-        <button type="submit" onClick={demo}>
+        {dmo && <button type="submit" onClick={demo}>
           Demo
-        </button>
+        </button>}
       </div>
     </form>
   );

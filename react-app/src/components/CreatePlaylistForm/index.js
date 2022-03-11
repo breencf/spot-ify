@@ -24,19 +24,21 @@ export const CreatePlaylistForm = ({closeModal}) => {
       description,
     };
 
-    const value = await dispatch(add_Playlist(playList)).catch(async (err) => {
-      if (err) {
-        return err;
-      }
-    });
+    
 
     // if (value.errors) {
     //   return setErrors(value.errors);
     // }
     // dispatch(load_Playlists(id));
-
-    closeModal();
-    history.push(`/users/${id}/playlists/${value.playlist.id}`);
+    if(name){
+      const value = await dispatch(add_Playlist(playList)).catch(async (err) => {
+        if (err) {
+          return err;
+        }
+      });
+      closeModal();
+      history.push(`/users/${id}/playlists/${value.playlist.id}`);
+    }
   };
 
   return (
