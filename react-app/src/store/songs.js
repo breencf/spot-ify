@@ -85,6 +85,10 @@ export default function songsReducer(state = initialState, action) {
       newState.queue.push(action.songObj)
       console.log(newState.queue)
       return newState
+    case GET_SONGS:
+        newState = { ...state };
+        newState.songs = action.song;
+        return newState;
     default:
       return state;
   }
