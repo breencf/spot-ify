@@ -40,7 +40,9 @@ export const AlbumPage = () => {
         </div>
       </div>
       <br />
+      <div classname="page-buttons">
       <PlayButton type={"albums"} mediaId={albumId} />
+      </div>
       <hr />
       <br />
       <SongsList songProp={songs} />

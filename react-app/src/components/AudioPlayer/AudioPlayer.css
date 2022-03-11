@@ -2,6 +2,7 @@
   display: flex;
   gap: 20px;
   max-height: 50px;
+  width: 25%;
 }
 
 .player-image {
@@ -18,8 +19,8 @@
 }
 
 .player-center button {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   padding: 0px;
   display: flex;
   align-items: center;
@@ -35,7 +36,7 @@
 
 .player-center-bottom {
   display: flex;
-  gap: 30px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -44,8 +45,8 @@
 }
 
 .progressBar {
-  width: 80%;
-  height: 5px;
+  width: 60%;
+  height: 4px;
   appearance: none;
   background: var(--sp-gray);
   border-radius: 10px;
@@ -88,6 +89,14 @@
   z-index: 100;
   position: relative;
   top: 0;
+  background-color: var(--sp-green);
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .player-right {
@@ -96,5 +105,9 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 200px;
+  width: 25%;
+}
+
+.player-right > .progressBar {
+  width: 100px;
 }

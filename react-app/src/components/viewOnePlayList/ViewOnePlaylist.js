@@ -55,13 +55,16 @@ const ViewOnePlaylist = () => {
         </div>
       </div>
       <br />
-      {currPlaylist?.user_id == id && (
-        <div>
+      <div className='page-buttons'>
           <PlayButton mediaId={id} type={'playlists'}/>
+      {currPlaylist?.user_id == id && (
+        <>
           <UserPlaylistsEdit playList={currPlaylist} />
           <button className="button-green" onClick={handleDelete}>Delete</button>
-        </div>
+
+        </>
       )}
+      </div>
       <hr />
 
       <br />

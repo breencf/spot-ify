@@ -10,6 +10,7 @@ import {
     addMultipleSongs,
   } from "../../store/songs";
 import "./AudioPlayer.css"
+import {FaPlay} from 'react-icons/fa'
 
 
 export const PlayButton = ({ type, mediaId }) => {
@@ -26,7 +27,7 @@ const onClick = () => {
     return (
         <>
             <button className="global-play-button"
-            onClick={onClick}>Play</button>
+            onClick={onClick}><FaPlay /></button>
         </>
     )
 }
