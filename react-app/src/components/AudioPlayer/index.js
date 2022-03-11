@@ -1,6 +1,12 @@
 import { useEffect, useState, useRef, useDebugValue } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { playSong, toggle_play, play, pause } from "../../store/songs";
+import {
+  playSong,
+  toggle_play,
+  loadSong,
+  play,
+  pause,
+} from "../../store/songs";
 
 export const AudioPlayer = () => {
   const newSong = useSelector((state) => state.songsReducer.currSong);
@@ -154,28 +160,50 @@ export const AudioPlayer = () => {
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [currentSong, setCurrentSong] = useState(false)
+  const [currentSong, setCurrentSong] = useState(false);
+  const [redState, setRedState] = useState(false);
   const audioPlayer = useRef();
   const progressBar = useRef();
   const progressRef = useRef();
 
-  useEffect(() => {console.log('toggle state', toggleState)}, [toggleState])
+  //checks if the song is over to move on to the next song
+  useEffect(() => {
+    console.log(progressBar.current.max, progressBar.current.value);
+    if (progressBar?.current?.value === progressBar?.current?.max) {
+      console.log("finished song!");
+      let nextSong = queue.pop();
+      dispatch(loadSong(nextSong.id));
+    }
+  }, [progressBar?.current?.value]);
 
   useEffect(() => {
-    console.log('sending the song to the player', newSong)
-    if (newSong) setCurrentSong(newSong)
-  },[newSong])
+   console.log(currentSong?.id)
+   console.log(newSong?.id)
+   console.log("before ^")
+    if (newSong !== currentSong) setCurrentSong(newSong);
+  console.log(currentSong?.id)
+  console.log(newSong?.id)
+  }, [newSong]);
+
+  useEffect(() => {}, [audioPlayer?.current?.readyState]);
 
   //uses the metadata of the loaded audio to set duration + progress bar max
   useEffect(() => {
-    if(currentSong) {
-    console.log('sending the songs metadata from the player to the progressbar')
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-    togglePlay()
+    if (currentSong) {
+      const seconds = Math.floor(audioPlayer.current.duration);
+      setDuration(seconds);
+      progressBar.current.max = seconds;
+      setRedState(true);
     }
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+  }, [
+    audioPlayer?.current?.loadedmetadata,
+    audioPlayer?.current?.readyState,
+    currentSong,
+  ]);
+
+  useEffect(() => {
+    if (redState) togglePlay();
+  }, [redState]);
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -184,16 +212,6 @@ export const AudioPlayer = () => {
     const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
     return `${returnedMinutes}:${returnedSeconds}`;
   };
-
-  //checks if the song is over to move on to the next song
-  // useEffect(() => {
-  //   console.log(progressBar.current.max, progressBar.current.value);
-  //   if (progressBar?.current?.value === progressBar?.current?.max) {
-  //     console.log("finished song!");
-  //     let nextSong = queue.pop();
-  //     dispatch(playSong(nextSong.id));
-  //   }
-  // }, [progressBar?.current?.value]);
 
   //called while a song is playing, changes the left time and progresses the bar
   const whilePlaying = () => {
@@ -214,15 +232,16 @@ export const AudioPlayer = () => {
   };
 
   const togglePlay = () => {
+    console.log("togglePlaycalled");
     if (toggleState === false) {
-      dispatch(play());
       console.log("playing that song!");
       audioPlayer.current.play();
+      dispatch(play());
       progressRef.current = requestAnimationFrame(whilePlaying);
     } else {
       console.log("pausing that shiiii");
-      dispatch(pause());
       audioPlayer.current.pause();
+      dispatch(pause());
       cancelAnimationFrame(progressRef.current);
     }
   };

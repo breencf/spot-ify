@@ -3,7 +3,7 @@ import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
-import { loadSong, pause, play } from "../../store/songs";
+import { loadSong, pause, play, toggle_play } from "../../store/songs";
 
 export const SongListing = ({ song, playlistId }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
@@ -35,7 +35,9 @@ export const SongListing = ({ song, playlistId }) => {
     // else if (currSong?.id === song.id && toggleState === false)
     //   dispatch(play());
     else {
-      dispatch(pause());
+      console.log('song listing toggle')
+      dispatch(toggle_play);
+      console.log(toggleState)
     }
   };
 
