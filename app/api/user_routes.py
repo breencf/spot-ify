@@ -254,3 +254,81 @@ def delete_library_playlist():
 
     db.session.commit()
     return {"test": "testing route to delete"}
+
+
+
+@user_routes.route('/library/song/add', methods=['POST'])
+@login_required
+def add_library_song():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    song = Song.query.get(value['songId'])
+
+    library.songs_lib.append(song)
+    db.session.commit()
+
+    return {'test': 'is album added'}
+
+
+@user_routes.route('/library/song/delete', methods=["POST"])
+@login_required
+def delete_library_song():
+    value = request.json
+    library = Library.query.get(value['userId'])
+    user_song = Song.query.get(value['songId'])
+    index = 0
+    for song in library.songs_lib:
+        if song == user_song:
+            library.songs_lib.pop(index)
+        index += 1
+
+    db.session.commit()
+    return {"test": "testing route to delete"}
+
+
+@user_routes.route('/<int:userId>/followers')
+@login_required
+def load_followers(userId):
+    user = User.query.filter(User.id == userId).first()
+    allFollowers = [user.to_dict() for user in user.following.all()]
+    return {"follows": allFollowers}
+
+
+
+@user_routes.route('/followers/add', methods=['POST'])
+@login_required
+def add_user_follower():
+    value = request.json
+    user1 = User.query.get(value['userId'])
+    other_user2 = User.query.get(value['otherUserId'])
+    # print('\n \n', value, '\n \n')
+    user1.following.append(other_user2)
+
+    db.session.commit()
+
+    return {'test': 'is album added'}
+
+
+@user_routes.route('followers/delete', methods=['POST'])
+@login_required
+def remove_user_follow():
+    value = request.json
+    user1 = User.query.get(value['userId'])
+    other_user2 = User.query.get(value['otherUserId'])
+    user1.following.remove(other_user2)
+
+    index = 0
+    for user in user1.following.all():
+        if user.id == other_user2.id:
+            arr = user1.following.all()
+            arr.pop(index)
+
+        index += 1
+    # index = 0
+    # for user in user1.following.all():
+    #     if user == other_user2:
+    #         user1.following.all().pop(index)
+    #     index += 1
+
+    db.session.commit()
+    return {"test": "testing route to delete"}

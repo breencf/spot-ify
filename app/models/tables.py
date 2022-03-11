@@ -10,8 +10,9 @@ songs_playlist = db.Table("songs_playlist",
 
 
 user_follows = db.Table("user_follows",
-    db.Column("following_user_id", db.Integer, db.ForeignKey("users.id"), nullable=False, primary_key=True),
-    db.Column("followed_user_id", db.Integer, db.ForeignKey("users.id"), nullable=False, primary_key=True))
+    db.Column("following_user_id", db.Integer, db.ForeignKey("users.id"),nullable=True, primary_key=True),
+    db.Column("followed_user_id", db.Integer, db.ForeignKey("users.id"),nullable=True, primary_key=True))
+
 
 
 playlist_like = db.Table('playlist_like', db.Column("user_id",

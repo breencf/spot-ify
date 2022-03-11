@@ -5,6 +5,7 @@ import { Menu, MenuButton, MenuItem, SubMenu } from "@szhsin/react-menu";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
 import { playSong } from "../../store/songs";
+import { add_Library_Song } from "../../store/library";
 
 export const SongListing = ({ song, playlistId }) => {
   const { playLists } = useSelector((state) => state.playListReducer);
@@ -60,6 +61,7 @@ export const SongListing = ({ song, playlistId }) => {
       </span>
 
       <button onClick={onClickPlay}>Play</button>
+      <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button>
     </div>
   );
 };

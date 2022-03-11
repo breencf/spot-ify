@@ -7,7 +7,7 @@ import searchReducer from './search';
 import albumReducer from './album';
 import libraryReducer from './library';
 import artistReducer from './artist';
-
+import followsReducer from './follows';
 
 const rootReducer = combineReducers({
   session,
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   searchReducer,
   albumReducer,
   libraryReducer,
-  artistReducer
+  artistReducer,
+  followsReducer,
 });
 
 

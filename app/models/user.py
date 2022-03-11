@@ -21,8 +21,12 @@ class User(db.Model, UserMixin):
     playlists = db.relationship("Playlist", back_populates="user", cascade='all, delete, delete-orphan')
     #Child
 
-    following_user = db.relationship("User", foreign_keys=user_follows.c.following_user_id, secondary=user_follows, back_populates="followed_user")
-    followed_user = db.relationship("User",  foreign_keys=user_follows.c.followed_user_id, secondary=user_follows, back_populates="following_user")
+    followers = db.relationship("User", primaryjoin=(user_follows.c.following_user_id == id),
+                                        secondaryjoin=(user_follows.c.followed_user_id == id),
+                                     secondary=user_follows, backref=db.backref("following", lazy="dynamic"),
+                                     lazy="dynamic")
+    # followed_user = db.relationship("User",  secondayjoin=(user_follows.c.followed_user_id == id),
+    #                                 secondary=user_follows, back_populates="following_user")
 
     liking_user = db.relationship("Playlist", secondary=playlist_like, back_populates="liked_playlist")
 
@@ -43,6 +47,9 @@ class User(db.Model, UserMixin):
         for playlist in self.playlists:
             dict_playlists.append(playlist.to_dict())
 
+        followers = [follower.to_dict() for follower in self.followers]
+        # followings = [following.to_dict() for following in self.following]
+
         return {
             "id": self.id,
             "username": self.username,
@@ -52,5 +59,7 @@ class User(db.Model, UserMixin):
             "profile_image": self.profile_image,
             "hashed_password": self.hashed_password,
             "created_at": self.created_at,
-            "playlists": {"dict": dict_playlists}
+            "playlists": {"dict": dict_playlists},
+            "followers": followers,
+            # "followings": followings
         }
