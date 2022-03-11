@@ -8,11 +8,16 @@
 
 .songListing {
   padding: 5px 16px;
-  height: 50px;
+  height: 80px;
   background-color: transparent;
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.songListing:hover {
+  background: rgba(255,255,255,.3);
+  border-radius: 5px;
 }
 
 .songListing span {
@@ -51,4 +56,15 @@
 .song_album_image {
   width: 40px;
   height: 40px;
+}
+
+.love-click {
+  width: 25px;
+  height: 25px;
+}
+
+.saved {
+  fill: var(--sp-green);
+  width: 25px;
+  height: 25px;
 }

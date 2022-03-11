@@ -1,3 +1,4 @@
+from copyreg import constructor
 from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy.orm import joinedload
 from flask_login import login_required
@@ -283,6 +284,8 @@ def delete_library_song():
         index += 1
 
     db.session.commit()
+    # print('\n \n', library, '\n \n')
+
     return {"test": "testing route to delete"}
 
 

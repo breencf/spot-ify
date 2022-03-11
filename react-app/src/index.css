@@ -158,6 +158,22 @@ body,
   border: 1px solid #282828;
 }
 
+.large-play-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: none;
+  background: var(--sp-green);
+}
+
+.play-logo {
+  height: 30px;
+  width: 30px;
+}
+
 /* top nav bar */
 #topbar {
   /* padding: 0px 20px;
