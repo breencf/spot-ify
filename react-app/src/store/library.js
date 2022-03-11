@@ -3,10 +3,38 @@
 const LOAD_LIBRARY = 'user/LOAD_LIBRARY';
 const ADD_LIBRARY = 'user/ADD_LIBRARY';
 const DELETE_LIBRARY_ALBUM = 'user/DELETE_ALBUM';
-const ADD_LIBRARY_ALBUM = 'user/ADD_LIBRARY_ALBUM';
-const ADD_LIBRARY_ARTIST = 'user/ADD_LIBRARY_ARTIST';
 const DELETE_LIBRARY_ARTIST = 'user/DELETE_LIBRARY_ARTIST';
 const DELETE_LIBRARY_PLAYLIST = 'user/DELETE_LIBRARY_PLAYLIST';
+const DELETE_LIBRARY_SONG = 'user/DELETE_LIBRARY_SOMG';
+
+
+
+
+const deleteLibrarySong = (userId, songId) => {
+    return {
+        type: DELETE_LIBRARY_SONG,
+        userId,
+        songId
+    }
+}
+
+export const delete_LibrarySong = (userId, songId) => async dispatch => {
+    const response = await fetch(`/api/users/library/song/delete`,{
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({userId, songId}),
+    })
+    const data = await response.json()
+    dispatch(deleteLibrarySong(userId, songId))
+}
+
+export const add_Library_Song = (userId, songId) => async dispatch => {
+    const response = await fetch(`/api/users/library/song/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({userId, songId}),
+    })
+}
 
 
 const deleteLibraryPlaylist = (userId, playlistId) => {
@@ -162,6 +190,16 @@ export const load_Library = ( userId ) => async dispatch => {
               }
           }
           return newState
+          case DELETE_LIBRARY_SONG:
+            newState = {...state}
+            let songs = newState.songs
+            for(let i = 0; i < songs.length; i++){
+                let userSong = songs[i]
+                if(userSong.id === action.songId){
+                    songs.pop(i)
+                }
+            }
+            return newState
       default:
         return state;
     }

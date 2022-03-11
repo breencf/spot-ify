@@ -21,6 +21,8 @@ import Library from "./components/library/Library";
 import { ArtistPage } from "./components/ArtistPage";
 import { ProfilePage } from "./components/ProfilePage";
 import { CarrotButtons } from "./components/TopBar/CarrotButtons";
+import LikedSongs from "./components/LikedSongs/LikedSongs";
+import Followers from "./components/Followers/Followers";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +60,12 @@ function App() {
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
                 </ProtectedRoute>
+                <ProtectedRoute path="/songs" exact={true}>
+                  <LikedSongs />
+                </ProtectedRoute>
+                <ProtectedRoute path="/followers" exact={true}>
+                  <Followers />
+                </ProtectedRoute>
                 <ProtectedRoute path="/:userId/library" exact={true}>
                   <Library />
                 </ProtectedRoute>
@@ -76,9 +84,9 @@ function App() {
                 <ProtectedRoute path="/" exact={true}>
                   <h2>Good Evening</h2>
                 </ProtectedRoute>
-                <Route path="/songs" exact={true}>
+                {/* <Route path="/songs" exact={true}>
                   <SongsList />
-                </Route>
+                </Route> */}
                 <Route path="/albums/:albumId" exact={true}>
                   <AlbumPage />
                 </Route>

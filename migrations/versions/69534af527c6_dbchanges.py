@@ -1,8 +1,8 @@
-"""db changes
+"""dbchanges
 
-Revision ID: d929b861f55f
+Revision ID: 69534af527c6
 Revises: 
-Create Date: 2022-03-09 19:00:51.460731
+Create Date: 2022-03-10 18:18:01.871097
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd929b861f55f'
+revision = '69534af527c6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -60,8 +60,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_follows',
-    sa.Column('following_user_id', sa.Integer(), nullable=False),
-    sa.Column('followed_user_id', sa.Integer(), nullable=False),
+    sa.Column('following_user_id', sa.Integer(), nullable=True),
+    sa.Column('followed_user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['followed_user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['following_user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('following_user_id', 'followed_user_id')
