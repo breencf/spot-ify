@@ -14,6 +14,7 @@ import { TopBar } from "./TopBar";
 import ProtectedRoute from "./TopBar/auth/ProtectedRoute";
 import { AlbumPage } from "./AlbumPage";
 import { ArtistPage } from "./ArtistPage";
+import Homepage from "./Hompage";
 
 
 
@@ -50,7 +51,7 @@ export default function MainInfo () {
                         <ViewOnePlaylist />
                     </ProtectedRoute>
                     <ProtectedRoute path="/" exact={true}>
-                        <h2>Good Evening</h2>
+                        <Homepage />
                     </ProtectedRoute>
                     {/* <Route path="/songs" exact={true}>
             <SongsList />

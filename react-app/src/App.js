@@ -57,7 +57,7 @@ function App() {
     <>
       <BrowserRouter>
         <div id="top">
-          <NavBar />
+          {music && <NavBar />}
           <Switch>
             <Route path="/login" exact={true}>
               <LoginForm />
