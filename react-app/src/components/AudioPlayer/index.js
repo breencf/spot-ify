@@ -8,7 +8,13 @@ import songsReducer, {
   toggle_play,
 } from "../../store/songs";
 import "./AudioPlayer.css";
-import { FaPlay, FaStepForward, FaStepBackward } from "react-icons/fa";
+import {
+  FaPlay,
+  FaStepForward,
+  FaStepBackward,
+  FaPause,
+  FaVolumeUp,
+} from "react-icons/fa";
 
 export const AudioPlayer = () => {
   const { queue } = useSelector((state) => state.songsReducer);
@@ -23,6 +29,7 @@ export const AudioPlayer = () => {
   const audioPlayer = useRef();
   const progressBar = useRef();
   const progressRef = useRef();
+  const volumeBar = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,7 +61,6 @@ export const AudioPlayer = () => {
     }
   }, [duration]);
 
-
   //checks if the song is over to move on to the next song
   useEffect(() => {
     console.log(progressBar.current.max, progressBar.current.value);
@@ -84,6 +90,10 @@ export const AudioPlayer = () => {
   const changeRange = () => {
     audioPlayer.current.currentTime = progressBar.current.value;
     changePlayerCurrentTime();
+  };
+
+  const changeVolume = () => {
+    audioPlayer.current.volume = volumeBar.current.value;
   };
 
   // changes current time (left of progress bar)
@@ -151,7 +161,7 @@ export const AudioPlayer = () => {
                 dispatch(toggle_play());
               }}
             >
-              <FaPlay />
+              {toggleState ? <FaPause /> : <FaPlay />}
             </button>
             <button
               className="button-none"
@@ -184,7 +194,21 @@ export const AudioPlayer = () => {
             </div>
           </div>
         </div>
-        <div className="player-right"></div>
+        <div className="player-right">
+          <h4>
+            <FaVolumeUp />
+          </h4>
+          <input
+            className="progressBar"
+            ref={volumeBar}
+            type="range"
+            defaultValue={1}
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={changeVolume}
+          />
+        </div>
       </div>
     </>
   );
