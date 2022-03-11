@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../../store/session";
+import {FaSpotify} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -40,24 +42,27 @@ const LoginForm = () => {
   }
 
   return (
+    <div className="splash">
+      <h1><FaSpotify/> Spot-ify</h1>
+
+    <div>
     <form onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
+      <div className="formdiv">
         <input
           name="email"
           type="text"
           placeholder="Email"
           value={email}
           onChange={updateEmail}
+
         />
       </div>
-      <div>
-        <label htmlFor="password">Password</label>
+      <div className="formdiv">
         <input
           name="password"
           type="password"
@@ -65,12 +70,17 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
-        <button type="submit" onClick={demo}>
+        <div className="formdiv">
+        <button className="button-white" type="submit">Login</button>
+        <button className="button-white"type="submit" onClick={demo}>
           Demo
         </button>
+        <Link to="/signup"><h4>Sign up here</h4></Link>
+        </div>
       </div>
     </form>
+    </div>
+    </div>
   );
 };
 

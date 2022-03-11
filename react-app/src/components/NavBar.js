@@ -61,10 +61,10 @@ const NavBar = () => {
   return (
     <>
       <nav id="sidebar">
-        <div className="icon-div"></div>
         <h2>
           <FaSpotify /> Spotify
         </h2>
+        <div className="navbar-playlist">
         <ul>
           {/* <li>
             <NavLink to="/login" exact={true} activeClassName="active">
@@ -119,6 +119,7 @@ const NavBar = () => {
             <h3>Following</h3>
           </NavLink>
         </ul>
+        </div>
         <Modal
           isOpen={isOpen}
           onAfterOpen={afterOpenModal}

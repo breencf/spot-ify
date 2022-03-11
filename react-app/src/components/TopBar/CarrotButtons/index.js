@@ -8,14 +8,14 @@ export const CarrotButtons = () => {
     <>
       <div id="top-left-buttons">
         <button className="button-none" onClick={(e) => history.goBack()}>
-          <h3>
+          <h2>
             <FaAngleLeft />
-          </h3>
+          </h2>
         </button>
         <button className="button-none" onClick={(e) => history.goForward()}>
-          <h3>
+          <h2>
             <FaAngleRight />
-          </h3>
+          </h2>
         </button>
       </div>
     </>

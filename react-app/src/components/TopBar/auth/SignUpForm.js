@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../../store/session';
+import "./Splash.css"
+import {FaSpotify} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -43,51 +46,84 @@ const SignUpForm = () => {
   }
 
   return (
+    <div className="splash">
+      <h1><FaSpotify/> Spot-ify</h1>
+    <div>
     <form onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>User Name</label>
+      <div className='formdiv'>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
+          placeholder={"Username"}
         ></input>
       </div>
-      <div>
-        <label>Email</label>
+      <div className='formdiv'>
         <input
           type='text'
           name='email'
           onChange={updateEmail}
           value={email}
+          placeholder={"Email"}
+
         ></input>
       </div>
-      <div>
-        <label>Password</label>
+      <div className='formdiv'>
+        <input
+          type='text'
+          name='firstName'
+          // onChange={updateEmail}
+          // value={email}
+          placeholder={"First Name"}
+
+        ></input>
+      </div>
+      <div className='formdiv'>
+        <input
+          type='text'
+          name='lastName'
+          // onChange={updateEmail}
+          // value={email}
+          placeholder={"Last Name"}
+
+        ></input>
+      </div>
+      <div className='formdiv'>
         <input
           type='password'
           name='password'
           onChange={updatePassword}
           value={password}
+          placeholder={"Password"}
+
         ></input>
       </div>
-      <div>
-        <label>Repeat Password</label>
+      <div className='formdiv'>
         <input
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
+          placeholder={"Confirm Password"}
+
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div className='formdiv'>
+      <button className="button-white" type='submit'>Sign Up</button>
+      </div>
     </form>
+    <div className='formdiv'>
+    <Link to="/login"><h4> Login here</h4></Link>
+    </div>
+    </div>
+    </div>
   );
 };
 

@@ -16,6 +16,11 @@
   width: 100%;
 }
 
+.songListing:hover {
+  background: rgba(255,255,255,.3);
+  border-radius: 5px;
+}
+
 .songListing span {
   display: flex;
 
@@ -85,8 +90,21 @@
   height: 40px;
 }
 
+
 #menu-heart{
   display: flex;
   flex-direction: row;
   gap: 15px;
+}
+
+.love-click {
+  width: 25px;
+  height: 25px;
+}
+
+.saved {
+  fill: var(--sp-green);
+  width: 25px;
+  height: 25px;
+
 }
