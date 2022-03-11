@@ -65,6 +65,7 @@ h4 {
   font-size: 14px;
   color: var(--sp-gray);
   font-weight: 500;
+  margin: 10px 0px
 }
 
 h4:active {
