@@ -150,8 +150,10 @@ export const SongListing = ({ song, playlistId }) => {
         <button className="button-none" onClick={handleDelete}>
           <h4><FaTimes /></h4>
         </button>
-      </span> */}
+
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
+      </span>
+
     </div>
   );
 };

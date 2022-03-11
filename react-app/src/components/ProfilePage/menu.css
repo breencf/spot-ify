@@ -1,0 +1,23 @@
+#testing_menu{
+    cursor: pointer;
+    color:white;
+}
+
+#testing_menu:hover{
+    background-color: rgb(58, 57, 57);
+}
+
+
+#icon-color{
+    color: #FFFFFFE6;
+}
+
+
+#user-menu-style{
+    background-color: #282828;
+    border-radius: 4px;
+    border: none;
+    width: 75px;
+    height: 75px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+}

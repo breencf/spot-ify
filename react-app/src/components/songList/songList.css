@@ -6,10 +6,11 @@
   overflow-y: scroll;
 }
 
+
 .songListing {
   padding: 5px 16px;
-  height: 80px;
-  background-color: transparent;
+  height: 50px;
+  /* background-color: transparent; */
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -41,14 +42,45 @@
   width: 30%;
 }
 
+/* .contextMenu .szh-menu{
+  width: 10px;
+} */
+
 .contextMenu {
-  background-color: aqua;
-  margin-right: 10px;
+  /* background-color: aqua; */
+  /* margin-right: 150px; */
+  /* right: 5;
+  width: 50px; */
+  /* position:absolute; */
   z-index: 100000;
+  padding-right: 50px;
+}
+#testing1{
+  /* width: 50px; */
+  background-color: #282828;
+    border-radius: 4px;
+    border: none;
+    width: 75px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
 }
 
+.menu-item-test{
+  cursor: pointer;
+  color:white;
+}
+
+#testing2{
+  background-color: #282828;
+  border-radius: 4px;
+  border: none;
+  width: 75px;
+  box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+}
+
+
+
 .contextMenu * {
-  background-color: aqua;
+  /* background-color: aqua; */
   z-index: 101;
 
 }
@@ -56,6 +88,13 @@
 .song_album_image {
   width: 40px;
   height: 40px;
+}
+
+
+#menu-heart{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }
 
 .love-click {
@@ -67,4 +106,5 @@
   fill: var(--sp-green);
   width: 25px;
   height: 25px;
+
 }
