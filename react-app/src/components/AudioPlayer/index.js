@@ -10,6 +10,7 @@ import songsReducer, {
 import "./AudioPlayer.css";
 import {
   FaPlay,
+  FaList,
   FaStepForward,
   FaStepBackward,
   FaPause,
@@ -195,6 +196,11 @@ export const AudioPlayer = () => {
           </div>
         </div>
         <div className="player-right">
+          <Link to="/queue">
+            <h4>
+              <FaList />
+            </h4>
+          </Link>
           <h4>
             <FaVolumeUp />
           </h4>

@@ -12,12 +12,9 @@ playlist_routes = Blueprint("playlists", __name__)
 #GET A PLAYLIST
 @playlist_routes.route('/<int:playlistId>')
 @login_required
-def edit_playlist(playlistId):
+def get_playlist(playlistId):
     playlist = Playlist.query.get(playlistId)
-    if playlist:
-        return {"playlist": playlist.to_dict()}
-    else:
-        return {"playlist": "deleted"}
+    return {"playlist": playlist.to_dict()}
 
 #EDIT A PLAYLIST
 @playlist_routes.route('/<int:playlistId>/edit', methods=['POST'])

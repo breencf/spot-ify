@@ -2,7 +2,15 @@ const LOAD_SONG = "songs/LOAD_SONG";
 const PAUSE_SONG = "songs/PAUSE_SONG";
 const PLAY_SONG = "songs/PLAY_SONG";
 const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
-const ADD_TO_QUEUE = 'songs/ADD_TO_QUEUE'
+const ADD_TO_QUEUE = "songs/ADD_TO_QUEUE";
+const ADD_MULTIPLE = "songs/ADD_MULTIPLE";
+
+const addMultiple = (songsArr) => {
+  return {
+    type: ADD_MULTIPLE,
+    songsArr,
+  };
+};
 
 const load = (songObj) => ({
   type: LOAD_SONG,
@@ -11,8 +19,8 @@ const load = (songObj) => ({
 
 const queue = (songObj) => ({
   type: ADD_TO_QUEUE,
-  songObj
-})
+  songObj,
+});
 
 export const toggle_play = () => {
   return {
@@ -39,13 +47,25 @@ export const loadSong = (id) => async (dispatch) => {
   dispatch(load(song));
 };
 
-export const addToQueue = id => async dispatch => {
+export const addToQueue = (id) => async (dispatch) => {
   const response = await fetch(`/api/songs/${id}`);
 
   const { song } = await response.json();
-  console.log('song in queue thunk', song)
+  console.log("song in queue thunk", song);
   dispatch(queue(song));
-}
+};
+
+export const addMultipleSongs =
+  ({ id, type }) =>
+  async (dispatch) => {
+    const response = await fetch(`/api/${type}/${id}`);
+    const mediaDict = await response.json();
+    let mediaArr;
+    if (type === "playlists") mediaArr = Object.values(mediaDict)[0].songs.dict;
+    else if ((type = "albums")) mediaArr = mediaDict.songs.dict
+    console.log(mediaArr);
+    dispatch(addMultiple(mediaArr));
+  };
 
 const initialState = { queue: [], newSong: null, isPlaying: false };
 let newState;
@@ -69,10 +89,15 @@ export default function songsReducer(state = initialState, action) {
       newState.newSong = action.songObj;
       return newState;
     case ADD_TO_QUEUE:
-      newState = {...state};
-      newState.queue.push(action.songObj)
-      console.log(newState.queue)
-      return newState
+      newState = { ...state };
+      newState.queue.push(action.songObj);
+      console.log(newState.queue);
+      return newState;
+    case ADD_MULTIPLE:
+      newState = { ...state };
+      newState.newSong = action.songsArr[0];
+      action.songsArr.splice(1).map((song) => newState.queue.push(song));
+      return newState;
     default:
       return state;
   }

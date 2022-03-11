@@ -7,17 +7,21 @@ import {
 } from "react-router-dom";
 import UserPlaylistsEdit from "../userPlaylists/EditPlayListForm";
 import { SongsList } from "../songList";
-import { delete_Playlist, load_Playlists } from "../../store/playlists";
+import { delete_Playlist, getOnePlaylist, load_Playlists } from "../../store/playlists";
 import { CompoundAlbumImage } from "./CompoundAlbumImage";
+import { useEffect } from "react";
+import { PlayButton } from "../AudioPlayer/PlayButton";
 
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
   const { playlistId } = useParams();
   const history = useHistory();
+  useEffect(()=> {dispatch(getOnePlaylist(playlistId))},[playlistId])
 
   const playLists = useSelector((state) => state?.playListReducer?.playLists);
   const { id } = useSelector((state) => state.session.user);
-  const currPlaylist = playLists[playlistId];
+  // const currPlaylist = playLists[playlistId];
+  const currPlaylist = useSelector((state) => state?.playListReducer.currentPlaylist)
   const playlistProp = currPlaylist?.songs?.dict;
 
   const handleDelete = () => {
@@ -53,6 +57,7 @@ const ViewOnePlaylist = () => {
       <br />
       {currPlaylist?.user_id == id && (
         <div>
+          <PlayButton mediaId={id} type={'playlists'}/>
           <UserPlaylistsEdit playList={currPlaylist} />
           <button className="button-green" onClick={handleDelete}>Delete</button>
         </div>

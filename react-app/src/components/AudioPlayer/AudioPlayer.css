@@ -82,3 +82,19 @@
   --player-cursor: white;
   --cursor-grabbed: var(--sp-green);
 }
+
+
+.global-play-button {
+  z-index: 100;
+  position: relative;
+  top: 0;
+}
+
+.player-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 200px;
+}

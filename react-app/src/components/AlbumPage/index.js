@@ -5,6 +5,7 @@ import { load_album } from "../../store/album";
 import { SongsList } from "../songList";
 import { add_Library_Album } from "../../store/library";
 import "./AlbumPage.css";
+import { PlayButton } from "../AudioPlayer/PlayButton";
 
 export const AlbumPage = () => {
   let { albumId } = useParams();
@@ -39,6 +40,7 @@ export const AlbumPage = () => {
         </div>
       </div>
       <br />
+      <PlayButton type={"albums"} mediaId={albumId} />
       <hr />
       <br />
       <SongsList songProp={songs} />
