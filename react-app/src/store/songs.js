@@ -2,11 +2,17 @@ const LOAD_SONG = "songs/LOAD_SONG";
 const PAUSE_SONG = "songs/PAUSE_SONG";
 const PLAY_SONG = "songs/PLAY_SONG";
 const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
+const ADD_TO_QUEUE = 'songs/ADD_TO_QUEUE'
 
 const load = (songObj) => ({
   type: LOAD_SONG,
   songObj,
 });
+
+const queue = (songObj) => ({
+  type: ADD_TO_QUEUE,
+  songObj
+})
 
 export const toggle_play = () => {
   return {
@@ -33,6 +39,14 @@ export const loadSong = (id) => async (dispatch) => {
   dispatch(load(song));
 };
 
+export const addToQueue = id => async dispatch => {
+  const response = await fetch(`/api/songs/${id}`);
+
+  const { song } = await response.json();
+  console.log('song in queue thunk', song)
+  dispatch(queue(song));
+}
+
 const initialState = { queue: [], newSong: null, isPlaying: false };
 let newState;
 
@@ -44,7 +58,6 @@ export default function songsReducer(state = initialState, action) {
       return newState;
     case TOGGLE_IS_PLAYING:
       newState = { ...state };
-      console.log("toggled to", !state.isPlaying);
       newState.isPlaying = !state.isPlaying;
       return newState;
     case PAUSE_SONG:
@@ -55,8 +68,11 @@ export default function songsReducer(state = initialState, action) {
       newState = { ...state };
       newState.newSong = action.songObj;
       return newState;
-    // case ADD_TO_PLAYLIST:
-    //   newState = { ...state };
+    case ADD_TO_QUEUE:
+      newState = {...state};
+      newState.queue.push(action.songObj)
+      console.log(newState.queue)
+      return newState
     default:
       return state;
   }

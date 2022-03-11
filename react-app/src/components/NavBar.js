@@ -26,7 +26,7 @@ const NavBar = () => {
 
   useEffect(() => {
     if (userId) dispatch(load_Playlists(userId))
-    if(userId) dispatch(load_Library(userId))
+    // if(userId) dispatch(load_Library(userId))
 
   }, [dispatch, userId]);
 

@@ -3,7 +3,13 @@ import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
-import { loadSong, pause, play, toggle_play } from "../../store/songs";
+import {
+  addToQueue,
+  loadSong,
+  pause,
+  play,
+  toggle_play,
+} from "../../store/songs";
 
 export const SongListing = ({ song, playlistId }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
@@ -11,6 +17,7 @@ export const SongListing = ({ song, playlistId }) => {
   const { id } = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [deleting, setDeleting] = useState(false);
+  const [duration, setDuration] = useState("0:00");
 
   useEffect(() => {
     if (deleting) dispatch(load_Playlists(id));
@@ -28,17 +35,22 @@ export const SongListing = ({ song, playlistId }) => {
     console.log(deleting, "-------------");
   };
 
+  const calculateTime = (secs) => {
+    const minutes = Math.floor(secs / 60);
+    const returnedMinutes = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const seconds = Math.floor(secs % 60);
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    return `${returnedMinutes}:${returnedSeconds}`;
+  };
+
+  const songAudio = new Audio(song.audio);
+  songAudio.addEventListener("loadedmetadata", () => {
+    setDuration(songAudio.duration);
+  });
+
   const onClickPlay = () => {
-    if (currSong?.id !== song.id) {
-      dispatch(loadSong(song.id));
-    }
-    // else if (currSong?.id === song.id && toggleState === false)
-    //   dispatch(play());
-    else {
-      console.log('song listing toggle')
-      dispatch(toggle_play);
-      console.log(toggleState)
-    }
+    dispatch(loadSong(song.id));
+    dispatch(loadSong(song.id));
   };
 
   return (
@@ -56,8 +68,23 @@ export const SongListing = ({ song, playlistId }) => {
       <span className="song_album">
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
+
+      <span className="song_...">
+        <button className="button-none" onClick={onClickPlay}>
+          <h4>pl</h4>
+        </button>
+      </span>
+      <span className="song_...">
+        <button
+          className="button-none"
+          onClick={() => dispatch(addToQueue(song.id))}
+        >
+          <h4>q</h4>
+        </button>{" "}
+      </span>
+
       <span className="song_duration">
-        <p>0:00</p>
+        <p>{duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}</p>
       </span>
 
       <span className="song_...">
@@ -68,8 +95,6 @@ export const SongListing = ({ song, playlistId }) => {
           <h4>x</h4>
         </button>
       </span>
-
-      <button onClick={onClickPlay}>Play</button>
     </div>
   );
 };
