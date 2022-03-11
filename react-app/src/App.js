@@ -4,24 +4,8 @@ import { useDispatch } from "react-redux";
 import LoginForm from "./components/TopBar/auth/LoginForm";
 import SignUpForm from "./components/TopBar/auth/SignUpForm";
 import NavBar from "./components/NavBar";
-import UsersList from "./components/UsersList";
 import { authenticate } from "./store/session";
-import UserPlaylists from "./components/userPlaylists/UserPlaylists";
-import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
-import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
-import Search from "./components/TopBar/search/Search";
-
-import { AlbumPage } from "./components/AlbumPage";
-import { LoginMenu } from "./components/TopBar/LoginMenu";
-import ProtectedRoute from "../src/components/TopBar/auth/ProtectedRoute";
-import Library from "./components/library/Library";
-import { ArtistPage } from "./components/ArtistPage";
-import { ProfilePage } from "./components/ProfilePage";
-import { CarrotButtons } from "./components/TopBar/CarrotButtons";
-import LikedSongs from "./components/LikedSongs/LikedSongs";
-import Followers from "./components/Followers/Followers";
-import { TopBar } from "./components/TopBar";
 import MainInfo from "./components/MainInfo";
 
 
