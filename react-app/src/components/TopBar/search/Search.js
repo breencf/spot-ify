@@ -36,9 +36,7 @@ const Search = () => {
 
     return (
         <div>
-            <h2>Hello form Search</h2>
             <form onSubmit={handelsubmit}>
-                <label htmlFor='name'>Name</label>
                 <input
                     onChange={(e) => {
                         setName(e.target.value)

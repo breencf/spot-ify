@@ -33,7 +33,7 @@ const NavBar = () => {
 
   useEffect(() => {
     if (userId) dispatch(load_Playlists(userId));
-    // if(userId) dispatch(load_Library(userId))
+    if(userId) dispatch(load_Library(userId))
   }, [dispatch, userId]);
 
   const data = useSelector((state) => state.libraryReducer);
@@ -111,7 +111,7 @@ const NavBar = () => {
               <FaPlus /> Create Playlist
             </h3>
           </button>
-              
+
           <NavLink to="/songs" exact={true} activeClassName="active">
             <h3><FaRegHeart /> Liked Songs</h3>
           </NavLink>

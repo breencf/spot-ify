@@ -4,8 +4,8 @@ const DELETE_LIBRARY_ALBUM = 'user/DELETE_ALBUM';
 const DELETE_LIBRARY_ARTIST = 'user/DELETE_LIBRARY_ARTIST';
 const DELETE_LIBRARY_PLAYLIST = 'user/DELETE_LIBRARY_PLAYLIST';
 const DELETE_LIBRARY_SONG = 'user/DELETE_LIBRARY_SOMG';
-
-
+const ADD_LIBRARY_ALBUM = "user/ADD_LIBRARY_ALBUM"
+const ADD_LIBRARY_ARTIST= "user/ADD_LIBRARY_ARTIST"
 
 
 const deleteLibrarySong = (userId, songId) => {
@@ -54,20 +54,30 @@ export const delete_LibraryPlaylist = (userId, playlistId) => async dispatch => 
 }
 
 
-export const add_Library_Playlist = (userId, playlistId) => async dispatch => {
-    const response = await fetch(`/api/users/library/playlist/add`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, playlistId}),
-    })
-}
-
 const deleteLibraryArtist = (userId, artistId) => {
     return {
         type: DELETE_LIBRARY_ARTIST,
         userId,
         artistId
     }
+}
+
+
+// const addLibraryArtist = (userId, artistId) => {
+//     return {
+//         type: DELETE_LIBRARY_PLAYLIST,
+//         userId,
+//         playlistId
+//     }
+// }
+
+
+export const add_Library_Playlist = (userId, playlistId) => async dispatch => {
+    const response = await fetch(`/api/users/library/playlist/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({userId, playlistId}),
+    })
 }
 
 export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
@@ -81,92 +91,30 @@ export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
 }
 
 
-// const addLibraryArtist = (userId, artistId) => {
-//     return {
-//         type: DELETE_LIBRARY_PLAYLIST,
-//         userId,
-//         playlistId
-//     }
-// }
+const addLibraryArtist = (userId, artistId) => {
+    return {
+        type: ADD_LIBRARY_ARTIST,
+        userId,
+        artistId
+    }
+}
 
-// export const delete_LibraryPlaylist = (userId, playlistId) => async dispatch => {
-//     const response = await fetch(`/api/users/library/playlist/delete`,{
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({userId, playlistId}),
-//     })
-//     const data = await response.json()
-//     dispatch(deleteLibraryPlaylist(userId, playlistId))
-// }
+export const add_Library_Artist = (userId, artistId) => async dispatch => {
+    const response = await fetch(`/api/users/library/artist/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({userId, artistId}),
+    })
+}
 
+const addLibraryAlbum = (userId, albumId) => {
+    return {
+        type: ADD_LIBRARY_ALBUM,
+        userId,
+        albumId
+    }
+}
 
-// export const add_Library_Playlist = (userId, playlistId) => async dispatch => {
-//     const response = await fetch(`/api/users/library/playlist/add`, {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({userId, playlistId}),
-//     })
-// }
-
-// const deleteLibraryArtist = (userId, artistId) => {
-//     return {
-//         type: DELETE_LIBRARY_ARTIST,
-//         userId,
-//         artistId
-//     }
-// }
-
-// export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
-//     const response = await fetch(`/api/users/library/artist/delete`,{
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({userId, artistId}),
-//     })
-//     const data = await response.json()
-//     dispatch(deleteLibraryArtist(userId, artistId))
-// }
-
-
-// // const addLibraryArtist = (userId, artistId) => {
-// //     return {
-// //         type: ADD_LIBRARY_ARTIST,
-// //         userId,
-// //         artistId
-// //     }
-// // }
-
-// export const add_Library_Artist = (userId, artistId) => async dispatch => {
-//     const response = await fetch(`/api/users/library/artist/add`, {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({userId, artistId}),
-//     })
-// }
-
-// // const addLibraryAlbum = (userId, albumId) => {
-// //     return {
-// //         type: ADD_LIBRARY_ALBUM,
-// //         userId,
-// //         albumId
-// //     }
-// // }
-
-// export const add_Library_Album = (userId, albumId) => async dispatch => {
-//     const response = await fetch(`/api/users/library/album/add`, {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({userId, albumId}),
-//     })
-// }
-
-
-// const deleteLibraryAlbum = (libraryId, albumId) => {
-//     return {
-//         type: DELETE_LIBRARY_ALBUM,
-//         albumId,
-//         libraryId
-//     }
-// }
 
 export const add_Library_Album = (userId, albumId) => async dispatch => {
     const response = await fetch(`/api/users/library/album/add`, {

@@ -14,7 +14,6 @@ export const searchVal = (value) => async (dispatch) => {
       body: JSON.stringify({value}),
     });
     const data = await response.json();
-    // console.log(data, " what is the search data?");
     dispatch(search(data));
     return data
   };
@@ -25,7 +24,6 @@ export const searchVal = (value) => async (dispatch) => {
       case SEARCH_VALUE:
         newState = {...state}
         newState = action.value
-        // console.log(newState)
         return newState
       default:
         return state;

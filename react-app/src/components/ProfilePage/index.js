@@ -21,8 +21,6 @@ export const ProfilePage = () => {
 
     const playlists = user?.playlists?.dict;
 
-    // console.log('-------USER-------', user)
-
     return (
         <>
             <div className="albumTop">

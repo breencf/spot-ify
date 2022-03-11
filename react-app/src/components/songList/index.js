@@ -5,14 +5,8 @@ import { SongListing } from "./SongListing";
 
 export const SongsList = ({ songProp, playlistId }) => {
   const dispatch = useDispatch();
-  // const songsObj = useSelector((state) => state.songsReducer);
-  // let songs = Object.values(songsObj.songs);
   const { id } = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    // dispatch(loadSongs());
-    // dispatch(load_Playlists(id));
-  }, [dispatch]);
 
   return (
     <>

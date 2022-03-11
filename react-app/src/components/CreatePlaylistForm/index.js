@@ -7,7 +7,6 @@ import "./CreatePlaylistForm.css";
 export const CreatePlaylistForm = ({closeModal}) => {
   const dispatch = useDispatch();
   const { id } = useSelector(state => state.session.user);
-  // const { userId } = useParams();
   const history = useHistory();
 
   const [name, setName] = useState("");
@@ -31,7 +30,6 @@ export const CreatePlaylistForm = ({closeModal}) => {
       }
     });
 
-    console.log('value    :', value)
     // if (value.errors) {
     //   return setErrors(value.errors);
     // }

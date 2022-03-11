@@ -3,7 +3,7 @@ import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
-import { FaPlay, FaList, FaEllipsisH } from "react-icons/fa";
+import { FaPlay, FaList, FaEllipsisH, FaTimes } from "react-icons/fa";
 import {
   addToQueue,
   loadSong,
@@ -96,7 +96,7 @@ export const SongListing = ({ song, playlistId }) => {
       </span>
       <span className="song_...">
         <button className="button-none" onClick={handleDelete}>
-          <h4>x</h4>
+          <h4><FaTimes /></h4>
         </button>
       </span>
       <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button>

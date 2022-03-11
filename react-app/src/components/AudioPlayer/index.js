@@ -37,7 +37,6 @@ export const AudioPlayer = () => {
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
       audioPlayer.current.play();
-      // progressBar.current.max = seconds;
     }
   }, [
     audioPlayer?.current?.loadedmetadata,
@@ -55,10 +54,6 @@ export const AudioPlayer = () => {
     }
   }, [duration]);
 
-  // useEffect(() => {
-  //   if(toggleState !== isPlaying) setIsPlaying(toggleState)
-  //   togglePlay()
-  // }, [toggleState])
 
   //checks if the song is over to move on to the next song
   useEffect(() => {
@@ -100,12 +95,10 @@ export const AudioPlayer = () => {
     if (!toggleState === true) {
       console.log("playing that song!");
       audioPlayer.current.play();
-      // dispatch(play());
       progressRef.current = requestAnimationFrame(whilePlaying);
     } else {
       console.log("pausing that shiiii");
       audioPlayer.current.pause();
-      // dispatch(pause());
       cancelAnimationFrame(progressRef.current);
     }
   };

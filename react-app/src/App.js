@@ -52,6 +52,7 @@ function App() {
             <div id="ui">
               <div id="topbar">
                 <CarrotButtons />
+                {/* <Search/> */}
                 <LoginMenu />
               </div>
               <div id="main">
@@ -67,7 +68,7 @@ function App() {
                 </ProtectedRoute>
                 <ProtectedRoute path="/:userId/library" exact={true}>
                   <Library />
-                </ProtectedRoute> */}
+                </ProtectedRoute>
                 <ProtectedRoute path="/search" exact={true}>
                   <Search />
                 </ProtectedRoute>

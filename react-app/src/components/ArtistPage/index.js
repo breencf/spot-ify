@@ -18,13 +18,8 @@ export const ArtistPage = () => {
 
       const artistObj = useSelector((state) => state?.artistReducer?.artist);
       const userId = useSelector((state) => state.session.user.id)
-    //   console.log('-------------------', artistObj)
-
       let albums = artistObj?.albums?.dict;
-    //   console.log('-------------------', albums)
-
       let songs = artistObj?.songs?.dict;
-    //   console.log('-------------------', songs)
 
 
     return (

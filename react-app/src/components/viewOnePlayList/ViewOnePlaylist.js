@@ -26,24 +26,6 @@ const ViewOnePlaylist = () => {
     return history.push("/");
   };
 
-  // useEffect(() => {
-  //   dispatch(load_Playlists(id))
-  //   // console.log('ANGRY USE EFFECT ====================== SO MAD!!!')
-  // }, [dispatch, playlistProp])
-
-  // return (
-  //     <div>
-
-  //         <p>{playList?.image}</p>
-  //         <p>{playList?.description}</p>
-  //         <UserPlaylistsEdit />
-  //         <NavLink to={`/users/${userId}/playlists/${playlistId}`}>{playList?.name}</NavLink>
-  //         {playList &&
-  //         <button onClick={() => dispatch(delete_Playlist(userId, playlistId))}>Delete playlist here</button>
-  //         }
-  //     </div>
-  // )
-
   let imag;
 
   if (currPlaylist?.image) {
