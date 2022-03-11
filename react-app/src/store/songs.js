@@ -1,34 +1,79 @@
+const LOAD_SONG = "songs/LOAD_SONG";
+const PAUSE_SONG = "songs/PAUSE_SONG";
 const PLAY_SONG = "songs/PLAY_SONG";
-const ADD_TO_QUEUE = "songs/ADD_TO_QUEUE"
+const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
+const ADD_TO_QUEUE = 'songs/ADD_TO_QUEUE'
 
-const play = (songObj) => ({
-    type: PLAY_SONG,
-    songObj,
+const load = (songObj) => ({
+  type: LOAD_SONG,
+  songObj,
 });
 
+const queue = (songObj) => ({
+  type: ADD_TO_QUEUE,
+  songObj
+})
 
-
-export const playSong = (id) => async (dispatch) => {
-    const response = await fetch(`/api/songs/${id}`);
-
-    const {song} = await response.json();
-    dispatch(play(song));
+export const toggle_play = () => {
+  return {
+    type: TOGGLE_IS_PLAYING,
+  };
 };
 
+export const pause = () => {
+  return {
+    type: PAUSE_SONG,
+  };
+};
 
+export const play = () => {
+  return {
+    type: PLAY_SONG,
+  };
+};
 
-const initialState = { queue: [], currSong: null};
+export const loadSong = (id) => async (dispatch) => {
+  const response = await fetch(`/api/songs/${id}`);
+
+  const { song } = await response.json();
+  dispatch(load(song));
+};
+
+export const addToQueue = id => async dispatch => {
+  const response = await fetch(`/api/songs/${id}`);
+
+  const { song } = await response.json();
+  console.log('song in queue thunk', song)
+  dispatch(queue(song));
+}
+
+const initialState = { queue: [], newSong: null, isPlaying: false };
 let newState;
 
 export default function songsReducer(state = initialState, action) {
-    switch (action.type) {
-        case PLAY_SONG:
-            newState = { ...state };
-            newState.currSong = action.songObj;
-            return newState;
-        // case ADD_TO_PLAYLIST:
-        //   newState = { ...state };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case PLAY_SONG:
+      newState = { ...state };
+      newState.isPlaying = true;
+      return newState;
+    case TOGGLE_IS_PLAYING:
+      newState = { ...state };
+      newState.isPlaying = !state.isPlaying;
+      return newState;
+    case PAUSE_SONG:
+      newState = { ...state };
+      newState.isPlaying = false;
+      return newState;
+    case LOAD_SONG:
+      newState = { ...state };
+      newState.newSong = action.songObj;
+      return newState;
+    case ADD_TO_QUEUE:
+      newState = {...state};
+      newState.queue.push(action.songObj)
+      console.log(newState.queue)
+      return newState
+    default:
+      return state;
+  }
 }

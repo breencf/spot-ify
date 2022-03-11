@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
-import { add_Playlist, load_Playlists } from "../store/playlists";
-import LogoutButton from "./TopBar/auth/LogoutButton";
+import { NavLink } from "react-router-dom";
+import { load_Playlists } from "../store/playlists";
 import Modal from "react-modal";
 import { CreatePlaylistForm } from "./CreatePlaylistForm";
 import { load_Library } from "../store/library";
+import {
+  FaSpotify,
+  FaHome,
+  FaSearch,
+  FaStream,
+  FaPlus,
+  FaRegHeart,
+} from "react-icons/fa";
 
 const NavBar = () => {
   const userId = useSelector((state) => state.session?.user?.id);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-
 
   const openModal = () => {
     setIsOpen(true);
@@ -26,23 +32,18 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    if (userId) dispatch(load_Playlists(userId))
-    if(userId) dispatch(load_Library(userId))
-
+    if (userId) dispatch(load_Playlists(userId));
+    // if(userId) dispatch(load_Library(userId))
   }, [dispatch, userId]);
 
-
-  const data = useSelector((state) => state.libraryReducer)
-  let lists = data?.playlists
+  const data = useSelector((state) => state.libraryReducer);
+  let lists = data?.playlists;
 
   const playLists = useSelector((state) =>
     Object?.values(state?.playListReducer?.playLists)
   );
 
-  let allPlayLists = playLists?.concat(lists)
-
-
-
+  let allPlayLists = playLists?.concat(lists);
 
   const customStyles = {
     content: {
@@ -60,7 +61,10 @@ const NavBar = () => {
   return (
     <>
       <nav id="sidebar">
-        <h2>Spotify</h2>
+        <div className="icon-div"></div>
+        <h2>
+          <FaSpotify /> Spotify
+        </h2>
         <ul>
           {/* <li>
             <NavLink to="/login" exact={true} activeClassName="active">
@@ -77,13 +81,17 @@ const NavBar = () => {
           </li> */}
           <li>
             <NavLink to="/" exact={true} activeClassName="active">
-              <h3>Home</h3>
+              <h3>
+                <FaHome /> Home
+              </h3>
             </NavLink>
           </li>
 
           <li>
             <NavLink to="/search" exact={true} activeClassName="active">
-              <h3>Search</h3>
+              <h3>
+                <FaSearch /> Search
+              </h3>
             </NavLink>
           </li>
           <li>
@@ -92,15 +100,20 @@ const NavBar = () => {
               exact={true}
               activeClassName="active"
             >
-              <h3>Your Library</h3>
+              <h3>
+                <FaStream /> Your Library
+              </h3>
             </NavLink>
           </li>
           <br />
           <button className="button-none" onClick={openModal}>
-            <h3>Create Playlist</h3>
+            <h3>
+              <FaPlus /> Create Playlist
+            </h3>
           </button>
+              
           <NavLink to="/songs" exact={true} activeClassName="active">
-            <h3>Liked Songs</h3>
+            <h3><FaRegHeart /> Liked Songs</h3>
           </NavLink>
           <NavLink to="/followers" exact={true} activeClassName="active">
             <h3>Following</h3>
@@ -117,18 +130,19 @@ const NavBar = () => {
 
         <hr />
         <div id="playlists-nav">
-          {allPlayLists.length > 0 && allPlayLists?.map((list, index) => {
-            return (
-              <div key={index} className="navbar-playlist">
-                <NavLink
-                  activeClassName="activeNav"
-                  to={`/playlists/${list?.id}`}
+          {allPlayLists.length > 0 &&
+            allPlayLists?.map((list, index) => {
+              return (
+                <div key={index} className="navbar-playlist">
+                  <NavLink
+                    activeClassName="activeNav"
+                    to={`/playlists/${list?.id}`}
                   >
-                  <h4>{list?.name}</h4>
-                </NavLink>
-              </div>
-            );
-          })}
+                    <h4>{list?.name}</h4>
+                  </NavLink>
+                </div>
+              );
+            })}
         </div>
       </nav>
     </>

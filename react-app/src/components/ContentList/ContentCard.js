@@ -1,5 +1,4 @@
-import { Link, useParams } from "react-router-dom"
-import { ArtistPage } from "../ArtistPage";
+import { Link } from "react-router-dom"
 import "./ContentList.css"
 
 export const ContentCard = ({ content, heading }) => {

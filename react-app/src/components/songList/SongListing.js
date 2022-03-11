@@ -1,36 +1,59 @@
 import { useEffect, useRef, useState } from "react";
 import { ContextMenu } from "./ContextMenu";
 import { Link } from "react-router-dom";
-import { Menu, MenuButton, MenuItem, SubMenu } from "@szhsin/react-menu";
 import { useSelector, useDispatch } from "react-redux";
 import { load_Playlists, delete_from_playlist } from "../../store/playlists";
-import { playSong } from "../../store/songs";
+import { FaPlay, FaList, FaEllipsisH } from "react-icons/fa";
+import {
+  addToQueue,
+  loadSong,
+  pause,
+  play,
+  toggle_play,
+} from "../../store/songs";
 import { add_Library_Song } from "../../store/library";
 
 export const SongListing = ({ song, playlistId }) => {
-  const { playLists } = useSelector((state) => state.playListReducer);
+  const { currSong } = useSelector((state) => state.songsReducer);
+  const { toggleState } = useSelector((state) => state.songsReducer.isPlaying);
   const { id } = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-
   const [deleting, setDeleting] = useState(false);
+  const [duration, setDuration] = useState("0:00");
 
   useEffect(() => {
     if (deleting) dispatch(load_Playlists(id));
-    setDeleting(false)
-  }, [dispatch, deleting])
+    setDeleting(false);
+  }, [dispatch, deleting]);
 
   const handleDelete = () => {
-    console.log(playlistId)
-    console.log('--------------------')
-    console.log(song.id)
-    dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id }))
-    setDeleting(true)
-    console.log(deleting, '-------------')
-  }
+    console.log(playlistId);
+    console.log("--------------------");
+    console.log(song.id);
+    dispatch(
+      delete_from_playlist({ playlist_id: playlistId, song_id: song.id })
+    );
+    setDeleting(true);
+    console.log(deleting, "-------------");
+  };
+
+  const calculateTime = (secs) => {
+    const minutes = Math.floor(secs / 60);
+    const returnedMinutes = minutes < 10 ? `${minutes}` : `${minutes}`;
+    const seconds = Math.floor(secs % 60);
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    return `${returnedMinutes}:${returnedSeconds}`;
+  };
+
+  const songAudio = new Audio(song.audio);
+  songAudio.addEventListener("loadedmetadata", () => {
+    setDuration(songAudio.duration);
+  });
 
   const onClickPlay = () => {
-    dispatch(playSong(song.id));
-  }
+    dispatch(loadSong(song.id));
+    dispatch(loadSong(song.id));
+  };
 
   return (
     <div className="songListing">
@@ -47,8 +70,27 @@ export const SongListing = ({ song, playlistId }) => {
       <span className="song_album">
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
+
+      <span className="song_...">
+        <button className="button-none" onClick={onClickPlay}>
+          <div className="icon-div">
+            <i className="fa-solid fa-play"></i>
+          </div>
+        </button>
+      </span>
+      <span className="song_...">
+        <button
+          className="button-none"
+          onClick={() => dispatch(addToQueue(song.id))}
+        >
+          <h4>
+            <FaList />
+          </h4>
+        </button>{" "}
+      </span>
+
       <span className="song_duration">
-        <p>0:00</p>
+        <p>{duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}</p>
       </span>
 
       <span className="song_...">
@@ -59,8 +101,6 @@ export const SongListing = ({ song, playlistId }) => {
           <h4>x</h4>
         </button>
       </span>
-
-      <button onClick={onClickPlay}>Play</button>
       <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button>
     </div>
   );

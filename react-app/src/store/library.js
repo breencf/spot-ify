@@ -1,5 +1,3 @@
-
-
 const LOAD_LIBRARY = 'user/LOAD_LIBRARY';
 const ADD_LIBRARY = 'user/ADD_LIBRARY';
 const DELETE_LIBRARY_ALBUM = 'user/DELETE_ALBUM';
@@ -85,25 +83,88 @@ export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
 
 // const addLibraryArtist = (userId, artistId) => {
 //     return {
-//         type: ADD_LIBRARY_ARTIST,
+//         type: DELETE_LIBRARY_PLAYLIST,
+//         userId,
+//         playlistId
+//     }
+// }
+
+// export const delete_LibraryPlaylist = (userId, playlistId) => async dispatch => {
+//     const response = await fetch(`/api/users/library/playlist/delete`,{
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({userId, playlistId}),
+//     })
+//     const data = await response.json()
+//     dispatch(deleteLibraryPlaylist(userId, playlistId))
+// }
+
+
+// export const add_Library_Playlist = (userId, playlistId) => async dispatch => {
+//     const response = await fetch(`/api/users/library/playlist/add`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({userId, playlistId}),
+//     })
+// }
+
+// const deleteLibraryArtist = (userId, artistId) => {
+//     return {
+//         type: DELETE_LIBRARY_ARTIST,
 //         userId,
 //         artistId
 //     }
 // }
 
-export const add_Library_Artist = (userId, artistId) => async dispatch => {
-    const response = await fetch(`/api/users/library/artist/add`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, artistId}),
-    })
-}
+// export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
+//     const response = await fetch(`/api/users/library/artist/delete`,{
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({userId, artistId}),
+//     })
+//     const data = await response.json()
+//     dispatch(deleteLibraryArtist(userId, artistId))
+// }
 
-// const addLibraryAlbum = (userId, albumId) => {
+
+// // const addLibraryArtist = (userId, artistId) => {
+// //     return {
+// //         type: ADD_LIBRARY_ARTIST,
+// //         userId,
+// //         artistId
+// //     }
+// // }
+
+// export const add_Library_Artist = (userId, artistId) => async dispatch => {
+//     const response = await fetch(`/api/users/library/artist/add`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({userId, artistId}),
+//     })
+// }
+
+// // const addLibraryAlbum = (userId, albumId) => {
+// //     return {
+// //         type: ADD_LIBRARY_ALBUM,
+// //         userId,
+// //         albumId
+// //     }
+// // }
+
+// export const add_Library_Album = (userId, albumId) => async dispatch => {
+//     const response = await fetch(`/api/users/library/album/add`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({userId, albumId}),
+//     })
+// }
+
+
+// const deleteLibraryAlbum = (libraryId, albumId) => {
 //     return {
-//         type: ADD_LIBRARY_ALBUM,
-//         userId,
-//         albumId
+//         type: DELETE_LIBRARY_ALBUM,
+//         albumId,
+//         libraryId
 //     }
 // }
 

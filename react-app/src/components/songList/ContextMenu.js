@@ -1,7 +1,6 @@
 import "./songList.css";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToPlaylist, load_Playlists } from "../../store/playlists";
+import { addToPlaylist } from "../../store/playlists";
 import { Link } from "react-router-dom";
 
 import {

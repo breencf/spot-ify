@@ -5,12 +5,10 @@ import LoginForm from "./components/TopBar/auth/LoginForm";
 import SignUpForm from "./components/TopBar/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
-import User from "./components/User";
 import { authenticate } from "./store/session";
 import UserPlaylists from "./components/userPlaylists/UserPlaylists";
 import { SongsList } from "./components/songList";
 import { AudioPlayer } from "./components/AudioPlayer";
-import EditPlayList from "./components/viewOnePlayList/ViewOnePlaylist";
 import ViewOnePlaylist from "./components/viewOnePlayList/ViewOnePlaylist";
 import Search from "./components/TopBar/search/Search";
 
@@ -60,6 +58,7 @@ function App() {
                 <ProtectedRoute path="/users" exact={true}>
                   <UsersList />
                 </ProtectedRoute>
+
                 <ProtectedRoute path="/songs" exact={true}>
                   <LikedSongs />
                 </ProtectedRoute>
@@ -68,7 +67,7 @@ function App() {
                 </ProtectedRoute>
                 <ProtectedRoute path="/:userId/library" exact={true}>
                   <Library />
-                </ProtectedRoute>
+                </ProtectedRoute> */}
                 <ProtectedRoute path="/search" exact={true}>
                   <Search />
                 </ProtectedRoute>

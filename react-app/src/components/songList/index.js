@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSongs } from "../../store/songs";
 import { SongListing } from "./SongListing";
-import { load_Playlists } from "../../store/playlists";
 
 export const SongsList = ({ songProp, playlistId }) => {
   const dispatch = useDispatch();
