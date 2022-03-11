@@ -17,7 +17,7 @@ const Followers = () => {
         <>
         <div>
             <h2>hello from following</h2>
-            <p>{data?.follows?.map((follow) => <div key={follow.id}>{follow.username}<button onClick={(()=> dispatch(remove_Follower(userId, follow.id)))}>delete following</button></div>)}</p>
+            <p>{data?.follows?.map((follow) => <div key={follow.id}>{follow.username}</div>)}</p>
         </div>
         </>
     )
