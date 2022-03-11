@@ -73,9 +73,7 @@ export const SongListing = ({ song, playlistId }) => {
 
       <span className="song_...">
         <button className="button-none" onClick={onClickPlay}>
-          <div className="icon-div">
-            <i className="fa-solid fa-play"></i>
-          </div>
+          <h4><FaPlay/></h4>
         </button>
       </span>
       <span className="song_...">

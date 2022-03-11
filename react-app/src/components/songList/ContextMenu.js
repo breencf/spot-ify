@@ -2,6 +2,7 @@ import "./songList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToPlaylist } from "../../store/playlists";
 import { Link } from "react-router-dom";
+import {FaEllipsisH} from 'react-icons/fa'
 
 import {
   Menu,
@@ -29,7 +30,7 @@ export const ContextMenu = ({ song }) => {
         className="contextMenu"
         menuButton={
           <MenuButton className="button-none">
-            <h4>...</h4>
+            <h4><FaEllipsisH/></h4>
           </MenuButton>
         }
       >

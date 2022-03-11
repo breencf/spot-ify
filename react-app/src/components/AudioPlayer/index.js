@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useDebugValue } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import songsReducer, {
   loadSong,
   play,
@@ -7,7 +8,7 @@ import songsReducer, {
   toggle_play,
 } from "../../store/songs";
 import "./AudioPlayer.css";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaStepForward, FaStepBackward } from "react-icons/fa";
 
 export const AudioPlayer = () => {
   const { queue } = useSelector((state) => state.songsReducer);
@@ -35,6 +36,7 @@ export const AudioPlayer = () => {
       console.log("song loaded, assigning duration");
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
+      audioPlayer.current.play();
       // progressBar.current.max = seconds;
     }
   }, [
@@ -108,6 +110,19 @@ export const AudioPlayer = () => {
     }
   };
 
+  const onNextClick = () => {
+    let nextSong = queue.shift();
+    console.log(nextSong.id);
+    dispatch(loadSong(nextSong.id));
+  };
+
+  const onLastClick = () => {
+    console.log(lastSong.id);
+    let last = queue.unshift(lastSong);
+    console.log(queue[0].id);
+    dispatch(loadSong(lastSong.id));
+  };
+
   return (
     <>
       <div id="player">
@@ -116,13 +131,26 @@ export const AudioPlayer = () => {
             <img className="player-image" src={currentSong?.album_image} />
           </div>
           <div>
-            <p>{currentSong?.name}</p>
-            <p>{currentSong?.artist}</p>
+            <Link to={`/albums/${currentSong?.album_id}`}>
+              <h4>{currentSong?.name}</h4>
+            </Link>
+            <Link to={`/artist/${currentSong?.artist_id}`}>
+              <h4>{currentSong?.artist}</h4>
+            </Link>
           </div>
         </div>
 
         <div className="player-center">
           <div className="player-center-top">
+            <button
+              className="button-none"
+              onClick={onLastClick}
+              disabled={lastSong ? false : true}
+            >
+              <h4>
+                <FaStepBackward />
+              </h4>
+            </button>
             <button
               className="button-green"
               onClick={() => {
@@ -132,18 +160,28 @@ export const AudioPlayer = () => {
             >
               <FaPlay />
             </button>
+            <button
+              className="button-none"
+              onClick={onNextClick}
+              disabled={queue.length ? false : true}
+            >
+              <h4>
+                <FaStepForward />
+              </h4>
+            </button>
           </div>
           <div className="player-center-bottom">
             <audio ref={audioPlayer} src={currentSong?.audio}></audio>
             <div className="current-time">
               <h4>{calculateTime(currentTime)}</h4>
             </div>
-              <input
-                ref={progressBar}
-                type="range"
-                defaultValue={0}
-                onChange={changeRange}
-              />
+            <input
+              className="progressBar"
+              ref={progressBar}
+              type="range"
+              defaultValue={0}
+              onChange={changeRange}
+            />
             <div className="current-time">
               <h4>
                 {duration && !isNaN(duration)
