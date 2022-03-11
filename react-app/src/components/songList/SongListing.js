@@ -24,13 +24,13 @@ export const SongListing = ({ song, playlistId }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const checkIfSaved = () => {
-    for (const index in songs) {
-      if (songs[index] === song)
-      setSaved(true);
-      else setSaved(false);
-    }
-  }
+  // const checkIfSaved = () => {
+  //   for (const index in songs) {
+  //     if (songs[index] === song)
+  //     setSaved(true);
+  //     else setSaved(false);
+  //   }
+  // }
 
   // console.log('songsReducer', songs)
 
@@ -76,10 +76,8 @@ export const SongListing = ({ song, playlistId }) => {
   }
 
   const handleButtonClick = () => {
-    // if (!saved) saveItem();
-    // else removeSaveItem();
-    console.log(song.name)
-    removeSaveItem();
+    if (!saved) saveItem();
+    else removeSaveItem();
   }
 
   return (
