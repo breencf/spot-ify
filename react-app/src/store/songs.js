@@ -3,7 +3,12 @@ const PAUSE_SONG = "songs/PAUSE_SONG";
 const PLAY_SONG = "songs/PLAY_SONG";
 const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
 const ADD_TO_QUEUE = 'songs/ADD_TO_QUEUE'
+const GET_SONGS = "songs/GET_SONGS";
 
+const song = (song) => ({
+    type: GET_SONGS,
+    song
+});
 const load = (songObj) => ({
   type: LOAD_SONG,
   songObj,
