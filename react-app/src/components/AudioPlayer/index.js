@@ -9,7 +9,8 @@ import {
 } from "../../store/songs";
 
 export const AudioPlayer = () => {
-  const newSong = useSelector((state) => state.songsReducer.currSong);
+  const newSong = useSelector((state) => state.songsReducer.newSong);
+  const newSid = useSelector((state) => state.songsReducer.newSong?.id);
   const toggleState = useSelector((state) => state.songsReducer.isPlaying);
 
   const dispatch = useDispatch();
@@ -162,38 +163,28 @@ export const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [currentSong, setCurrentSong] = useState(false);
   const [redState, setRedState] = useState(false);
+  const [beginNew, setBeginNew] = useState(null);
   const audioPlayer = useRef();
   const progressBar = useRef();
   const progressRef = useRef();
 
-  //checks if the song is over to move on to the next song
   useEffect(() => {
-    console.log(progressBar.current.max, progressBar.current.value);
-    if (progressBar?.current?.value === progressBar?.current?.max) {
-      console.log("finished song!");
-      let nextSong = queue.pop();
-      dispatch(loadSong(nextSong.id));
-    }
-  }, [progressBar?.current?.value]);
+    console.log("updated the song sId");
+    setCurrentSong(newSong);
+  }, [newSid]);
 
-  useEffect(() => {
-   console.log(currentSong?.id)
-   console.log(newSong?.id)
-   console.log("before ^")
-    if (newSong !== currentSong) setCurrentSong(newSong);
-  console.log(currentSong?.id)
-  console.log(newSong?.id)
-  }, [newSong]);
+  // useEffect(() => {
 
-  useEffect(() => {}, [audioPlayer?.current?.readyState]);
+  // }, [currentSong]);
 
   //uses the metadata of the loaded audio to set duration + progress bar max
   useEffect(() => {
     if (currentSong) {
+      console.log("metadata aquired");
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
       progressBar.current.max = seconds;
-      setRedState(true);
+      setRedState(!redState);
     }
   }, [
     audioPlayer?.current?.loadedmetadata,
@@ -201,7 +192,20 @@ export const AudioPlayer = () => {
     currentSong,
   ]);
 
+  //checks if the song is over to move on to the next song
   useEffect(() => {
+    console.log(progressBar.current.max, progressBar.current.value);
+    if (progressBar?.current?.value === progressBar?.current?.max) {
+      console.log("finished song!");
+      let nextSong = queue.shift();
+      // togglePlay();
+      dispatch(loadSong(nextSong.id));
+      setBeginNew(nextSong.id);
+    }
+  }, [progressBar?.current?.value]);
+
+  useEffect(() => {
+    console.log("playing............");
     if (redState) togglePlay();
   }, [redState]);
 
