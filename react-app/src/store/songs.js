@@ -59,7 +59,7 @@ export const addToQueue = id => async dispatch => {
   dispatch(queue(song));
 }
 
-const initialState = { queue: [], newSong: null, isPlaying: false };
+const initialState = { queue: [], newSong: null, isPlaying: false ,songs:{}};
 let newState;
 
 export default function songsReducer(state = initialState, action) {
