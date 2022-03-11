@@ -21,6 +21,9 @@ import { ProfilePage } from "./components/ProfilePage";
 import { CarrotButtons } from "./components/TopBar/CarrotButtons";
 import LikedSongs from "./components/LikedSongs/LikedSongs";
 import Followers from "./components/Followers/Followers";
+import { TopBar } from "./components/TopBar";
+import MainInfo from "./components/MainInfo";
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,6 +40,8 @@ function App() {
     return null;
   }
 
+  window.ui = 'ui';
+
   return (
     <>
       <BrowserRouter>
@@ -49,52 +54,7 @@ function App() {
             <Route path="/sign-up" exact={true}>
               <SignUpForm />
             </Route>
-            <div id="ui">
-              <div id="topbar">
-                <CarrotButtons />
-                {/* <Search/> */}
-                <LoginMenu />
-              </div>
-              <div id="main">
-                <ProtectedRoute path="/users" exact={true}>
-                  <UsersList />
-                </ProtectedRoute>
-
-                <ProtectedRoute path="/songs" exact={true}>
-                  <LikedSongs />
-                </ProtectedRoute>
-                <ProtectedRoute path="/followers" exact={true}>
-                  <Followers />
-                </ProtectedRoute>
-                <ProtectedRoute path="/:userId/library" exact={true}>
-                  <Library />
-                </ProtectedRoute>
-                <ProtectedRoute path="/search" exact={true}>
-                  <Search />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId" exact={true}>
-                  <ProfilePage />
-                </ProtectedRoute>
-                <ProtectedRoute path="/users/:userId/playlists" exact={true}>
-                  <UserPlaylists />
-                </ProtectedRoute>
-                <ProtectedRoute path="/playlists/:playlistId" exact={true}>
-                  <ViewOnePlaylist />
-                </ProtectedRoute>
-                <ProtectedRoute path="/" exact={true}>
-                  <h2>Good Evening</h2>
-                </ProtectedRoute>
-                {/* <Route path="/songs" exact={true}>
-                  <SongsList />
-                </Route> */}
-                <Route path="/albums/:albumId" exact={true}>
-                  <AlbumPage />
-                </Route>
-                <Route path="/artists/:artistId" exact={true}>
-                  <ArtistPage />
-                </Route>
-              </div>
-            </div>
+            <MainInfo />
           </Switch>
         </div>
         <AudioPlayer />
