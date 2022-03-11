@@ -10,6 +10,7 @@ import songsReducer, {
 import "./AudioPlayer.css";
 import {
   FaPlay,
+  FaList,
   FaStepForward,
   FaStepBackward,
   FaPause,
@@ -21,7 +22,7 @@ export const AudioPlayer = () => {
   const newSong = useSelector((state) => state.songsReducer.newSong);
   const newSid = useSelector((state) => state.songsReducer.newSong?.id);
   const toggleState = useSelector((state) => state.songsReducer.isPlaying);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [playedSongs, setPlayedSongs] = useState([])
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentSong, setCurrentSong] = useState(false);
@@ -65,6 +66,8 @@ export const AudioPlayer = () => {
   useEffect(() => {
     console.log(progressBar.current.max, progressBar.current.value);
     if (progressBar?.current?.value === progressBar?.current?.max) {
+      playedSongs.unshift(currentSong)
+      console.log(playedSongs)
       let nextSong = queue.shift();
       console.log(nextSong.id);
       dispatch(loadSong(nextSong.id));
@@ -115,15 +118,17 @@ export const AudioPlayer = () => {
 
   const onNextClick = () => {
     let nextSong = queue.shift();
+    playedSongs.unshift(currentSong)
     console.log(nextSong.id);
     dispatch(loadSong(nextSong.id));
   };
 
   const onLastClick = () => {
     console.log(lastSong.id);
-    let last = queue.unshift(lastSong);
-    console.log(queue[0].id);
-    dispatch(loadSong(lastSong.id));
+    let last = playedSongs.shift();
+    queue.unshift(currentSong)
+    console.log(last.id);
+    dispatch(loadSong(last.id));
   };
 
   return (
@@ -155,7 +160,7 @@ export const AudioPlayer = () => {
               </h4>
             </button>
             <button
-              className="button-green"
+              className="button-white"
               onClick={() => {
                 togglePlay();
                 dispatch(toggle_play());
@@ -195,6 +200,11 @@ export const AudioPlayer = () => {
           </div>
         </div>
         <div className="player-right">
+          <Link to="/queue">
+            <h4>
+              <FaList />
+            </h4>
+          </Link>
           <h4>
             <FaVolumeUp />
           </h4>

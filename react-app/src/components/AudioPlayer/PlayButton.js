@@ -6,49 +6,28 @@ import {
     loadSong,
     play,
     pause,
+    addToQueue,
+    addMultipleSongs,
   } from "../../store/songs";
+import "./AudioPlayer.css"
+import {FaPlay} from 'react-icons/fa'
 
 
-export const PlayButton = ({ id, media }) => {
+export const PlayButton = ({ type, mediaId }) => {
 
-    const { currSong } = useSelector(state => state.songsReducer)
-    const toggleState = useSelector(state => state.songsReducer.isPlaying);
 
-    const [isPlaying, setIsPlaying] = useState(false);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
+const onClick = () => {
+    dispatch(addMultipleSongs({type, id: mediaId}))
+}
 
-    }, [dispatch])
-
-    // const clickPlay = () => {
-    //     // setIsPlaying(!isPlaying);
-    //     dispatch(loadSong(id))
-    //     console.log(currSong)
-    // }
-
-    const togglePlay = () => {
-        console.log("togglePlaycalled");
-        if (toggleState === false) {
-        //   console.log("playing that song!");
-          audioPlayer.current.play();
-          dispatch(play());
-          progressRef.current = requestAnimationFrame(whilePlaying);
-        } else {
-        //   console.log("pausing that shiiii");
-          audioPlayer.current.pause();
-          dispatch(pause());
-          cancelAnimationFrame(progressRef.current);
-        }
-      };
 
     return (
         <>
-            <audio ref={audioPlayer} src={media}></audio>
-            <button
-            onClick={togglePlay}
-            >Play</button>
+            <button className="global-play-button"
+            onClick={onClick}><FaPlay /></button>
         </>
     )
 }

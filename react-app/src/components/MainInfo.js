@@ -14,6 +14,7 @@ import { TopBar } from "./TopBar";
 import ProtectedRoute from "./TopBar/auth/ProtectedRoute";
 import { AlbumPage } from "./AlbumPage";
 import { ArtistPage } from "./ArtistPage";
+import { QueuePage } from "./ContentList/QueuePage";
 
 
 
@@ -51,6 +52,9 @@ export default function MainInfo () {
                     </ProtectedRoute>
                     <ProtectedRoute path="/" exact={true}>
                         <h2>Good Evening</h2>
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/queue" exact={true}>
+                    <QueuePage />
                     </ProtectedRoute>
                     {/* <Route path="/songs" exact={true}>
             <SongsList />

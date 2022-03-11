@@ -1,29 +1,18 @@
 import { Link } from "react-router-dom"
 import "./ContentList.css"
+import { PlayButton } from "../AudioPlayer/PlayButton";
 
 export const ContentCard = ({ content, heading }) => {
 
     let source = content.image;
     let contentResult;
-    let route;
 
     // Determine route for given heading
     if (heading === 'Songs') {
         source = content.album_image;
-        route = `/albums/${content.album_id}`
     }
-    else if (heading === 'Playlist') {
-        route = `/playlists/${content.id}`
+    else if (heading === 'Playlists') {
         if (!content.image) source = "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2";
-    }
-    else if (heading === 'Artists') {
-        route = `/artists/${content.id}`
-    }
-    else if (heading === 'Albums') {
-        route = `/albums/${content.id}`
-    }
-    else if (heading === 'User') {
-        route = `/users/${content.id}`
     }
     else {
         source = content.image;
@@ -33,10 +22,12 @@ export const ContentCard = ({ content, heading }) => {
 
     return (
         <>
-            <Link to={route}>
+            <Link to={`/${heading}/${content.id}`}>
                 <div className="content-card">
                     <div>
+                        <div className="cc-image">
                         <img src={source} className="albumImage" />
+                        </div>
                         <h3>{content.name}</h3>
                         {(heading === 'Albums') &&
                             <p>{content.artist}</p>}

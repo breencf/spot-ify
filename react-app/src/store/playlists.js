@@ -6,6 +6,21 @@ const ADD_TO_PLAYLIST = "songs/ADD_TO_PLAYLIST";
 const DELETE_FROM_PLAYLIST = "songs/DELETE_FROM_PLAYLIST";
 const EDIT_PLAYLIST = "user/EDIT_PLAYLIST";
 
+const GET_ONE_PLAYLIST = "playlists/GET_ONE_PLAYLIST";
+
+const get_one = (playlistObj) => {
+  return {
+    type: GET_ONE_PLAYLIST,
+    playlistObj,
+  };
+};
+
+export const getOnePlaylist = (id) => async (dispatch) => {
+  const response = await fetch(`/api/playlists/${id}`);
+  const {playlist} = await response.json();
+  dispatch(get_one(playlist));
+};
+
 const editPlaylist = (playlist) => {
   return {
     type: EDIT_PLAYLIST,
@@ -139,7 +154,7 @@ export const load_Playlists = (id) => async (dispatch) => {
   return playLists;
 };
 
-const initialState = { playLists: {} };
+const initialState = { playLists: {}, currentPlaylist: {} };
 
 const playListReducer = (state = initialState, action) => {
   let newState;
@@ -177,6 +192,10 @@ const playListReducer = (state = initialState, action) => {
       console.log(action.updatedPlaylist.id);
       console.log("==========================");
       console.log(newState);
+      return newState;
+    case GET_ONE_PLAYLIST:
+      newState = { ...state };
+      newState.currentPlaylist = action.playlistObj;
       return newState;
     default:
       return state;
