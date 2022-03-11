@@ -5,7 +5,7 @@ const DELETE_LIBRARY_ARTIST = 'user/DELETE_LIBRARY_ARTIST';
 const DELETE_LIBRARY_PLAYLIST = 'user/DELETE_LIBRARY_PLAYLIST';
 const DELETE_LIBRARY_SONG = 'user/DELETE_LIBRARY_SOMG';
 const ADD_LIBRARY_ALBUM = "user/ADD_LIBRARY_ALBUM"
-const ADD_LIBRARY_ARTIST= "user/ADD_LIBRARY_ARTIST"
+const ADD_LIBRARY_ARTIST = "user/ADD_LIBRARY_ARTIST"
 
 
 const deleteLibrarySong = (userId, songId) => {
@@ -17,10 +17,10 @@ const deleteLibrarySong = (userId, songId) => {
 }
 
 export const delete_LibrarySong = (userId, songId) => async dispatch => {
-    const response = await fetch(`/api/users/library/song/delete`,{
+    const response = await fetch(`/api/users/library/song/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, songId}),
+        body: JSON.stringify({ userId, songId }),
     })
     const data = await response.json()
     dispatch(deleteLibrarySong(userId, songId))
@@ -30,7 +30,7 @@ export const add_Library_Song = (userId, songId) => async dispatch => {
     const response = await fetch(`/api/users/library/song/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, songId}),
+        body: JSON.stringify({ userId, songId }),
     })
 }
 
@@ -44,10 +44,10 @@ const deleteLibraryPlaylist = (userId, playlistId) => {
 }
 
 export const delete_LibraryPlaylist = (userId, playlistId) => async dispatch => {
-    const response = await fetch(`/api/users/library/playlist/delete`,{
+    const response = await fetch(`/api/users/library/playlist/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, playlistId}),
+        body: JSON.stringify({ userId, playlistId }),
     })
     const data = await response.json()
     dispatch(deleteLibraryPlaylist(userId, playlistId))
@@ -76,15 +76,15 @@ export const add_Library_Playlist = (userId, playlistId) => async dispatch => {
     const response = await fetch(`/api/users/library/playlist/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, playlistId}),
+        body: JSON.stringify({ userId, playlistId }),
     })
 }
 
 export const delete_LibraryArtist = (userId, artistId) => async dispatch => {
-    const response = await fetch(`/api/users/library/artist/delete`,{
+    const response = await fetch(`/api/users/library/artist/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, artistId}),
+        body: JSON.stringify({ userId, artistId }),
     })
     const data = await response.json()
     dispatch(deleteLibraryArtist(userId, artistId))
@@ -103,7 +103,7 @@ export const add_Library_Artist = (userId, artistId) => async dispatch => {
     const response = await fetch(`/api/users/library/artist/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, artistId}),
+        body: JSON.stringify({ userId, artistId }),
     })
 }
 
@@ -120,7 +120,7 @@ export const add_Library_Album = (userId, albumId) => async dispatch => {
     const response = await fetch(`/api/users/library/album/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, albumId}),
+        body: JSON.stringify({ userId, albumId }),
     })
 }
 
@@ -133,11 +133,11 @@ const deleteLibraryAlbum = (libraryId, albumId) => {
     }
 }
 
-export const delete_LibraryAlbum = (libraryId,albumId) => async dispatch => {
-    const response = await fetch(`/api/users/library/${albumId}/delete`,{
+export const delete_LibraryAlbum = (libraryId, albumId) => async dispatch => {
+    const response = await fetch(`/api/users/library/${albumId}/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({libraryId, albumId}),
+        body: JSON.stringify({ libraryId, albumId }),
     })
     const data = await response.json()
     dispatch(deleteLibraryAlbum(libraryId, albumId))
@@ -150,7 +150,7 @@ const loadLibrary = (data) => {
     }
 }
 
-export const load_Library = ( userId ) => async dispatch => {
+export const load_Library = (userId) => async dispatch => {
     const response = await fetch(`/api/users/${userId}/library`)
     const data = await response.json()
     // console.log(data, 'any data coming back? ')
@@ -162,57 +162,34 @@ export const load_Library = ( userId ) => async dispatch => {
 
 
 
-  const libraryReducer = (state = {}, action) => {
+const libraryReducer = (state = {}, action) => {
     let newState
     switch (action.type) {
-      case LOAD_LIBRARY:
-          newState = {...state}
-          newState = action.data
-          return newState
-      case DELETE_LIBRARY_ALBUM:
-          newState = {...state}
-          let albums = newState.albums
-          for(let i = 0; i < albums.length; i++){
-              let userAlbum = albums[i]
-              if(userAlbum.id === action.albumId){
-                  albums.pop(i)
-              }
-          }
-          return newState
-        case DELETE_LIBRARY_ARTIST:
-          newState = {...state}
-          let artists = newState.artists
-          for(let i = 0; i < artists.length; i++){
-              let userArtist = artists[i]
-              if(userArtist.id === action.artistId){
-                  artists.pop(i)
-              }
-          }
-          return newState
-        case DELETE_LIBRARY_PLAYLIST:
-          newState = {...state}
-          let playlists = newState.playlists
-          for(let i = 0; i < playlists.length; i++){
-              let userPlaylist = playlists[i]
-              if(userPlaylist.id === action.playlistId){
-                  playlists.pop(i)
-              }
-          }
-          return newState
-          case DELETE_LIBRARY_SONG:
-            newState = {...state}
-            let songs = newState.songs
-            for(let i = 0; i < songs.length; i++){
-                let userSong = songs[i]
-                if(userSong.id === action.songId){
-                    songs.pop(i)
-                }
-            }
+        case LOAD_LIBRARY:
+            newState = { ...state }
+            newState = action.data
             return newState
-      default:
-        return state;
+        case DELETE_LIBRARY_ALBUM:
+            newState = { ...state }
+            newState.album = newState.album.filter(ele => ele.id !== action.albumId);
+            return newState
+        case DELETE_LIBRARY_ARTIST:
+            newState = { ...state }
+            newState.artists = newState.artists.filter(artist => artist.id !== action.artistId);
+            return newState
+        case DELETE_LIBRARY_PLAYLIST:
+            newState = { ...state }
+            newState.playlist = newState.playlist.filter(ele => ele.id !== action.playlistId);
+
+            return newState
+        case DELETE_LIBRARY_SONG:
+            newState = { ...state }
+            newState.songs = newState.songs.filter(song => song.id !== action.songId);
+            return newState
+        default:
+            return state;
     }
-  };
+};
 
 
-  export default libraryReducer;
+export default libraryReducer;

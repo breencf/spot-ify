@@ -24,31 +24,20 @@ export const SongListing = ({ song, playlistId }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  // const checkIfSaved = () => {
-  //   for (const index in songs) {
-  //     if (songs[index] === song)
-  //     setSaved(true);
-  //     else setSaved(false);
-  //   }
-  // }
+  const checkIfSaved = () => {
+    for (const index in songs) {
+      if (songs[index].id === song.id) setSaved(true);
+
+    }
+  }
 
   // console.log('songsReducer', songs)
 
   useEffect(() => {
+    checkIfSaved();
     if (deleting) dispatch(load_Playlists(id));
     setDeleting(false);
   }, [dispatch, deleting]);
-
-  const handleDelete = () => {
-    // console.log(playlistId);
-    // console.log("--------------------");
-    // console.log(song.id);
-    dispatch(
-      delete_from_playlist({ playlist_id: playlistId, song_id: song.id })
-    );
-    setDeleting(true);
-    console.log(deleting, "-------------");
-  };
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -76,8 +65,15 @@ export const SongListing = ({ song, playlistId }) => {
   }
 
   const handleButtonClick = () => {
-    if (!saved) saveItem();
-    else removeSaveItem();
+    console.log(saved)
+    if (!saved) {
+      saveItem();
+      setSaved(true);
+    }
+    else {
+      removeSaveItem();
+      setSaved(false);
+    }
   }
 
   return (
@@ -118,6 +114,25 @@ export const SongListing = ({ song, playlistId }) => {
         </button>{" "}
       </span>
 
+      {!saved && isHovering && (
+         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
+         onClick={handleButtonClick}
+         >
+           <path
+             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
+           </path>
+         </svg>
+      )}
+      {saved &&  (
+         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
+         onClick={handleButtonClick}
+         >
+           <path
+             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
+           </path>
+         </svg>
+      )}
+
       <span className="song_duration">
         <p>{duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}</p>
       </span>
@@ -126,15 +141,10 @@ export const SongListing = ({ song, playlistId }) => {
         <span className="song_...">
           <ContextMenu song={song} />
         </span>
+
       )}
 
-      <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
-      onClick={handleButtonClick}
-      >
-        <path
-          d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
-        </path>
-      </svg>
+
 
       {/* <span className="song_...">
         <button className="button-none" onClick={handleDelete}>
