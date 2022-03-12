@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { get_a_user } from "../../store/session";
@@ -15,26 +15,35 @@ export const ProfilePage = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.profile);
     const loggedUser = useSelector((state) => state.session.user);
+    const followers = useSelector((state) => state.followsReducer)
+
+    const [test, setTest] = useState(false)
+
+    let foll = followers?.follows?.filter(user => {
+        console.log(user.id, +userId)
+        return user.id === +userId
+    })
+    console.log(foll)
 
   const menu = (
     <Menu id='user-menu-style'>
       <MenuItem id="testing_menu" onClick={() => dispatch(add_Followers(loggedUser.id, userId))} key="1">Follow User</MenuItem>
-
       <MenuItem id="testing_menu" onClick={() => dispatch(remove_Follower(loggedUser.id, userId))} key="2">Unfollow</MenuItem>
     </Menu>
   );
 
   useEffect(() => {
-      dispatch(load_Followers(userId))
-    dispatch(get_a_user(userId));
+      dispatch(load_Followers(loggedUser.id))
+      dispatch(get_a_user(userId));
   }, [dispatch, userId]);
+
 
 
   const playlists = user?.playlists?.dict;
 
   return (
     <>
-      <div className="albumTop">
+      <div className="albumTop user prof">
         <div>
           <img
             className="albumImage artistImage"
@@ -58,10 +67,12 @@ export const ProfilePage = () => {
                     </Link> */}
         </div>
       </div>
-      <div>
-        <h4>Following</h4>
+      <div id='following-menu'>
+        <h4 id='following-title'>{followers?.follows && (followers?.follows?.filter(user => {
+        return user.id === +userId
+    }).length > 0) ? 'Following' : 'Follow'}</h4>
         <div style={{ margin: 20 }}>
-          <div style={{ height: 100 }} />
+          {/* <div style={{ height: 100 }} /> */}
           <div id='idk2'>
             <Dropdown
               trigger={["click"]}

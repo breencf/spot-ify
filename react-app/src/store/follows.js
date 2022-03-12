@@ -24,6 +24,13 @@ export const remove_Follower = (userId, otherUserId) => async dispatch => {
     dispatch(removeFollower(userId, otherUserId))
 }
 
+const addFollowers = (follower) => {
+    return {
+        type: ADD_FOLLOWERS,
+        follower
+    }
+}
+
 
 export const add_Followers = (userId, otherUserId) => async dispatch => {
     const response = await fetch(`/api/users/followers/add`, {
@@ -31,6 +38,9 @@ export const add_Followers = (userId, otherUserId) => async dispatch => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({userId, otherUserId}),
     })
+    const follower = await response.json()
+    dispatch(addFollowers(follower))
+
 }
 
 
@@ -44,7 +54,7 @@ const loadFollowers = (data) => {
 export const load_Followers = ( userId ) => async dispatch => {
     const response = await fetch(`/api/users/${userId}/followers`)
     const data = await response.json()
-    console.log(data, 'any data coming back? ')
+    // console.log(data, 'any data coming back? ')
     dispatch(loadFollowers(data))
 }
 
@@ -58,7 +68,11 @@ export const load_Followers = ( userId ) => async dispatch => {
           return newState
         case REMOVE_FOLLOWERS:
             newState = {...state}
-            newState.follows = newState.follows.filter(ele => ele.id !== action.otherUserId);
+            newState.follows = newState.follows.filter(ele => ele.id !== Number(action.otherUserId));
+            return newState
+        case ADD_FOLLOWERS:
+            newState = {...state}
+            newState.follows.push(action.follower)
             return newState
       default:
         return state;
