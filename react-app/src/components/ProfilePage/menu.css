@@ -10,6 +10,7 @@
 
 #icon-color{
     color: #FFFFFFE6;
+    font-size: 20px;
 }
 
 
@@ -21,4 +22,22 @@
     width: 150px;
     height: 75px;
     box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+}
+
+.albumTop.user.prof{
+    background-color: rgb(26, 25, 25)
+}
+
+#following-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#following-title{
+    margin:0
+}
+
+#idk2{
+    margin-top: 7px;
 }

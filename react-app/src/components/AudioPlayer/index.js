@@ -127,7 +127,7 @@ export const AudioPlayer = () => {
     console.log(lastSong.id);
     let last = playedSongs.shift();
     queue.unshift(currentSong)
-    console.log(last.id);
+    // console.log(last.id);
     dispatch(loadSong(last.id));
   };
 

@@ -305,11 +305,13 @@ def add_user_follower():
     user1 = User.query.get(value['userId'])
     other_user2 = User.query.get(value['otherUserId'])
     # print('\n \n', value, '\n \n')
+    if other_user2 in user1.following:
+        return {'test': 'is album added'}
     user1.following.append(other_user2)
 
     db.session.commit()
 
-    return {'test': 'is album added'}
+    return other_user2.to_dict()
 
 
 @user_routes.route('followers/delete', methods=['POST'])
@@ -318,20 +320,11 @@ def remove_user_follow():
     value = request.json
     user1 = User.query.get(value['userId'])
     other_user2 = User.query.get(value['otherUserId'])
+
+    if other_user2 not in user1.following:
+        return {"test": "testing route to delete"}
+
+
     user1.following.remove(other_user2)
-
-    index = 0
-    for user in user1.following.all():
-        if user.id == other_user2.id:
-            arr = user1.following.all()
-            arr.pop(index)
-
-        index += 1
-    # index = 0
-    # for user in user1.following.all():
-    #     if user == other_user2:
-    #         user1.following.all().pop(index)
-    #     index += 1
-
     db.session.commit()
     return {"test": "testing route to delete"}
