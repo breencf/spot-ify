@@ -20,8 +20,10 @@ const ViewOnePlaylist = () => {
 
   const playLists = useSelector((state) => state?.playListReducer?.playLists);
   const { id } = useSelector((state) => state.session.user);
-  // const currPlaylist = playLists[playlistId];
+
+
   const currPlaylist = useSelector((state) => state?.playListReducer.currentPlaylist)
+
   const playlistProp = currPlaylist?.songs?.dict;
 
   const handleDelete = () => {
@@ -46,7 +48,9 @@ const ViewOnePlaylist = () => {
         </div>
         <div>
           <h4>PLAYLIST</h4>
-          <button onClick={(() => dispatch(add_Library_Playlist(id, playlistId)))}>add playlist to library</button>
+          {currPlaylist?.id &&
+          <button onClick={(() => dispatch(add_Library_Playlist(id, playlistId)))}>Add to library</button>
+           }
           <h1>{currPlaylist?.name}</h1>
           <p>{currPlaylist?.description}</p>
           {/* <Link to={`/users/${currPlaylist?.user_id}`}>
