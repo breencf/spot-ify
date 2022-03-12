@@ -86,7 +86,7 @@ export const SongListing = ({ song, playlistId }) => {
         </span>
       )}
       {isHovering && (
-        <span className="song_...">
+        <span className="play-button-hover song_...">
           <button className="button-none" onClick={onClickPlay}>
             <h4><FaPlay /></h4>
           </button>
@@ -114,31 +114,47 @@ export const SongListing = ({ song, playlistId }) => {
         </button>{" "}
       </span>
 
-      {!saved && isHovering && (
-         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
-         onClick={handleButtonClick}
-         >
-           <path
-             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
-           </path>
-         </svg>
+      {!saved && !isHovering && (
+        <svg role="img" viewBox="0 0 16 16" className={'love-click hidden'}
+          onClick={handleButtonClick}
+        >
+          <path
+            d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
+          </path>
+        </svg>
       )}
-      {saved &&  (
-         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
-         onClick={handleButtonClick}
-         >
-           <path
-             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
-           </path>
-         </svg>
+
+      {!saved && isHovering && (
+        <svg role="img" viewBox="0 0 16 16" className={'love-click'}
+          onClick={handleButtonClick}
+        >
+          <path
+            d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
+          </path>
+        </svg>
+      )}
+      {saved && (
+        <svg role="img" viewBox="0 0 16 16" className={'saved love-click'}
+          onClick={handleButtonClick}
+        >
+          <path
+            d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
+          </path>
+        </svg>
       )}
 
       <span className="song_duration">
         <p>{duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}</p>
       </span>
 
+      {!isHovering && (
+        <span className="popup-menu hidden song_...">
+          <ContextMenu song={song} />
+        </span>
+      )}
+
       {isHovering && (
-        <span className="song_...">
+        <span className="popup-menu song_...">
           <ContextMenu song={song} />
         </span>
 
@@ -152,7 +168,6 @@ export const SongListing = ({ song, playlistId }) => {
         </button>
 
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
-      </span>
 
     </div>
   );

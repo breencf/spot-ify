@@ -9,10 +9,11 @@
 
 .songListing {
   padding: 5px 16px;
-  height: 50px;
+  height: 80px;
   /* background-color: transparent; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -31,11 +32,28 @@
 }
 
 .song_track_number {
-  width: 40px;
+  width: 80px;
+}
+
+.play-button-hover {
+  width: 80px;
+}
+
+.popup-menu {
+  margin: 5px;
+}
+
+.hidden {
+opacity: 0;
 }
 
 .song_name_artist {
   width: 30%;
+}
+
+.song_album_image {
+  width: 100px;
+  height: 100px;
 }
 
 .song_album {
@@ -94,17 +112,18 @@
 #menu-heart{
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 15px;
 }
 
 .love-click {
   width: 25px;
   height: 25px;
+  margin: 0 15px;
 }
 
 .saved {
   fill: var(--sp-green);
   width: 25px;
   height: 25px;
-
 }
