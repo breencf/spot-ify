@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { load_Playlists } from "../store/playlists";
 import Modal from "react-modal";
 import { CreatePlaylistForm } from "./CreatePlaylistForm";
@@ -61,9 +61,11 @@ const NavBar = () => {
   return (
     <>
       <nav id="sidebar">
+        <Link id='spot-icon' to='/'>
         <h2>
           <FaSpotify /> Spotify
         </h2>
+        </Link>
         <div className="navbar-playlist">
         <ul>
           {/* <li>

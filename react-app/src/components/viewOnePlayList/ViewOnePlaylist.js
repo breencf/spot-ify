@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { add_Library_Playlist } from "../../store/library";
+import { add_Library_Playlist, delete_LibraryPlaylist } from "../../store/library";
 // import { one_Playlists, delete_Playlist } from "../../store/playlists";
 import {
   useHistory,
@@ -7,10 +7,15 @@ import {
 } from "react-router-dom";
 import UserPlaylistsEdit from "../userPlaylists/EditPlayListForm";
 import { SongsList } from "../songList";
-import { delete_Playlist, getOnePlaylist, load_Playlists } from "../../store/playlists";
+import { add_Playlist, delete_Playlist, getOnePlaylist, load_Playlists } from "../../store/playlists";
 import { CompoundAlbumImage } from "./CompoundAlbumImage";
 import { useEffect } from "react";
 import { PlayButton } from "../AudioPlayer/PlayButton";
+import Dropdown from "rc-dropdown";
+import Menu, { Item as MenuItem } from "rc-menu";
+import "rc-dropdown/assets/index.css";
+import { FaEllipsisH} from "react-icons/fa";
+
 
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
@@ -22,12 +27,19 @@ const ViewOnePlaylist = () => {
   const { id } = useSelector((state) => state.session.user);
 
 
-  const currPlaylist = useSelector((state) => state?.playListReducer.currentPlaylist)
 
+  const currPlaylist = useSelector((state) => state?.playListReducer.currentPlaylist)
+  const menu = (
+    <Menu id='user-menu-style'>
+      <MenuItem id="testing_menu" onClick={() => dispatch(add_Library_Playlist(id, currPlaylist?.id ))} key="1">Add Playlist to Library</MenuItem>
+      <MenuItem id="testing_menu" onClick={() => dispatch(delete_LibraryPlaylist(id, currPlaylist?.id ))} key="2">Remove Playlist from Library</MenuItem>
+    </Menu>
+  );
   const playlistProp = currPlaylist?.songs?.dict;
 
   const handleDelete = () => {
     dispatch(delete_Playlist({ userId: id, playlistId: currPlaylist.id }));
+    dispatch(delete_LibraryPlaylist(id, currPlaylist?.id))
     dispatch(load_Playlists(id));
     return history.push("/");
   };
@@ -47,10 +59,6 @@ const ViewOnePlaylist = () => {
           {imag}
         </div>
         <div>
-          <h4>PLAYLIST</h4>
-          {currPlaylist?.id &&
-          <button onClick={(() => dispatch(add_Library_Playlist(id, playlistId)))}>Add to library</button>
-           }
           <h1>{currPlaylist?.name}</h1>
           <p>{currPlaylist?.description}</p>
           {/* <Link to={`/users/${currPlaylist?.user_id}`}>
@@ -59,8 +67,20 @@ const ViewOnePlaylist = () => {
         </div>
       </div>
       <br />
-      <div className='page-buttons'>
+
+      <div className='page-buttons playlist'>
+          {currPlaylist?.id && <>
           <PlayButton mediaId={id} type={'playlists'}/>
+          <div >
+            <Dropdown
+              trigger={["click"]}
+              overlay={menu}
+              animation="slide-up"
+            >
+              <p id='icon-color' style={{width: 150}}><FaEllipsisH /></p>
+            </Dropdown>
+          </div>
+            </>}
       {currPlaylist?.user_id == id && (
         <>
           <UserPlaylistsEdit playList={currPlaylist} />

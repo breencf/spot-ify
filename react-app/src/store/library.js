@@ -125,22 +125,22 @@ export const add_Library_Album = (userId, albumId) => async dispatch => {
 }
 
 
-const deleteLibraryAlbum = (libraryId, albumId) => {
+const deleteLibraryAlbum = (userId, albumId) => {
     return {
         type: DELETE_LIBRARY_ALBUM,
         albumId,
-        libraryId
+        userId
     }
 }
 
-export const delete_LibraryAlbum = (libraryId, albumId) => async dispatch => {
+export const delete_LibraryAlbum = (userId, albumId) => async dispatch => {
     const response = await fetch(`/api/users/library/${albumId}/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ libraryId, albumId }),
+        body: JSON.stringify({ userId, albumId }),
     })
     const data = await response.json()
-    dispatch(deleteLibraryAlbum(libraryId, albumId))
+    dispatch(deleteLibraryAlbum(userId, albumId))
 }
 
 const loadLibrary = (data) => {
@@ -171,7 +171,7 @@ const libraryReducer = (state = {}, action) => {
             return newState
         case DELETE_LIBRARY_ALBUM:
             newState = { ...state }
-            newState.album = newState.album.filter(ele => ele.id !== action.albumId);
+            newState.albums = newState.albums.filter(ele => ele.id !== action.albumId);
             return newState
         case DELETE_LIBRARY_ARTIST:
             newState = { ...state }
@@ -179,8 +179,7 @@ const libraryReducer = (state = {}, action) => {
             return newState
         case DELETE_LIBRARY_PLAYLIST:
             newState = { ...state }
-            newState.playlist = newState.playlist.filter(ele => ele.id !== action.playlistId);
-
+            newState.playlists = newState.playlists.filter(ele => ele.id !== action.playlistId);
             return newState
         case DELETE_LIBRARY_SONG:
             newState = { ...state }
