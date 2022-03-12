@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { load_album } from "../../store/album";
 import { SongsList } from "../songList";
-import { add_Library_Album } from "../../store/library";
+import { add_Library_Album, delete_LibraryAlbum } from "../../store/library";
 import "./AlbumPage.css";
 import { PlayButton } from "../AudioPlayer/PlayButton";
+import Dropdown from "rc-dropdown";
+import Menu, { Item as MenuItem } from "rc-menu";
+import "rc-dropdown/assets/index.css";
+import { FaEllipsisH} from "react-icons/fa";
 
 export const AlbumPage = () => {
   let { albumId } = useParams();
@@ -18,9 +22,15 @@ export const AlbumPage = () => {
 
   const albumObj = useSelector((state) => state.albumReducer);
   const userId = useSelector((state) => state.session.user.id)
-  console.log(userId);
 
-  console.log(albumObj?.album?.songs?.dict);
+  const menu = (
+    <Menu id='user-menu-style'>
+      <MenuItem id="testing_menu" onClick={() => dispatch(add_Library_Album(userId, albumId))} key="1">Add to Library</MenuItem>
+      <MenuItem id="testing_menu" onClick={() => dispatch(delete_LibraryAlbum(userId, albumId ))} key="2">Remove from Library</MenuItem>
+    </Menu>
+  );
+
+  // console.log(albumObj?.album?.songs?.dict);
   let songs = albumObj?.album?.songs?.dict;
 
   return (
@@ -31,7 +41,6 @@ export const AlbumPage = () => {
         </div>
         <div>
           <h4>ALBUM</h4>
-          <button onClick={(() => dispatch(add_Library_Album(userId, albumId)))}>Add Album to Library</button>
           <h1>{albumObj?.album?.name}</h1>
           <img className="artistIcon" src={albumObj?.album?.artist_image} />
           <Link to={`/artists/${albumObj?.album?.artist_id}`}>
@@ -40,9 +49,20 @@ export const AlbumPage = () => {
         </div>
       </div>
       <br />
-      <div classname="page-buttons">
-      <PlayButton type={"albums"} mediaId={albumId} />
+      {albumObj.album.id && <>
+      <div className="page-buttons" id='album'>
+        <PlayButton type={"albums"} mediaId={albumId} />
+        <div >
+            <Dropdown
+              trigger={["click"]}
+              overlay={menu}
+              animation="slide-up"
+            >
+              <p id='icon-color' style={{width: 150}}><FaEllipsisH /></p>
+            </Dropdown>
+          </div>
       </div>
+      </>}
       <hr />
       <br />
       <SongsList songProp={songs} />

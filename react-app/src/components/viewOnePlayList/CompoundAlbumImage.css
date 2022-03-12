@@ -13,3 +13,9 @@
   width: 96px;
 
 }
+
+.page-buttons.playlist{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

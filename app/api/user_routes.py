@@ -164,6 +164,7 @@ def load_library(userId):
 @login_required
 def delete_library_album(albumId):
     value = request.json
+    print('\n \n ', value, ' \n \n' )
     library = Library.query.filter(Library.user_id == value['userId']).first()
     user_album = Album.query.get(albumId)
     index = 0

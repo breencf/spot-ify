@@ -73,7 +73,7 @@ export const ProfilePage = () => {
     }).length > 0) ? 'Following' : 'Follow'}</h4>
         <div style={{ margin: 20 }}>
           {/* <div style={{ height: 100 }} /> */}
-          <div id='idk2'>
+          <div id='menu-marg'>
             <Dropdown
               trigger={["click"]}
               overlay={menu}
