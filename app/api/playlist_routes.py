@@ -14,6 +14,8 @@ playlist_routes = Blueprint("playlists", __name__)
 @login_required
 def get_playlist(playlistId):
     playlist = Playlist.query.get(playlistId)
+    if not playlist:
+        return {'none': 'no playlist'}
     return {"playlist": playlist.to_dict()}
 
 #EDIT A PLAYLIST
