@@ -1,59 +1,82 @@
 .splash {
-    background: linear-gradient(338deg, #000000, #1db954);
-    background-size: 800% 800%;
+  background: linear-gradient(338deg, #000000, #1db954);
+  background-size: 800% 800%;
 
-    -webkit-animation: AnimationName 30 ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* flex-direction: column; */
-    gap: 30px
+  -webkit-animation: AnimationName 30 ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  gap: 30px;
 }
 
 .splash form * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .splash input {
-    height: 40px;
-    border-radius: 16px;
-    border: none;
+  height: 40px;
+  border-radius: 16px;
+  border: none;
 }
 
-.splash input::placeholder{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.splash input::placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formdiv {
-    margin: 20px
+  margin: 20px;
+  width: 100%;
+}
+
+.formdiv .half {
+  width: 50%;
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 2%}
-    50%{background-position:100% 99%}
-    100%{background-position:0% 2%}
+  0% {
+    background-position: 0% 2%;
+  }
+  50% {
+    background-position: 100% 99%;
+  }
+  100% {
+    background-position: 0% 2%;
+  }
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 2%}
-    50%{background-position:100% 99%}
-    100%{background-position:0% 2%}
+  0% {
+    background-position: 0% 2%;
+  }
+  50% {
+    background-position: 100% 99%;
+  }
+  100% {
+    background-position: 0% 2%;
+  }
 }
 @keyframes AnimationName {
-    0%{background-position:0% 2%}
-    50%{background-position:100% 99%}
-    100%{background-position:0% 2%}
+  0% {
+    background-position: 0% 2%;
+  }
+  50% {
+    background-position: 100% 99%;
+  }
+  100% {
+    background-position: 0% 2%;
+  }
 }
 
 #signup-err{

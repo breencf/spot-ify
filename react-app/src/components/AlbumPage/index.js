@@ -9,7 +9,7 @@ import { PlayButton } from "../AudioPlayer/PlayButton";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import "rc-dropdown/assets/index.css";
-import { FaEllipsisH} from "react-icons/fa";
+import { FaEllipsisH } from "react-icons/fa";
 
 export const AlbumPage = () => {
   let { albumId } = useParams();
@@ -18,15 +18,27 @@ export const AlbumPage = () => {
 
   useEffect(() => {
     dispatch(load_album(albumId));
-  }, [dispatch]);
+  }, [dispatch, albumId]);
 
   const albumObj = useSelector((state) => state.albumReducer);
-  const userId = useSelector((state) => state.session.user.id)
+  const userId = useSelector((state) => state.session.user.id);
 
   const menu = (
-    <Menu id='user-menu-style'>
-      <MenuItem id="testing_menu" onClick={() => dispatch(add_Library_Album(userId, albumId))} key="1">Add to Library</MenuItem>
-      <MenuItem id="testing_menu" onClick={() => dispatch(delete_LibraryAlbum(userId, albumId ))} key="2">Remove from Library</MenuItem>
+    <Menu id="user-menu-style">
+      <MenuItem
+        id="testing_menu"
+        onClick={() => dispatch(add_Library_Album(userId, albumId))}
+        key="1"
+      >
+        Add to Library
+      </MenuItem>
+      <MenuItem
+        id="testing_menu"
+        onClick={() => dispatch(delete_LibraryAlbum(userId, albumId))}
+        key="2"
+      >
+        Remove from Library
+      </MenuItem>
     </Menu>
   );
 
@@ -37,32 +49,40 @@ export const AlbumPage = () => {
     <>
       <div className="albumTop">
         <div>
-          <img className="albumImage" src={albumObj?.album?.image} />
+          <img
+            alt="spotify"
+            className="albumImage"
+            src={albumObj?.album?.image}
+          />
         </div>
         <div>
           <h4>ALBUM</h4>
           <h1>{albumObj?.album?.name}</h1>
-          <img className="artistIcon" src={albumObj?.album?.artist_image} />
+          <img
+            alt="spotify"
+            className="artistIcon"
+            src={albumObj?.album?.artist_image}
+          />
           <Link to={`/artists/${albumObj?.album?.artist_id}`}>
             {albumObj?.album?.artist}
           </Link>
         </div>
       </div>
       <br />
-      {albumObj.album.id && <>
-      <div className="page-buttons" id='album'>
-        <PlayButton type={"albums"} mediaId={albumId} />
-        <div >
-            <Dropdown
-              trigger={["click"]}
-              overlay={menu}
-              animation="slide-up"
-            >
-              <p id='icon-color' style={{width: 150}}><FaEllipsisH /></p>
-            </Dropdown>
+      {albumObj.album.id && (
+        <>
+          <div className="page-buttons" id="album">
+            <PlayButton type={"albums"} mediaId={albumId} />
+            <div>
+              <Dropdown trigger={["click"]} overlay={menu} animation="slide-up">
+                <p id="icon-color" style={{ width: 150 }}>
+                  <FaEllipsisH />
+                </p>
+              </Dropdown>
+            </div>
           </div>
-      </div>
-      </>}
+        </>
+      )}
       <hr />
       <br />
       <SongsList songProp={songs} />

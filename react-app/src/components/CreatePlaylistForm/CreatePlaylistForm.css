@@ -1,5 +1,6 @@
 .create-playlist-form {
   padding: 20px;
+  width: 500px;
   background-color: var(--sp-dark);
   border: none;
   display: flex;

@@ -42,6 +42,10 @@
   width: 30%;
 }
 
+.song_icon_span {
+  width: 40px;
+}
+
 
 .contextMenu {
   z-index: 100000;

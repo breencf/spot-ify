@@ -62,7 +62,8 @@ export const addMultipleSongs =
     const mediaDict = await response.json();
     let mediaArr;
     if (type === "playlists") mediaArr = Object.values(mediaDict)[0].songs.dict;
-    else if ((type = "albums")) mediaArr = mediaDict.songs.dict
+    else if (type === "albums") mediaArr = mediaDict.songs.dict;
+    else if (type === "users") mediaArr = mediaDict.songs;
     console.log(mediaArr);
     dispatch(addMultiple(mediaArr));
   };

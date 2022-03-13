@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import {useState } from "react";
+import { useState } from "react";
 import { add_Playlist } from "../../store/playlists";
-import {useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./CreatePlaylistForm.css";
 
-export const CreatePlaylistForm = ({closeModal}) => {
+export const CreatePlaylistForm = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const { id } = useSelector(state => state.session.user);
+  const { id } = useSelector((state) => state.session.user);
   const history = useHistory();
 
   const [name, setName] = useState("");
@@ -18,7 +18,7 @@ export const CreatePlaylistForm = ({closeModal}) => {
     e.preventDefault();
 
     const playList = {
-      'userId': id,
+      userId: id,
       name,
       image,
       description,
@@ -49,7 +49,10 @@ export const CreatePlaylistForm = ({closeModal}) => {
           })}
         </ul>
         <div className="create-container">
-          <img src="https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2" />
+          <img
+            alt="spotify"
+            src="https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2"
+          />
           <div>
             <div className="form-div">
               <ul>
