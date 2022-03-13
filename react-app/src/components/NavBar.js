@@ -61,7 +61,7 @@ const NavBar = () => {
   return (
     <>
       <nav id="sidebar">
-        <Link id='spot-icon' to='/'>
+        <Link id='spot-icon' to='/home'>
         <h2>
           <FaSpotify /> Spotify
         </h2>
@@ -82,7 +82,7 @@ const NavBar = () => {
             <LogoutButton />
           </li> */}
           <li>
-            <NavLink to="/" exact={true} activeClassName="active">
+            <NavLink to="/home" exact={true} activeClassName="active">
               <h3>
                 <FaHome /> Home
               </h3>

@@ -8,9 +8,10 @@ const LogoutButton = () => {
   const dispatch = useDispatch()
   const onLogout = async (e) => {
     await dispatch(logout());
+    history.push("/")
   };
 
-  return <Link to='/login' onClick={onLogout}>Logout</Link>;
+  return <button onClick={onLogout}>Logout</button>;
 };
 
 export default LogoutButton;

@@ -15,6 +15,7 @@ import ProtectedRoute from "./TopBar/auth/ProtectedRoute";
 import { AlbumPage } from "./AlbumPage";
 import { ArtistPage } from "./ArtistPage";
 import { QueuePage } from "./ContentList/QueuePage";
+import { Homepage } from "./Homepage";
 
 
 
@@ -28,7 +29,6 @@ export default function MainInfo () {
                     <ProtectedRoute path="/users" exact={true}>
                         <UsersList />
                     </ProtectedRoute>
-
                     <ProtectedRoute path="/songs" exact={true}>
                         <LikedSongs />
                     </ProtectedRoute>
@@ -50,8 +50,8 @@ export default function MainInfo () {
                     <ProtectedRoute path="/playlists/:playlistId" exact={true}>
                         <ViewOnePlaylist />
                     </ProtectedRoute>
-                    <ProtectedRoute path="/" exact={true}>
-                        <h2>Good Evening</h2>
+                    <ProtectedRoute path="/home" exact={true}>
+                        <Homepage />
                     </ProtectedRoute>
                     <ProtectedRoute path="/queue" exact={true}>
                     <QueuePage />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/TopBar/auth/LoginForm";
 import SignUpForm from "./components/TopBar/auth/SignUpForm";
@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import { authenticate } from "./store/session";
 import { AudioPlayer } from "./components/AudioPlayer";
 import MainInfo from "./components/MainInfo";
+import { Homepage } from "./components/Homepage";
 
 
 function App() {
@@ -33,12 +34,17 @@ function App() {
         <div id="top">
           <NavBar />
           <Switch>
+            <Route path="/" exact={true}>
+              {!user && <LoginForm />}
+              {user && <Redirect to="/home"/>}
+              </Route>
             <Route path="/login" exact={true}>
               <LoginForm />
             </Route>
             <Route path="/signup" exact={true}>
               <SignUpForm />
             </Route>
+
             {user && <MainInfo />}
           </Switch>
         </div>

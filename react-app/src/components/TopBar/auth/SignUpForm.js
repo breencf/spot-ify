@@ -18,10 +18,10 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    const err = []
-    if(password !== repeatPassword){
-      err.push('Passwords Must Match')
-      setErrors(err)
+    const err = [];
+    if (password !== repeatPassword) {
+      err.push("Passwords Must Match");
+      setErrors(err);
     }
     if (password === repeatPassword) {
       let splitName = name.split(" ");
@@ -61,7 +61,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/home" />;
   }
 
   return (
@@ -73,7 +73,9 @@ const SignUpForm = () => {
         <form onSubmit={onSignUp}>
           <div>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div key={ind}>
+                <h4>{error}</h4>
+              </div>
             ))}
           </div>
           <div className="formdiv">
