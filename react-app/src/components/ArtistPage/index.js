@@ -17,7 +17,7 @@ export const ArtistPage = () => {
 
   useEffect(() => {
     dispatch(load_artist(artistId));
-  }, [dispatch]);
+  }, [dispatch, artistId]);
 
   const artistObj = useSelector((state) => state?.artistReducer?.artist);
   const userId = useSelector((state) => state.session.user.id);
@@ -47,29 +47,34 @@ export const ArtistPage = () => {
     <>
       <div className="albumTop">
         <div>
-          <img className="albumImage artistImage" src={artistObj?.image} />
+          <img
+            alt="spotify"
+            className="albumImage artistImage"
+            src={artistObj?.image}
+          />
         </div>
         <div>
           <h1>{artistObj?.name}</h1>
 
-          {/* <img className="artistIcon" src={artistObj?.image} /> */}
+          {/* <img alt="spotify" className="artistIcon" src={artistObj?.image} /> */}
           {/* <Link to={`/albums/${artistObj?.id}`}>
                         {artistObj?.album?.artist}
                     </Link> */}
         </div>
       </div>
-      {artistObj?.id &&
-      <div id='artist-menu'>
-        <Dropdown trigger={["click"]} overlay={menu} animation="slide-up">
-          <p id="icon-color" style={{ width: 150 }}>
-            <FaEllipsisH />
-          </p>
-        </Dropdown>
-      </div> }
+      {artistObj?.id && (
+        <div id="artist-menu">
+          <Dropdown trigger={["click"]} overlay={menu} animation="slide-up">
+            <p id="icon-color" style={{ width: 150 }}>
+              <FaEllipsisH />
+            </p>
+          </Dropdown>
+        </div>
+      )}
       <br />
       <hr />
       <br />
-      <h2>{artistObj?.id ? 'Popular' : ''}</h2>
+      <h2>{artistObj?.id ? "Popular" : ""}</h2>
       <SongsList songProp={songs?.splice(0, 5)} />
       {albums && <ContentList array={albums} heading={"Albums"} />}
     </>

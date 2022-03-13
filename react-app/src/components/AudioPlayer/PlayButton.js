@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import {useState} from 'react'
 import {
-    playSong,
-    toggle_play,
-    loadSong,
-    play,
-    pause,
-    addToQueue,
     addMultipleSongs,
   } from "../../store/songs";
 import "./AudioPlayer.css"
-import {FaPlay} from 'react-icons/fa'
+import {FaPlay, FaPause} from 'react-icons/fa'
 
 
 export const PlayButton = ({ type, mediaId }) => {
-
+    const [toggleIcon, setToggleIcon] = useState(true)
 
 
     const dispatch = useDispatch();
 
 const onClick = () => {
+    setToggleIcon(false)
     dispatch(addMultipleSongs({type, id: mediaId}))
 }
 
@@ -27,7 +22,11 @@ const onClick = () => {
     return (
         <>
             <button className="global-play-button"
-            onClick={onClick}><FaPlay /></button>
+            onClick={onClick}>
+                {/* {toggleIcon ? */}
+            <FaPlay />
+            {/* : <FaPause />} */}
+            </button>
         </>
     )
 }

@@ -278,6 +278,16 @@ def delete_library_song():
 
     return {"test": "testing route to delete"}
 
+@user_routes.route("/<int:user_id>/likedsongs")
+@login_required
+def get_user_liked_songs(user_id):
+    library = Library.query.filter(Library.user_id == user_id).first()
+    songs = library.songs_lib
+    print(library.songs_lib)
+    return {"songs" : [song.to_dict() for song in songs]}
+
+
+
 
 @user_routes.route('/<int:userId>/followers')
 @login_required

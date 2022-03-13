@@ -17,7 +17,7 @@ export const SongListing = ({ song, playlistId }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
   const { toggleState } = useSelector((state) => state.songsReducer.isPlaying);
   const { id } = useSelector((state) => state.session.user);
-  const { songs } = useSelector(state => state.libraryReducer)
+  const { songs } = useSelector((state) => state.libraryReducer);
   const dispatch = useDispatch();
   const [deleting, setDeleting] = useState(false);
   const [duration, setDuration] = useState("0:00");
@@ -27,9 +27,8 @@ export const SongListing = ({ song, playlistId }) => {
   const checkIfSaved = () => {
     for (const index in songs) {
       if (songs[index].id === song.id) setSaved(true);
-
     }
-  }
+  };
 
   // console.log('songsReducer', songs)
 
@@ -59,41 +58,48 @@ export const SongListing = ({ song, playlistId }) => {
 
   const saveItem = () => {
     dispatch(add_Library_Song(id, song.id));
-  }
+  };
   const removeSaveItem = () => {
     dispatch(delete_LibrarySong(id, song.id));
-  }
+  };
 
   const handleButtonClick = () => {
-    console.log(saved)
+    console.log(saved);
     if (!saved) {
       saveItem();
       setSaved(true);
-    }
-    else {
+    } else {
       removeSaveItem();
       setSaved(false);
     }
-  }
+  };
 
   return (
-    <div className="songListing"
+    <div
+      className="songListing"
       onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}>
+      onMouseLeave={() => setIsHovering(false)}
+    >
       {!isHovering && (
         <span className="song_track_number">
           <p>{song.album_track_number}</p>
         </span>
       )}
       {isHovering && (
-        <span className="song_...">
+        <span className="song_track_number">
           <button className="button-none" onClick={onClickPlay}>
-            <h4><FaPlay /></h4>
+            <h4>
+              <FaPlay />
+            </h4>
           </button>
         </span>
       )}
       <span className="song_image">
-        <img src={song.album_image} className="song_album_image" />
+        <img
+          alt="spotify"
+          src={song.album_image}
+          className="song_album_image"
+        />
       </span>
       <span className="song_name_artist">
         <p>{song.name}</p>
@@ -103,7 +109,7 @@ export const SongListing = ({ song, playlistId }) => {
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
 
-      <span className="song_...">
+      <span className="song_icon_span">
         <button
           className="button-none"
           onClick={() => dispatch(addToQueue(song.id))}
@@ -111,49 +117,44 @@ export const SongListing = ({ song, playlistId }) => {
           <h4>
             <FaList />
           </h4>
-        </button>{" "}
+        </button>
       </span>
-
-      {!saved && isHovering && (
-         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
-         onClick={handleButtonClick}
-         >
-           <path
-             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
-           </path>
-         </svg>
-      )}
-      {saved &&  (
-         <svg role="img" viewBox="0 0 16 16" className={saved ? 'saved .love-click' : 'love-click'}
-         onClick={handleButtonClick}
-         >
-           <path
-             d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z">
-           </path>
-         </svg>
-      )}
-
+      <span className="song_icon_span">
+        {!saved && isHovering && (
+          <svg
+            role="img"
+            viewBox="0 0 16 16"
+            className={saved ? "saved .love-click" : "love-click"}
+            onClick={handleButtonClick}
+          >
+            <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
+          </svg>
+        )}
+        {saved && (
+          <svg
+            role="img"
+            viewBox="0 0 16 16"
+            className={saved ? "saved .love-click" : "love-click"}
+            onClick={handleButtonClick}
+          >
+            <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
+          </svg>
+        )}
+      </span>
       <span className="song_duration">
         <p>{duration && !isNaN(duration) ? calculateTime(duration) : "0:00"}</p>
       </span>
 
-      {isHovering && (
-        <span className="song_...">
-          <ContextMenu song={song} />
-        </span>
+      <span id="contextMenu" className="song_icon_span">
+        {isHovering && <ContextMenu song={song} />}
+      </span>
 
-      )}
-
-
-
-      {/* <span className="song_...">
+      {/* <span className="song_icon_span">
         <button className="button-none" onClick={handleDelete}>
           <h4><FaTimes /></h4>
         </button>
 
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
-      
-
     </div>
   );
 };

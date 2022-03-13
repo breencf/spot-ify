@@ -1,12 +1,7 @@
-import { useEffect, useState, useRef, useDebugValue } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import songsReducer, {
-  loadSong,
-  play,
-  pause,
-  toggle_play,
-} from "../../store/songs";
+import { loadSong, play, toggle_play } from "../../store/songs";
 import "./AudioPlayer.css";
 import {
   FaPlay,
@@ -22,7 +17,7 @@ export const AudioPlayer = () => {
   const newSong = useSelector((state) => state.songsReducer.newSong);
   const newSid = useSelector((state) => state.songsReducer.newSong?.id);
   const toggleState = useSelector((state) => state.songsReducer.isPlaying);
-  const [playedSongs, setPlayedSongs] = useState([])
+  const [playedSongs, setPlayedSongs] = useState([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentSong, setCurrentSong] = useState(false);
@@ -34,17 +29,21 @@ export const AudioPlayer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (newSong) {
     console.log("new song loaded from state");
     setLastSong(currentSong);
     setCurrentSong(newSong);
+    }
   }, [newSid]);
 
   useEffect(() => {
     if (currentSong !== lastSong) {
-      console.log("song loaded, assigning duration");
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
-      audioPlayer.current.play();
+        if (currentSong) {
+          audioPlayer.current.play()
+          progressRef.current = requestAnimationFrame(whilePlaying);
+        }
     }
   }, [
     audioPlayer?.current?.loadedmetadata,
@@ -53,7 +52,6 @@ export const AudioPlayer = () => {
   ]);
 
   useEffect(() => {
-    console.log(duration);
     if (duration) {
       progressBar.current.max = duration;
       dispatch(play());
@@ -64,12 +62,9 @@ export const AudioPlayer = () => {
 
   //checks if the song is over to move on to the next song
   useEffect(() => {
-    console.log(progressBar.current.max, progressBar.current.value);
     if (progressBar?.current?.value === progressBar?.current?.max) {
-      playedSongs.unshift(currentSong)
-      console.log(playedSongs)
+      playedSongs.unshift(currentSong);
       let nextSong = queue.shift();
-      console.log(nextSong.id);
       dispatch(loadSong(nextSong.id));
     }
   }, [progressBar?.current?.value]);
@@ -106,11 +101,9 @@ export const AudioPlayer = () => {
 
   const togglePlay = () => {
     if (!toggleState === true) {
-      console.log("playing that song!");
       audioPlayer.current.play();
       progressRef.current = requestAnimationFrame(whilePlaying);
     } else {
-      console.log("pausing that shiiii");
       audioPlayer.current.pause();
       cancelAnimationFrame(progressRef.current);
     }
@@ -118,16 +111,13 @@ export const AudioPlayer = () => {
 
   const onNextClick = () => {
     let nextSong = queue.shift();
-    playedSongs.unshift(currentSong)
-    console.log(nextSong.id);
+    playedSongs.unshift(currentSong);
     dispatch(loadSong(nextSong.id));
   };
 
   const onLastClick = () => {
-    console.log(lastSong.id);
     let last = playedSongs.shift();
-    queue.unshift(currentSong)
-    // console.log(last.id);
+    queue.unshift(currentSong);
     dispatch(loadSong(last.id));
   };
 
@@ -136,7 +126,11 @@ export const AudioPlayer = () => {
       <div id="player">
         <div className="player-left">
           <div>
-            <img className="player-image" src={currentSong?.album_image} />
+            <img
+              alt="spotify"
+              className="player-image"
+              src={currentSong?.album_image}
+            />
           </div>
           <div>
             <Link to={`/albums/${currentSong?.album_id}`}>
@@ -161,6 +155,7 @@ export const AudioPlayer = () => {
             </button>
             <button
               className="button-white"
+              disabled = {currentSong ? false : true}
               onClick={() => {
                 togglePlay();
                 dispatch(toggle_play());
