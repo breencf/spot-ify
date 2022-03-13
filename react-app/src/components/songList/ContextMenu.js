@@ -13,12 +13,10 @@ import "@szhsin/react-menu/dist/index.css";
 export const ContextMenu = ({ song, playlistId }) => {
   const { id } = useSelector((state) => state.session.user);
   const { playLists } = useSelector((state) => state.playListReducer);
-  // const [menuProps, toggleMenu] = useMenuState();
   const dispatch = useDispatch();
   const playlistArr = Object.values(playLists);
 
   const onClickAddNew = () => {
-    // console.log({ user_id: id, song_id: song.id, playlist_id: null });
     dispatch(addToPlaylist({ user_id: id, song, playlist_id: null }));
   };
 
@@ -47,7 +45,7 @@ export const ContextMenu = ({ song, playlistId }) => {
         <MenuItem className='menu-item-test'>
           <Link className='menu-item-test link' to={`/albums/${song.album_id}`}>Go to album</Link>
         </MenuItem>
-        <MenuItem className='menu-item-test'><button className="button-none menu-item-test link" onClick={onClickDelete}>Delete from this playlist</button></MenuItem>
+        {playlistId && <MenuItem className='menu-item-test'><button className="button-none menu-item-test link" onClick={onClickDelete}>Delete from this playlist</button></MenuItem>}
         {/* <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem> */}
         {/* <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem> */}
         <SubMenu className='menu-item-test submenu' direction='left' label="Add to playlist" id='testing2'>

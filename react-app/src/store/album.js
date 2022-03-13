@@ -11,7 +11,6 @@ export const load_album = (albumId) => async (dispatch) => {
     const response = await fetch(`/api/albums/${albumId}`);
 
     const album = await response.json();
-    console.log('album:     ' + album)
     dispatch(loadAlbum(album))
 
 }

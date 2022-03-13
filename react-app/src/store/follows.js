@@ -54,7 +54,6 @@ const loadFollowers = (data) => {
 export const load_Followers = ( userId ) => async dispatch => {
     const response = await fetch(`/api/users/${userId}/followers`)
     const data = await response.json()
-    // console.log(data, 'any data coming back? ')
     dispatch(loadFollowers(data))
 }
 

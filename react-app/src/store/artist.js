@@ -11,9 +11,8 @@ export const load_artist = (artistId) => async (dispatch) => {
     const response = await fetch(`/api/artists/${artistId}`);
 
     const artist = await response.json();
-    console.log('artist:     ' + artist)
     dispatch(loadArtist(artist))
-    
+
 }
 
 

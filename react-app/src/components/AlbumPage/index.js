@@ -42,7 +42,6 @@ export const AlbumPage = () => {
     </Menu>
   );
 
-  // console.log(albumObj?.album?.songs?.dict);
   let songs = albumObj?.album?.songs?.dict;
 
   return (

@@ -76,7 +76,7 @@ export const ArtistPage = () => {
       <hr />
       <br />
       <h2>{artistObj?.id ? "Popular" : ""}</h2>
-      {songs && <SongsList songProp={songs.length < 5 ? songs?.splice(0, 5): songs} />}
+      {songs && <SongsList songProp={songs.length <= 5 ? songs : songs?.splice(0, 5)} />}
       {albums && <ContentList array={albums} heading={"Albums"} />}
     </>
   );

@@ -30,10 +30,8 @@ export const SongListing = ({ song, playlistId }) => {
     }
   };
 
-  // console.log('songsReducer', songs)
 
   useEffect(() => {
-    console.log('TESTING USE EFFECT')
     if (deleting) dispatch(load_Playlists(id));
     setDeleting(false);
   }, [dispatch, deleting]);
@@ -68,7 +66,6 @@ export const SongListing = ({ song, playlistId }) => {
   };
 
   const handleButtonClick = () => {
-    console.log(saved);
     if (!saved) {
       saveItem();
       setSaved(true)

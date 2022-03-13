@@ -7,10 +7,6 @@ export const SearchResults = () => {
 
     const searchValue = useSelector(state => state.searchReducer);
 
-    // useEffect(() => {
-    //     console.log('=======', searchValue)
-    // }, [searchValue])
-
     return (
         <>
             {window.searchName && <div>

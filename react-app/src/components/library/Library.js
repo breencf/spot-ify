@@ -22,9 +22,8 @@ const Library = () => {
 
     return (
         <div>
-            <h3>hello from library</h3>
-            <ContentList array={data?.albums} heading={'Albums'}/>
-            <ContentList array={data?.artists} heading={'Artists'}/>
+            {data?.albums.length && <ContentList array={data?.albums} heading={'Albums'}/>}
+            {data?.artists.length && <ContentList array={data?.artists} heading={'Artists'}/>}
             {data?.playlists && playLists && <ContentList array={[...data?.playlists, ...playLists]} heading={'Playlists'}/>}
         </div>
     )

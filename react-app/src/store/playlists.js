@@ -58,7 +58,7 @@ export const delete_Playlist =
       }),
     });
     const { deleted } = await response.json();
- 
+
     dispatch(deletePlaylist(deleted));
     return deleted;
   };
@@ -108,7 +108,6 @@ export const addToPlaylist =
     );
     if (response.ok) {
       const updatedPlaylist = await response.json();
-      console.log(updatedPlaylist);
       dispatch(add(updatedPlaylist));
     }
   };
@@ -135,7 +134,6 @@ export const delete_from_playlist =
       }
     );
     const updatedPlaylist = await response.json();
-    console.log("updated playlist", updatedPlaylist);
     dispatch(deleteOne(updatedPlaylist));
     return updatedPlaylist;
   };
@@ -183,7 +181,6 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_TO_PLAYLIST:
       newState = { ...state };
-      console.log(action.updatedPlaylist.id);
       newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
       return newState;
     case DELETE_FROM_PLAYLIST:
