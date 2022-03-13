@@ -4,6 +4,7 @@ import { addToPlaylist } from "../../store/playlists";
 import { Link } from "react-router-dom";
 import { FaEllipsisH, FaHeart } from "react-icons/fa";
 import { add_Library_Song } from "../../store/library";
+import { addToQueue } from "../../store/songs";
 
 import {Menu,MenuItem,MenuButton,SubMenu,} from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
@@ -33,15 +34,15 @@ export const ContextMenu = ({ song }) => {
           </MenuButton>
         }
       >
-        <MenuItem className='menu-item-test'>Add to queue</MenuItem>
+        <MenuItem onClick={(() => dispatch(addToQueue(song.id)))} className='menu-item-test'>Add to queue</MenuItem>
         <MenuItem className='menu-item-test'>
           <Link className='menu-item-test link' to={`/artists/${song.artist_id}`}>Go to artist</Link>
         </MenuItem>
         <MenuItem className='menu-item-test'>
           <Link className='menu-item-test link' to={`/albums/${song.album_id}`}>Go to album</Link>
         </MenuItem>
-        <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem>
-        <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem>
+        {/* <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem> */}
+        {/* <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem> */}
         <SubMenu className='menu-item-test submenu' direction='left' label="Add to playlist" id='testing2'>
           <MenuItem className='menu-item-test' onClick={onClickAddNew}>Add to new playlist</MenuItem>
           {

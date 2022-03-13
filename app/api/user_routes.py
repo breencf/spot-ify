@@ -154,18 +154,8 @@ def delete_from_playlist(playlist_id, song_id):
 def load_library(userId):
     library_data = Library.query.filter(Library.user_id == userId).first()
 
-
-    # array= []
-    # for data in library_data:
-    #     if data.playlist_id:
-    #         array.append(data.playlist_id)
-    # playlist = library_data.filter(lambda:)
-
-    # user_playlists = Playlist.query.filter(Playlist.id == library_data.playlist_id).all()
-
-
-    # print('\n', user_playlists, 'testing out user playlists   \n \n')
-    # print('\n', array, 'library data in the backend   \n \n')
+    if not library_data:
+        return {'none': 'no data'}
 
     return library_data.to_dict()
 
@@ -174,7 +164,8 @@ def load_library(userId):
 @login_required
 def delete_library_album(albumId):
     value = request.json
-    library = Library.query.get(value['libraryId'])
+    print('\n \n ', value, ' \n \n' )
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     user_album = Album.query.get(albumId)
     index = 0
     for album in library.albums_lib:
@@ -190,9 +181,8 @@ def delete_library_album(albumId):
 @login_required
 def add_library_album():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     album = Album.query.get(value['albumId'])
-
     library.albums_lib.append(album)
     db.session.commit()
 
@@ -203,7 +193,7 @@ def add_library_album():
 @login_required
 def add_library_artist():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     artist = Artist.query.get(value['artistId'])
 
     library.artists_lib.append(artist)
@@ -216,7 +206,7 @@ def add_library_artist():
 @login_required
 def delete_library_artist():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     user_artist = Artist.query.get(value['artistId'])
     index = 0
     for artist in library.artists_lib:
@@ -232,7 +222,7 @@ def delete_library_artist():
 @login_required
 def add_library_playlist():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     playlist = Playlist.query.get(value['playlistId'])
 
     library.playlists_lib.append(playlist)
@@ -245,7 +235,7 @@ def add_library_playlist():
 @login_required
 def delete_library_playlist():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     user_playlist = Playlist.query.get(value['playlistId'])
     index = 0
     for playlist in library.playlists_lib:
@@ -262,7 +252,7 @@ def delete_library_playlist():
 @login_required
 def add_library_song():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     song = Song.query.get(value['songId'])
 
     library.songs_lib.append(song)
@@ -275,7 +265,7 @@ def add_library_song():
 @login_required
 def delete_library_song():
     value = request.json
-    library = Library.query.get(value['userId'])
+    library = Library.query.filter(Library.user_id == value['userId']).first()
     user_song = Song.query.get(value['songId'])
     index = 0
     for song in library.songs_lib:

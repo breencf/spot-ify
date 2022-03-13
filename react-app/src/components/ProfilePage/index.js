@@ -17,13 +17,11 @@ export const ProfilePage = () => {
     const loggedUser = useSelector((state) => state.session.user);
     const followers = useSelector((state) => state.followsReducer)
 
-    const [test, setTest] = useState(false)
 
     let foll = followers?.follows?.filter(user => {
-        console.log(user.id, +userId)
         return user.id === +userId
     })
-    console.log(foll)
+
 
   const menu = (
     <Menu id='user-menu-style'>
@@ -67,13 +65,14 @@ export const ProfilePage = () => {
                     </Link> */}
         </div>
       </div>
+      {+userId === loggedUser?.id ? '' : <>
       <div id='following-menu'>
         <h4 id='following-title'>{followers?.follows && (followers?.follows?.filter(user => {
         return user.id === +userId
     }).length > 0) ? 'Following' : 'Follow'}</h4>
         <div style={{ margin: 20 }}>
           {/* <div style={{ height: 100 }} /> */}
-          <div id='idk2'>
+          <div id='menu-marg'>
             <Dropdown
               trigger={["click"]}
               overlay={menu}
@@ -87,6 +86,7 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
+      </>}
       {playlists && <ContentList array={playlists} heading={"Playlists"} />}
     </>
   );

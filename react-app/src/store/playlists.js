@@ -57,8 +57,8 @@ export const delete_Playlist =
         playlistId,
       }),
     });
-    console.log(userId, playlistId, "ids in the backend");
     const { deleted } = await response.json();
+ 
     dispatch(deletePlaylist(deleted));
     return deleted;
   };
@@ -189,9 +189,9 @@ const playListReducer = (state = initialState, action) => {
     case DELETE_FROM_PLAYLIST:
       newState = { ...state };
       newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
-      console.log(action.updatedPlaylist.id);
-      console.log("==========================");
-      console.log(newState);
+      // console.log(action.updatedPlaylist.id);
+      // console.log("==========================");
+      // console.log(newState);
       return newState;
     case GET_ONE_PLAYLIST:
       newState = { ...state };

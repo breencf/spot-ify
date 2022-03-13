@@ -237,6 +237,7 @@ body,
   font-size: 14px !important;
   color: var(--sp-dark);
   width: 100%;
+  cursor: pointer;
 }
 
 .button-none {
@@ -244,6 +245,7 @@ body,
   background-color: inherit;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 
 .button-white:hover {
@@ -270,4 +272,8 @@ body,
   width: 100%;
   overflow-y: scroll;
   height: 300px;
+}
+
+#spot-icon{
+  text-decoration: none;
 }

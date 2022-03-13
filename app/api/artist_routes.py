@@ -7,5 +7,6 @@ artist_routes = Blueprint('artists', __name__)
 @artist_routes.route('/<int:artistId>')
 def get_artist(artistId):
     artist = Artist.query.get(artistId)
-
+    if not artist:
+        return {'none': 'not found'}
     return artist.to_dict()
