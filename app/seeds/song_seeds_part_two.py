@@ -7,9 +7,9 @@ def seed_artists_1():
     a4=Artist(name="Fela Kuti", image="https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F170802082807-02-fela-kuti-legacy-0802.jpg", bio="")
     a5=Artist(name="Floating Points & Pharaoh Sanders", image="https://static01.nyt.com/images/2021/03/26/arts/25sanderspoints-review3/25sanderspoints-review3-mobileMasterAt3x.jpg", bio="")
     a6=Artist(name="Bronx River Parkway", image="https://m.media-amazon.com/images/I/81BLa1Wk1TL._SY355_.jpg", bio="")
-    a8=Artist(name="Miles Davis", image="https://www.rollingstone.com/wp-content/uploads/2018/06/miles-davis-15-essential-albums-36cfea97-6c12-493e-967c-7661f6c08b72.jpg", bio="")
-    a9=Artist(name="Sun Ra", image="https://i.guim.co.uk/img/static/sys-images/Arts/Arts_/Pictures/2014/6/13/1402677997846/Sun-Ra-009.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=09753ba708ba0bde32053d4214be4ae7", bio="")
-    a7=Artist(name="Charlotte Dos Santos", image="https://thefader-res.cloudinary.com/private_images/c_limit,w_1024/c_crop,h_682,w_1023,x_1,y_76/w_400,c_limit,f_auto,q_auto:eco/static1.squarespace_zgdcna/static1.squarespace_zgdcna.jpg", bio="")
+    a7=Artist(name="Miles Davis", image="https://www.rollingstone.com/wp-content/uploads/2018/06/miles-davis-15-essential-albums-36cfea97-6c12-493e-967c-7661f6c08b72.jpg", bio="")
+    a8=Artist(name="Sun Ra", image="https://i.guim.co.uk/img/static/sys-images/Arts/Arts_/Pictures/2014/6/13/1402677997846/Sun-Ra-009.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=09753ba708ba0bde32053d4214be4ae7", bio="")
+    a9=Artist(name="Charlotte Dos Santos", image="https://thefader-res.cloudinary.com/private_images/c_limit,w_1024/c_crop,h_682,w_1023,x_1,y_76/w_400,c_limit,f_auto,q_auto:eco/static1.squarespace_zgdcna/static1.squarespace_zgdcna.jpg", bio="")
 
     db.session.add(a1)
     db.session.add(a2)
