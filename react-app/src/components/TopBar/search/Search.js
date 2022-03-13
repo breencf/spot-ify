@@ -4,9 +4,9 @@ import { searchVal } from "../../../store/search";
 import { ContentCard } from "../../ContentList/ContentCard";
 import { ContentList } from "../../ContentList";
 import "./Search.css"
+import { FaSearch } from 'react-icons/fa'
 
-
-const Search = () => {
+export const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
 
@@ -19,21 +19,24 @@ const Search = () => {
         }
     }
 
+    window.searchName = name;
 
     return (
         <div id="search">
+            <FaSearch id="search-icon"/>
             <form onSubmit={handelsubmit}>
                 <input
                     onChange={(e) => {
                         setName(e.target.value)
                         dispatch(searchVal(e.target.value))
                     }}
+                    placeholder='Artists, songs, or playlists'
                     value={name}
                     type='text'
                     name='name'
                 />
             </form>
-            {name && <div>
+            {/* {name && <div>
                 {searchValue?.Artist ?
                     <div>
                         {searchValue?.Artist[0] && (
@@ -44,7 +47,8 @@ const Search = () => {
                         )}
                         {searchValue?.Song[0] && (
                             <ContentList array={searchValue?.Song} heading={'Songs'} />
-                        )}{/*  <button onClick={() => showAllButton()}>See all</button> */}
+                        )}
+                        <button onClick={() => showAllButton()}>See all</button>
 
                         {searchValue?.Playlist[0] && (
                             <ContentList array={searchValue?.Playlist} heading={'Playlist'} />
@@ -56,7 +60,7 @@ const Search = () => {
                     </div>
                     : <h4>notworking</h4>}
             </div>
-            }
+            } */}
 
 
 

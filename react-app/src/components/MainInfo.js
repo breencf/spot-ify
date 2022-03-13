@@ -16,6 +16,7 @@ import { AlbumPage } from "./AlbumPage";
 import { ArtistPage } from "./ArtistPage";
 import { QueuePage } from "./ContentList/QueuePage";
 import { Homepage } from "./Homepage";
+import { SearchResults } from "./TopBar/search/SearchResults";
 
 
 
@@ -25,6 +26,7 @@ export default function MainInfo () {
         <div id={window.ui}>
             <div id="main">
                 <TopBar />
+                <div className="testing-back"></div>
                 <Switch>
                     <ProtectedRoute path="/users" exact={true}>
                         <UsersList />
@@ -39,7 +41,7 @@ export default function MainInfo () {
                         <Library />
                     </ProtectedRoute>
                     <ProtectedRoute path="/search" exact={true}>
-                        <Search />
+                        <SearchResults />
                     </ProtectedRoute>
                     <ProtectedRoute path="/users/:userId" exact={true}>
                         <ProfilePage />
