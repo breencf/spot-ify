@@ -3,8 +3,10 @@
     border-radius: 20px;
     border: none;
     width: 250px;
-    position: fixed;
+    position: absolute;
+    /* transform: translateX(-50%);
+    left: 50%; */
     top: 20px;
-    right: 500px;
+    /* right: 500px; */
     z-index: 600;
 }
