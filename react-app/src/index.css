@@ -205,12 +205,17 @@ body,
   /* opacity: 0%; */
   z-index: 5;
 }
-#top-left-buttons {
-  width: 50%;
+/* #top-left-buttons {
+  width: 15%;
   background-color: none;
+} */
+.left-side-top {
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 #top-right-button {
-  width: 50%;
+  width: 33%;
   background-color: none;
 }
 #top-right-button button {

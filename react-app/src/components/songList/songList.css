@@ -9,7 +9,7 @@
 
 .songListing {
   padding: 5px 16px;
-  height: 50px;
+  height: 80px;
   /* background-color: transparent; */
   display: flex;
   justify-content: space-between;
@@ -119,5 +119,8 @@
   fill: var(--sp-green);
   width: 25px;
   height: 25px;
+}
 
+.testing-back {
+  background-color: coral;
 }
