@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CompoundAlbumImage } from "../viewOnePlayList/CompoundAlbumImage";
 import "./ContentList.css";
 // import { PlayButton } from "../AudioPlayer/PlayButton";
 
@@ -10,9 +11,7 @@ export const ContentCard = ({ content, heading }) => {
   if (heading === "Songs") {
     source = content.album_image;
   } else if (heading === "Playlists") {
-    if (!content.image)
-      source =
-        "https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2";
+    if (!content.image) source = null;
   } else {
     source = content.image;
     contentResult = content.id;
@@ -24,7 +23,18 @@ export const ContentCard = ({ content, heading }) => {
         <div className="content-card">
           <div>
             <div className="cc-image">
-              <img alt="spotify" src={source} className="albumImage" />
+              {source && (
+                <img
+                  alt="spotify"
+                  src={source}
+                  className={
+                    heading === "Artists"
+                      ? "albumImage artistImage"
+                      : "albumImage"
+                  }
+                />
+              )}
+              {!source && <CompoundAlbumImage songs={content?.songs?.dict} />}
             </div>
             <h3>{content.name}</h3>
             {heading === "Albums" && <p>{content.artist}</p>}

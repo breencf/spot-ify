@@ -66,12 +66,7 @@ const ViewOnePlaylist = () => {
 
   if (currPlaylist?.image) {
     imag = (
-      <img
-        alt="spotify"
-        alt="spotify"
-        className="albumImage"
-        src={currPlaylist?.image}
-      />
+      <img alt="spotify" className="albumImage" src={currPlaylist?.image} />
     );
   } else {
     imag = <CompoundAlbumImage songs={playlistProp} />;
@@ -94,7 +89,7 @@ const ViewOnePlaylist = () => {
       <div className="page-buttons playlist">
         {currPlaylist?.id && (
           <>
-            <PlayButton mediaId={id} type={"playlists"} />
+            <PlayButton mediaId={currPlaylist.id} type={"playlists"} />
             <div>
               {currPlaylist?.user_id === id ? (
                 ""

@@ -3,11 +3,12 @@ const PAUSE_SONG = "songs/PAUSE_SONG";
 const PLAY_SONG = "songs/PLAY_SONG";
 const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
 const ADD_TO_QUEUE = "songs/ADD_TO_QUEUE";
-const ADD_MULTIPLE = "songs/ADD_MULTIPLE";
+const PLAY_MULTIPLE = "songs/PLAY_MULTIPLE";
 
-const addMultiple = (songsArr) => {
+
+const playMultiple = (songsArr) => {
   return {
-    type: ADD_MULTIPLE,
+    type: PLAY_MULTIPLE,
     songsArr,
   };
 };
@@ -55,7 +56,7 @@ export const addToQueue = (id) => async (dispatch) => {
   dispatch(queue(song));
 };
 
-export const addMultipleSongs =
+export const playMultipleSongs =
   ({ id, type }) =>
   async (dispatch) => {
     const response = await fetch(`/api/${type}/${id}`);
@@ -65,10 +66,10 @@ export const addMultipleSongs =
     else if (type === "albums") mediaArr = mediaDict.songs.dict;
     else if (type === "users") mediaArr = mediaDict.songs;
     console.log(mediaArr);
-    dispatch(addMultiple(mediaArr));
+    dispatch(playMultiple(mediaArr));
   };
 
-const initialState = { queue: [], newSong: null, isPlaying: false };
+const initialState = { playqueue: [], queue: [], newSong: null, isPlaying: false };
 let newState;
 
 export default function songsReducer(state = initialState, action) {
@@ -94,10 +95,11 @@ export default function songsReducer(state = initialState, action) {
       newState.queue.push(action.songObj);
       console.log(newState.queue);
       return newState;
-    case ADD_MULTIPLE:
+    case PLAY_MULTIPLE:
       newState = { ...state };
       newState.newSong = action.songsArr[0];
-      action.songsArr.splice(1).map((song) => newState.queue.push(song));
+      newState.playqueue = action.songsArr.splice(1)
+      // action.songsArr.splice(1).map((song) => newState.playqueue.push(song));
       return newState;
     default:
       return state;

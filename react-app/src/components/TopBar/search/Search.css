@@ -1,0 +1,10 @@
+#search input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 250px;
+    position: fixed;
+    top: 20px;
+    right: 500px;
+    z-index: 600;
+}

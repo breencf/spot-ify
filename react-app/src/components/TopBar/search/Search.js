@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { searchVal } from "../../../store/search";
 import { ContentCard } from "../../ContentList/ContentCard";
 import { ContentList } from "../../ContentList";
+import "./Search.css"
 
 
 const Search = () => {
@@ -10,32 +11,17 @@ const Search = () => {
     const [name, setName] = useState('')
 
     const searchValue = useSelector((state)=> state.searchReducer)
-    // console.log(searchValue, ' what is vvalue on initial load')
     const handelsubmit = async (e)=>{
         e.preventDefault();
 
         const value = await dispatch(searchVal(name))
         if (value) {
-            // console.log("something is coming back", value)
         }
     }
 
-    //   useEffect(() => {
-    //     dispatch(searchVal(name));
-    // }, [name]);
-
-    // const showAllButton = () => {
-    //     setShowAll(!showAll)
-    //     console.log('showAll:       ', showAll)
-    //     return (
-    //         <>
-
-    //         </>
-    //     )
-    // }
 
     return (
-        <div>
+        <div id="search">
             <form onSubmit={handelsubmit}>
                 <input
                     onChange={(e) => {

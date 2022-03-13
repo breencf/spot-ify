@@ -23,12 +23,12 @@ export const LoginMenu = () => {
     let ret;
 
     if(user) {
-        ret=(<Menu menuButton={<button className="button-green">user {user.id}</button>}>
+        ret=(<Menu menuButton={<button className="button-green">{user.username}</button>}>
         <MenuItem key="name">
-            {user.id}
+           <h4>{user.firstName? `${user.firstName}  ${user.lastName}` : user.email}</h4>
         </MenuItem>
         <MenuItem key="profile">
-            <NavLink to={`/users/${user.id}`}>Profile</NavLink>
+            <NavLink to={`/users/${user.id}`}>Your Profile</NavLink>
         </MenuItem>
         <MenuItem key="logout">
             <LogoutButton/>
