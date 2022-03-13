@@ -17,6 +17,11 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    const err = []
+    if(password !== repeatPassword){
+      err.push('Passwords Must Match')
+      setErrors(err)
+    }
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
@@ -50,16 +55,17 @@ const SignUpForm = () => {
       <h1><FaSpotify/> Spot-ify</h1>
     <div>
     <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+      <div >
+        {errors?.map((error, ind) => {
+         return <div id='signup-err' key={ind}>{error}</div>
+      })}
       </div>
       <div className='formdiv'>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
+          required
           value={username}
           placeholder={"Username"}
         ></input>
@@ -71,6 +77,7 @@ const SignUpForm = () => {
           onChange={updateEmail}
           value={email}
           placeholder={"Email"}
+          required
 
         ></input>
       </div>
@@ -101,7 +108,7 @@ const SignUpForm = () => {
           onChange={updatePassword}
           value={password}
           placeholder={"Password"}
-
+          required
         ></input>
       </div>
       <div className='formdiv'>
@@ -113,7 +120,7 @@ const SignUpForm = () => {
           required={true}
           placeholder={"Confirm Password"}
 
-        ></input>
+        />
       </div>
       <div className='formdiv'>
       <button className="button-white" type='submit'>Sign Up</button>
