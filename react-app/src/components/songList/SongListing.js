@@ -151,13 +151,8 @@ export const SongListing = ({ song, playlistId }) => {
       </span>
 
       <span id="contextMenu" className="song_icon_span">
-        {isHovering && <ContextMenu song={song} />}
+        {isHovering && <ContextMenu song={song} playlistId={playlistId} />}
       </span>
-
-      {/* <span className="song_icon_span">
-        <button className="button-none" onClick={handleDelete}>
-          <h4><FaTimes /></h4>
-        </button>
 
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
     </div>

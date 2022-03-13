@@ -23,6 +23,7 @@ export const ArtistPage = () => {
   const userId = useSelector((state) => state.session.user.id);
   let albums = artistObj?.albums?.dict;
   let songs = artistObj?.songs?.dict;
+  console.log(artistObj?.songs?.dict)
 
   const menu = (
     <Menu id="user-menu-style">
@@ -75,7 +76,7 @@ export const ArtistPage = () => {
       <hr />
       <br />
       <h2>{artistObj?.id ? "Popular" : ""}</h2>
-      <SongsList songProp={songs?.splice(0, 5)} />
+      {songs && <SongsList songProp={songs.length < 5 ? songs?.splice(0, 5): songs} />}
       {albums && <ContentList array={albums} heading={"Albums"} />}
     </>
   );

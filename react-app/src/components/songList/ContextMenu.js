@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { FaEllipsisH, FaHeart } from "react-icons/fa";
 import { add_Library_Song } from "../../store/library";
 import { addToQueue } from "../../store/songs";
-
+import { delete_from_playlist, getOnePlaylist } from "../../store/playlists";
+import { useParams } from "react-router-dom";
 import {Menu,MenuItem,MenuButton,SubMenu,} from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 
-export const ContextMenu = ({ song }) => {
+export const ContextMenu = ({ song, playlistId }) => {
   const { id } = useSelector((state) => state.session.user);
   const { playLists } = useSelector((state) => state.playListReducer);
   // const [menuProps, toggleMenu] = useMenuState();
@@ -20,6 +21,11 @@ export const ContextMenu = ({ song }) => {
     // console.log({ user_id: id, song_id: song.id, playlist_id: null });
     dispatch(addToPlaylist({ user_id: id, song, playlist_id: null }));
   };
+
+  const onClickDelete = () => {
+    dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id}))
+    dispatch(getOnePlaylist(playlistId));
+  }
 
 
 
@@ -41,6 +47,7 @@ export const ContextMenu = ({ song }) => {
         <MenuItem className='menu-item-test'>
           <Link className='menu-item-test link' to={`/albums/${song.album_id}`}>Go to album</Link>
         </MenuItem>
+        <MenuItem className='menu-item-test'><button className="button-none menu-item-test link" onClick={onClickDelete}>Delete from this playlist</button></MenuItem>
         {/* <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem> */}
         {/* <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem> */}
         <SubMenu className='menu-item-test submenu' direction='left' label="Add to playlist" id='testing2'>
