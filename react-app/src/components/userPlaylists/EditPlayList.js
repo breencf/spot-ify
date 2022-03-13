@@ -1,6 +1,6 @@
 import { useDispatch} from "react-redux";
 import { useState } from "react";
-import { edit_Playlist, load_Playlists } from "../../store/playlists";
+import { edit_Playlist, getOnePlaylist, load_Playlists } from "../../store/playlists";
 import "../CreatePlaylistForm/CreatePlaylistForm.css";
 import "../viewOnePlayList/CompoundAlbumImage.css"
 import { CompoundAlbumImage } from "../viewOnePlayList/CompoundAlbumImage";
@@ -38,8 +38,9 @@ const PlaylistsEdit = ({ playList, closeModal }) => {
     if (value.errors) {
       return setErrors(value.errors);
     }
-    closeModal();
+    dispatch(getOnePlaylist(playList.id))
     dispatch(load_Playlists(playList.user_id));
+    closeModal();
     // history.push(`/users/${playList.user_Id}/playlists/${playList.id}`);
   };
 
@@ -54,7 +55,7 @@ const PlaylistsEdit = ({ playList, closeModal }) => {
         </ul>
         <div className="create-container">
           <div>
-          <CompoundAlbumImage songs={playList.songs?.dict} />
+          {playList.image? <img className="albumImage" src={image}/> : <CompoundAlbumImage songs={playList.songs?.dict} />}
           </div>
           <div>
             <div className="form-div">
