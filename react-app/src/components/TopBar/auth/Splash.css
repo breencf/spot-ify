@@ -55,3 +55,7 @@
     50%{background-position:100% 99%}
     100%{background-position:0% 2%}
 }
+
+#signup-err{
+     color: white;
+}
