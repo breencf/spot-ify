@@ -72,6 +72,7 @@ const ViewOnePlaylist = () => {
           {currPlaylist?.id && <>
           <PlayButton mediaId={id} type={'playlists'}/>
           <div >
+            { currPlaylist?.user_id === id ? '' :
             <Dropdown
               trigger={["click"]}
               overlay={menu}
@@ -79,6 +80,7 @@ const ViewOnePlaylist = () => {
             >
               <p id='icon-color' style={{width: 150}}><FaEllipsisH /></p>
             </Dropdown>
+              }
           </div>
             </>}
       {currPlaylist?.user_id == id && (
