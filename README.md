@@ -47,7 +47,7 @@
    flask run
    ```
 
-6. To run the application go in the pipevn shell and enter flask run, in a separate terminal cd into react-app folder and run npm start
+6. To run the application enter your pipenv shell in the terminal and enter flask run, in a separate terminal cd into react-app folder and run npm start
      
 7. Create a user to explore the site or click on demo user to explore the site freely. 
 
