@@ -25,22 +25,34 @@ export const ProfilePage = () => {
     return user.id === +userId;
   });
 
+  const [us, setus]= useState(false)
+
+  // if(followers?.follows &&
+  //   followers?.follows?.filter((user) => {
+  //     return user.id === +userId;
+  //   }).length > 0){
+  //     setus(true)}
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+     {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Followers(loggedUser.id, userId))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Followers(loggedUser.id, userId))}}
         key="1"
       >
         Follow User
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(remove_Follower(loggedUser.id, userId))}
+        onClick={() => {
+          setus(true)
+          dispatch(remove_Follower(loggedUser.id, userId))}}
         key="2"
       >
         Unfollow
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
 
@@ -50,6 +62,16 @@ export const ProfilePage = () => {
   }, [dispatch, userId]);
 
   const playlists = user?.playlists?.dict;
+
+  const follo = () => {
+    setus(false)
+    return "Following"
+  }
+
+  const followw = () => {
+    setus(true)
+    return "Follow"
+  }
 
   return (
     <>

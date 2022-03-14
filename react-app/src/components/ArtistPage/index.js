@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { load_artist } from "../../store/artist";
 import { ContentList } from "../ContentList";
 import { SongsList } from "../songList";
 import "./ArtistPage.css";
-import { add_Library_Artist, delete_LibraryArtist } from "../../store/library";
+import { add_Library_Artist, delete_LibraryArtist, load_Library} from "../../store/library";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import "rc-dropdown/assets/index.css";
@@ -15,9 +15,6 @@ export const ArtistPage = () => {
   const { artistId } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(load_artist(artistId));
-  }, [dispatch, artistId]);
 
   const artistObj = useSelector((state) => state?.artistReducer?.artist);
   const userId = useSelector((state) => state.session.user.id);
@@ -25,22 +22,78 @@ export const ArtistPage = () => {
   let songs = artistObj?.songs?.dict;
   console.log(artistObj?.songs?.dict)
 
+  const data = useSelector((state) => state.libraryReducer)
+  const [us, setus]= useState(false)
+
+
+
+  useEffect(() => {
+    dispatch(load_artist(artistId));
+    // dispatch(load_Library(userId))
+
+
+    // if (data?.artists && newArr?.length > 0){
+    //   setus(false)
+    // }else{
+    //   setus(true)
+    // }
+    // console.log(newArr)
+  }, [dispatch, artistId]);
+
+  useEffect(() => {
+
+    let newArr = data.artists?.filter((user) => {
+      return user.id === parseInt(artistId);
+    })
+
+    if (data?.artists && newArr?.length > 0){
+      setus(false)
+    }else{
+      setus(true)
+    }
+    console.log(us)
+  }, [dispatch, artistObj, us]);
+
+
+  // const follo = () => {
+  //   setus(false)
+  //   return "Following"
+  // }
+
+  // const followw = () => {
+  //   setus(true)
+  //   return "Follow"
+  // }
+
+
+
+
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+      {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Library_Artist(userId, artistId))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Library_Artist(userId, artistId))
+          dispatch(load_Library(userId))
+        }}
         key="1"
       >
         Add Artist to Library
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(delete_LibraryArtist(userId, artistId))}
+        onClick={() => {
+          setus(true)
+          dispatch(delete_LibraryArtist(userId, artistId))
+          dispatch(load_Library(userId))
+
+        }}
         key="2"
       >
         Remove Artist from Library
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
 
@@ -76,7 +129,7 @@ export const ArtistPage = () => {
       <hr />
       <br />
       <h2>{artistObj?.id ? "Popular" : ""}</h2>
-      {songs && <SongsList songProp={songs.length <= 5 ? songs : songs?.splice(0, 5)} />}
+      {songs && <SongsList songProp={songs.length <= 5 ? songs : songs?.slice(0, 5)} />}
       {albums && <ContentList array={albums} heading={"Albums"} />}
     </>
   );
