@@ -1,4 +1,13 @@
-# Spot-ify Clone
+# Spot-ify 
+
+  Our **Spot-ify** project is what one would suspect, a website designed to mimic the behavior of Spotify (aka a spotify clone), where you can listen to music, like songs, and create your own playlists. 
+
+# Index
+   - [Features List](https://github.com/breencf/spotify-clone/wiki)
+   - [Database Schema](https://github.com/breencf/spotify-clone/wiki/User-Stories)
+   - [User Stories](https://github.com/breencf/spotify-clone/wiki/User-Stories)
+   - [Contributors](https://github.com/breencf/spotify-clone/wiki/About)
+   - [Live Site](https://Spot-ify.herokuapp.com)
 
 ## Setup
 
@@ -50,4 +59,10 @@
 6. To run the application enter your pipenv shell in the terminal and enter flask run, in a separate terminal cd into react-app folder and run npm start
      
 7. Create a user to explore the site or click on demo user to explore the site freely. 
+
+
+
+ 
+
+
 
