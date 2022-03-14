@@ -317,9 +317,9 @@ def add_user_follower():
     user1 = User.query.get(value['userId'])
     other_user2 = User.query.get(value['otherUserId'])
     # print('\n \n', value, '\n \n')
-    if other_user2 in user1.following:
+    if user1 in other_user2.following:
         return {'test': 'is album added'}
-    user1.following.append(other_user2)
+    other_user2.following.append(user1)
 
     db.session.commit()
 
@@ -333,10 +333,10 @@ def remove_user_follow():
     user1 = User.query.get(value['userId'])
     other_user2 = User.query.get(value['otherUserId'])
 
-    if other_user2 not in user1.following:
+    if user1 not in other_user2.following:
         return {"test": "testing route to delete"}
 
 
-    user1.following.remove(other_user2)
+    other_user2.following.remove(user1)
     db.session.commit()
     return {"test": "testing route to delete"}

@@ -3,24 +3,25 @@ import { useEffect, useState } from "react";
 import { load_Followers } from "../../store/follows";
 import { remove_Follower } from "../../store/follows";
 import { ContentList } from "../ContentList";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Follower.css";
 
 const Followers = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.session?.user?.id);
+  const {userid} = useParams();
+  console.log(userid)
   const data = useSelector((state) => state.followsReducer);
 
   useEffect(() => {
-    dispatch(load_Followers(userId));
+    dispatch(load_Followers(userid));
   }, [dispatch]);
 
   return (
     <>
       <div>
-        <h2>Following</h2>
+        <h2>Followers</h2>
         <div id="follow-cont">
-          <ContentList array={data?.follows} heading={"users"} />
+          <ContentList array={data?.follows} heading={"Users"} />
           {/* {data?.follows?.map((follow) => {
             return (
               <div id="follow-spacing" key={follow.id}>

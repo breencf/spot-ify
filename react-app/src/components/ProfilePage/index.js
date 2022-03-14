@@ -13,6 +13,7 @@ import Menu, { Item as MenuItem, Divider } from "rc-menu";
 import "rc-dropdown/assets/index.css";
 import "./menu.css";
 import { FaEllipsisH } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const ProfilePage = () => {
   const { userId } = useParams();
@@ -20,12 +21,21 @@ export const ProfilePage = () => {
   const user = useSelector((state) => state.session.profile);
   const loggedUser = useSelector((state) => state.session.user);
   const followers = useSelector((state) => state.followsReducer);
+  const [toggleFollow, setToggleFollow] = useState(false);
+  const [buttonClick, setButtonClick] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
 
-  let foll = followers?.follows?.filter((user) => {
-    return user.id === +userId;
-  });
+  useEffect(() => {
+    if (followers) setFollowerCount(followers?.follows?.length);
+  }, [followers?.follows?.length, buttonClick]);
 
-  const [us, setus]= useState(false)
+  let activeUserFollowsCheck = null;
+  useEffect(() => {
+    activeUserFollowsCheck = followers?.follows?.filter((followerObj) => {
+      return followerObj.id === loggedUser.id;
+    });
+    setToggleFollow(activeUserFollowsCheck?.length > 0);
+  }, [dispatch, userId, followers?.follows?.length]);
 
   // if(followers?.follows &&
   //   followers?.follows?.filter((user) => {
@@ -35,43 +45,53 @@ export const ProfilePage = () => {
 
   const menu = (
     <Menu id="user-menu-style">
-     {us && <MenuItem
-        id="testing_menu"
-        onClick={() => {
-          setus(false)
-          dispatch(add_Followers(loggedUser.id, userId))}}
-        key="1"
-      >
-        Follow User
-      </MenuItem>}
-      {!us && <MenuItem
-        id="testing_menu"
-        onClick={() => {
-          setus(true)
-          dispatch(remove_Follower(loggedUser.id, userId))}}
-        key="2"
-      >
-        Unfollow
-      </MenuItem>}
+      {!toggleFollow && (
+        <MenuItem
+          id="testing_menu"
+          onClick={() => {
+            setToggleFollow(true);
+            dispatch(add_Followers(loggedUser.id, userId));
+            setButtonClick(!buttonClick);
+            setFollowerCount(followerCount);
+          }}
+          key="1"
+        >
+          Follow User
+        </MenuItem>
+      )}
+      {toggleFollow && (
+        <MenuItem
+          id="testing_menu"
+          onClick={() => {
+            setToggleFollow(false);
+            dispatch(remove_Follower(loggedUser.id, userId));
+            setButtonClick(!buttonClick);
+            setFollowerCount(followerCount);
+          }}
+          key="2"
+        >
+          Unfollow
+        </MenuItem>
+      )}
     </Menu>
   );
 
   useEffect(() => {
-    dispatch(load_Followers(loggedUser.id));
+    dispatch(load_Followers(userId));
     dispatch(get_a_user(userId));
   }, [dispatch, userId]);
 
   const playlists = user?.playlists?.dict;
 
-  const follo = () => {
-    setus(false)
-    return "Following"
-  }
+  // const follo = () => {
+  //   setus(false);
+  //   return "Following";
+  // };
 
-  const followw = () => {
-    setus(true)
-    return "Follow"
-  }
+  // const followw = () => {
+  //   setus(true);
+  //   return "Follow";
+  // };
 
   return (
     <>
@@ -94,6 +114,12 @@ export const ProfilePage = () => {
               ? user?.first_name + " " + user?.last_name
               : user?.email}
           </h1>
+          <div className="album-details">
+            <Link to={`/users/${userId}/followers`}>
+              {" "}
+              <h4>{followerCount} Followers</h4>
+            </Link>
+          </div>
           {/* <img alt="spotify" className="artistIcon" src={artistObj?.image} /> */}
           {/* <Link to={`/albums/${artistObj?.id}`}>
                         {artistObj?.album?.artist}

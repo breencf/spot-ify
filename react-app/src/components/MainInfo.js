@@ -17,6 +17,7 @@ import { ArtistPage } from "./ArtistPage";
 import { QueuePage } from "./ContentList/QueuePage";
 import { Homepage } from "./Homepage";
 import { SearchResults } from "./TopBar/search/SearchResults";
+import { AboutPage } from "./AboutPage";
 
 
 
@@ -34,7 +35,10 @@ export default function MainInfo () {
                     <ProtectedRoute path="/songs" exact={true}>
                         <LikedSongs />
                     </ProtectedRoute>
-                    <ProtectedRoute path="/followers" exact={true}>
+                    <ProtectedRoute path="/users/:userid/followers" exact={true}>
+                        <Followers />
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/users/:userid/following" exact={true}>
                         <Followers />
                     </ProtectedRoute>
                     <ProtectedRoute path="/:userId/library">
@@ -58,9 +62,9 @@ export default function MainInfo () {
                     <ProtectedRoute path="/queue" exact={true}>
                     <QueuePage />
                     </ProtectedRoute>
-                    {/* <Route path="/songs" exact={true}>
-            <SongsList />
-          </Route> */}
+                    <ProtectedRoute path="/about" exact={true}>
+                        <AboutPage/>
+                    </ProtectedRoute>
                     <Route path="/albums/:albumId" exact={true}>
                         <AlbumPage />
                     </Route>

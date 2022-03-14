@@ -11,6 +11,7 @@
   /* width: 280px;
     height: 380px; */
   justify-content: center;
+  padding: 10px;
 }
 .content-card .albumImage {
   width: 192px;
@@ -31,4 +32,11 @@
   flex-flow: wrap;
   gap: 20px;
   margin: 20px;
+}
+
+.cc-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

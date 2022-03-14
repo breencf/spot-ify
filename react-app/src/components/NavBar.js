@@ -12,6 +12,7 @@ import {
   FaStream,
   FaPlus,
   FaRegHeart,
+  FaHeadphones,
 } from "react-icons/fa";
 
 const NavBar = () => {
@@ -24,7 +25,7 @@ const NavBar = () => {
   };
 
   function afterOpenModal() {
-    return null
+    return null;
   }
 
   const closeModal = () => {
@@ -33,7 +34,7 @@ const NavBar = () => {
 
   useEffect(() => {
     if (userId) dispatch(load_Playlists(userId));
-    if(userId) dispatch(load_Library(userId))
+    if (userId) dispatch(load_Library(userId));
   }, [dispatch, userId]);
 
   const data = useSelector((state) => state.libraryReducer);
@@ -61,14 +62,14 @@ const NavBar = () => {
   return (
     <>
       <nav id="sidebar">
-        <Link id='spot-icon' to='/home'>
-        <h2>
-          <FaSpotify /> Spot-ify
-        </h2>
+        <Link id="spot-icon" to="/home">
+          <h2>
+            <FaSpotify /> Spot-ify
+          </h2>
         </Link>
         <div className="navbar-playlist">
-        <ul>
-          {/* <li>
+          <ul>
+            {/* <li>
             <NavLink to="/login" exact={true} activeClassName="active">
               Login
             </NavLink>
@@ -81,46 +82,55 @@ const NavBar = () => {
           <li>
             <LogoutButton />
           </li> */}
-          <li>
-            <NavLink to="/home" exact={true} activeClassName="active">
-              <h3>
-                <FaHome />  Home
-              </h3>
-            </NavLink>
-          </li>
+            <li>
+              <NavLink to="/home" exact={true} activeClassName="active">
+                <h3>
+                  <FaHome /> Home
+                </h3>
+              </NavLink>
+            </li>
 
-          <li>
-            <NavLink to="/search" exact={true} activeClassName="active">
+            <li>
+              <NavLink to="/search" exact={true} activeClassName="active">
+                <h3>
+                  <FaSearch /> Search
+                </h3>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={`/${userId}/library/playlists`}
+                exact={true}
+                activeClassName="active"
+              >
+                <h3>
+                  <FaStream /> Your Library
+                </h3>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/about`} exact={true} activeClassName="active">
+                <h3>
+                  <FaHeadphones /> About
+                </h3>
+              </NavLink>
+            </li>
+            <br />
+            <button className="button-none" onClick={openModal}>
               <h3>
-                <FaSearch /> Search
+                <FaPlus /> Create Playlist
               </h3>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/${userId}/library/playlists`}
-              exact={true}
-              activeClassName="active"
-            >
-              <h3>
-                <FaStream /> Your Library
-              </h3>
-            </NavLink>
-          </li>
-          <br />
-          <button className="button-none" onClick={openModal}>
-            <h3>
-              <FaPlus /> Create Playlist
-            </h3>
-          </button>
+            </button>
 
-          <NavLink to="/songs" exact={true} activeClassName="active">
-            <h3><FaRegHeart /> Liked Songs</h3>
-          </NavLink>
-          {/* <NavLink to="/followers" exact={true} activeClassName="active">
+            <NavLink to="/songs" exact={true} activeClassName="active">
+              <h3>
+                <FaRegHeart /> Liked Songs
+              </h3>
+            </NavLink>
+            {/* <NavLink to="/followers" exact={true} activeClassName="active">
             <h3>Following</h3>
           </NavLink> */}
-        </ul>
+          </ul>
         </div>
         <Modal
           isOpen={isOpen}

@@ -306,3 +306,27 @@ body,
   padding: 3px 30px;
   border-radius: 6px;
 }
+
+.about-div {
+  display: flex;
+}
+
+.about-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-about {
+  background-color: var(--sp-green);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px !important;
+  height: 35px !important;
+  color: white;
+}
