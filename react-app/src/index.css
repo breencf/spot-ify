@@ -292,3 +292,13 @@ body,
 #spot-icon {
   text-decoration: none;
 }
+
+.library-link-clicked {
+  padding: 3px 30px;
+  border-radius: 6px;
+  background: #333;
+}
+.library-link {
+  padding: 3px 30px;
+  border-radius: 6px;
+}
