@@ -139,7 +139,7 @@ export const AudioPlayer = () => {
   const onLastClick = () => {
     let last = playedSongs.shift();
     compositeQueue.unshift(currentSong);
-    dispatch(loadSong(last.id));
+    dispatch(loadSong(last?.id));
   };
 
   return (
