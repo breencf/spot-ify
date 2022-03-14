@@ -15,6 +15,7 @@ import "./menu.css";
 import { FaEllipsisH } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+
 export const ProfilePage = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
@@ -22,12 +23,12 @@ export const ProfilePage = () => {
   const loggedUser = useSelector((state) => state.session.user);
   const followers = useSelector((state) => state.followsReducer);
   const [toggleFollow, setToggleFollow] = useState(false);
-  const [buttonClick, setButtonClick] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
+
 
   useEffect(() => {
     if (followers) setFollowerCount(followers?.follows?.length);
-  }, [followers?.follows?.length, buttonClick]);
+  }, [followers?.follows?.length, userId]);
 
   let activeUserFollowsCheck = null;
   useEffect(() => {
@@ -45,34 +46,20 @@ export const ProfilePage = () => {
 
   const menu = (
     <Menu id="user-menu-style">
-      {!toggleFollow && (
         <MenuItem
           id="testing_menu"
-          onClick={() => {
-            setToggleFollow(true);
-            dispatch(add_Followers(loggedUser.id, userId));
-            setButtonClick(!buttonClick);
-            setFollowerCount(followerCount);
-          }}
           key="1"
         >
-          Follow User
-        </MenuItem>
-      )}
-      {toggleFollow && (
-        <MenuItem
-          id="testing_menu"
-          onClick={() => {
-            setToggleFollow(false);
-            dispatch(remove_Follower(loggedUser.id, userId));
-            setButtonClick(!buttonClick);
+          {!toggleFollow?<button className="button-none" onClick={() => {
+            // setToggleFollow(true);
+            dispatch(add_Followers(loggedUser.id, userId));
             setFollowerCount(followerCount);
-          }}
-          key="2"
-        >
-          Unfollow
+          }}>Follow User</button>
+          :toggleFollow && (<button className="button-none" onClick={() => {
+            // setToggleFollow(false);
+            dispatch(remove_Follower(loggedUser.id, userId));
+            setFollowerCount(followerCount);}}>Unfollow</button>)}
         </MenuItem>
-      )}
     </Menu>
   );
 

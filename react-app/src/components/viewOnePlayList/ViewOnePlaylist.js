@@ -14,12 +14,13 @@ import {
   load_Playlists,
 } from "../../store/playlists";
 import { CompoundAlbumImage } from "./CompoundAlbumImage";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { PlayButton } from "../AudioPlayer/PlayButton";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import "rc-dropdown/assets/index.css";
 import { FaEllipsisH } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
@@ -37,45 +38,47 @@ const ViewOnePlaylist = () => {
     (state) => state?.playListReducer.currentPlaylist
   );
 
-  const data = useSelector((state) => state.libraryReducer)
-  const [us, setus]= useState(false)
-
-
+  const data = useSelector((state) => state.libraryReducer);
+  const [us, setus] = useState(false);
 
   useEffect(() => {
-
     let newArr = data.playlists?.filter((user) => {
       return user.id === parseInt(playlistId);
-    })
+    });
 
-    if (data?.playlists && newArr?.length > 0){
-      setus(false)
-    }else{
-      setus(true)
+    if (data?.playlists && newArr?.length > 0) {
+      setus(false);
+    } else {
+      setus(true);
     }
-  }, [dispatch, playLists ]);
-
+  }, [dispatch, playLists]);
 
   const menu = (
     <Menu id="user-menu-style">
-      {us && <MenuItem
-        id="testing_menu"
-        onClick={() => {
-          setus(false)
-          dispatch(add_Library_Playlist(id, currPlaylist?.id))}}
-        key="1"
-      >
-        Add Playlist to Library
-      </MenuItem>}
-      {!us && <MenuItem
-        id="testing_menu"
-        onClick={() => {
-          setus(true)
-          dispatch(delete_LibraryPlaylist(id, currPlaylist?.id))}}
-        key="2"
-      >
-        Remove Playlist from Library
-      </MenuItem>}
+      {us && (
+        <MenuItem
+          id="testing_menu"
+          onClick={() => {
+            setus(false);
+            dispatch(add_Library_Playlist(id, currPlaylist?.id));
+          }}
+          key="1"
+        >
+          Add Playlist to Library
+        </MenuItem>
+      )}
+      {!us && (
+        <MenuItem
+          id="testing_menu"
+          onClick={() => {
+            setus(true);
+            dispatch(delete_LibraryPlaylist(id, currPlaylist?.id));
+          }}
+          key="2"
+        >
+          Remove Playlist from Library
+        </MenuItem>
+      )}
     </Menu>
   );
   const playlistProp = currPlaylist?.songs?.dict;
@@ -96,12 +99,16 @@ const ViewOnePlaylist = () => {
     imag = <CompoundAlbumImage songs={playlistProp} />;
   }
 
+  console.log(currPlaylist);
   return (
     <>
       <div className="albumTop">
         <div>{imag}</div>
         <div>
           <h1>{currPlaylist?.name}</h1>
+          <Link to={`/users/${currPlaylist?.user_id}`}>
+            <h3>{currPlaylist?.user_username}</h3>
+          </Link>
           <p>{currPlaylist?.description}</p>
           {/* <Link to={`/users/${currPlaylist?.user_id}`}>
             {currPlaylist.user_id}
@@ -143,7 +150,10 @@ const ViewOnePlaylist = () => {
       <hr />
 
       <br />
-      <SongsList songProp={playlistProp} mediaId={{"playlists": currPlaylist?.id}} />
+      <SongsList
+        songProp={playlistProp}
+        mediaId={{ playlists: currPlaylist?.id }}
+      />
     </>
   );
 };

@@ -323,7 +323,7 @@ def add_user_follower():
 
     db.session.commit()
 
-    return other_user2.to_dict()
+    return user1.to_dict()
 
 
 @user_routes.route('followers/delete', methods=['POST'])
@@ -337,6 +337,6 @@ def remove_user_follow():
         return {"test": "testing route to delete"}
 
 
-    other_user2.following.remove(user1)
+    else : other_user2.following.remove(user1)
     db.session.commit()
-    return {"test": "testing route to delete"}
+    return user1.to_dict()
