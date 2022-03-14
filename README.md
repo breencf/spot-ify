@@ -1,5 +1,9 @@
 # Spot-ify Clone
 
+
+#Index
+   - [Features](github.com/breencf/spotify-clone/wiki)
+
 ## Setup
 
 1. Clone the repository 
