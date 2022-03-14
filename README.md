@@ -1,6 +1,6 @@
 # Spot-ify 
 
-  Our Spot-ify is what one would suspect, a website designed to mimic the behavior of Spotify (aka a spotify clone), where you can listen to music, like songs, and create your own playlists. 
+  Our **Spot-ify** project is what one would suspect, a website designed to mimic the behavior of Spotify (aka a spotify clone), where you can listen to music, like songs, and create your own playlists. 
 
 # Index
    - [Features List](https://github.com/breencf/spotify-clone/wiki)
