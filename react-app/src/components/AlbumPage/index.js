@@ -81,6 +81,7 @@ export const AlbumPage = () => {
         <div>
           <h4>ALBUM</h4>
           <h1>{albumObj?.album?.name}</h1>
+          <div className="album-details">
           <img
             alt="spotify"
             className="artistIcon"
@@ -89,6 +90,7 @@ export const AlbumPage = () => {
           <Link to={`/artists/${albumObj?.album?.artist_id}`}>
             {albumObj?.album?.artist}
           </Link>
+          </div>
         </div>
       </div>
       <br />
@@ -109,6 +111,8 @@ export const AlbumPage = () => {
       <hr />
       <br />
       <SongsList songProp={songs} mediaId={{"albums": albumId}} />
+      <hr/>
+      <p>© {albumObj.album.year} {albumObj.album.artist}</p>
     </>
   );
 };

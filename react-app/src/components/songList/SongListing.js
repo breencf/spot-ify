@@ -37,7 +37,6 @@ export const SongListing = ({ song, mediaId }) => {
   }, [dispatch, deleting]);
 
   useEffect(() => {
-    console.log('checking for memory leak')
     if (songs) checkIfSaved();
   }, [songs]);
 
@@ -126,7 +125,7 @@ export const SongListing = ({ song, mediaId }) => {
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
 
-      <span className="song_icon_span">
+      {/* <span className="song_icon_span">
         <button
           className="button-none"
           onClick={() => dispatch(addToQueue(song.id))}
@@ -135,7 +134,7 @@ export const SongListing = ({ song, mediaId }) => {
             <FaList />
           </h4>
         </button>
-      </span>
+      </span> */}
       <span className="song_icon_span">
         {!saved && isHovering && (
           <svg
