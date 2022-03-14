@@ -84,7 +84,7 @@ export const AlbumPage = () => {
       )}
       <hr />
       <br />
-      <SongsList songProp={songs} />
+      <SongsList songProp={songs} mediaId={{"albums": albumId}} />
     </>
   );
 };
