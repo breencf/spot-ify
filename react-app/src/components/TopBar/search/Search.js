@@ -10,7 +10,7 @@ export const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
 
-    const searchValue = useSelector((state)=> state.searchReducer)
+    // const searchValue = useSelector((state)=> state.searchReducer)
     const handelsubmit = async (e)=>{
         e.preventDefault();
 
@@ -36,40 +36,6 @@ export const Search = () => {
                     name='name'
                 />
             </form>
-            {/* {name && <div>
-                {searchValue?.Artist ?
-                    <div>
-                        {searchValue?.Artist[0] && (
-                            <ContentList array={searchValue?.Artist} heading={'Artists'} />
-                        )}
-                        {searchValue?.Album[0] && (
-                            <ContentList array={searchValue?.Album} heading={'Albums'} />
-                        )}
-                        {searchValue?.Song[0] && (
-                            <ContentList array={searchValue?.Song} heading={'Songs'} />
-                        )}
-                        <button onClick={() => showAllButton()}>See all</button>
-
-                        {searchValue?.Playlist[0] && (
-                            <ContentList array={searchValue?.Playlist} heading={'Playlist'} />
-                        )}
-                        {searchValue?.User[0] && (
-                            <ContentList array={searchValue?.User} heading={'User'} />
-                        )}
-
-                    </div>
-                    : <h4>notworking</h4>}
-            </div>
-            } */}
-
-
-
-
-            {/* {searchValue && (
-                {searchValue.Artist.map((artist) => {
-                    return <p></p>
-                  })}
-            )} */}
         </div>
     )
 }

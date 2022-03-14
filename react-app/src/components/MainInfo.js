@@ -37,7 +37,7 @@ export default function MainInfo () {
                     <ProtectedRoute path="/followers" exact={true}>
                         <Followers />
                     </ProtectedRoute>
-                    <ProtectedRoute path="/:userId/library" exact={true}>
+                    <ProtectedRoute path="/:userId/library">
                         <Library />
                     </ProtectedRoute>
                     <ProtectedRoute path="/search" exact={true}>
