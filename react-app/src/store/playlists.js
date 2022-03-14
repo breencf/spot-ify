@@ -17,7 +17,7 @@ const get_one = (playlistObj) => {
 
 export const getOnePlaylist = (id) => async (dispatch) => {
   const response = await fetch(`/api/playlists/${id}`);
-  const {playlist} = await response.json();
+  const { playlist } = await response.json();
   dispatch(get_one(playlist));
 };
 
@@ -122,6 +122,7 @@ const deleteOne = (updatedPlaylist) => {
 export const delete_from_playlist =
   ({ playlist_id, song_id }) =>
   async (dispatch) => {
+    console.log("========", playlist_id, song_id);
     const response = await fetch(
       `/api/playlists/${playlist_id}/${song_id}/delete`,
       {
