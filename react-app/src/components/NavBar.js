@@ -84,7 +84,7 @@ const NavBar = () => {
           <li>
             <NavLink to="/home" exact={true} activeClassName="active">
               <h3>
-                <FaHome /> Home
+                <FaHome />  Home
               </h3>
             </NavLink>
           </li>
@@ -117,9 +117,9 @@ const NavBar = () => {
           <NavLink to="/songs" exact={true} activeClassName="active">
             <h3><FaRegHeart /> Liked Songs</h3>
           </NavLink>
-          <NavLink to="/followers" exact={true} activeClassName="active">
+          {/* <NavLink to="/followers" exact={true} activeClassName="active">
             <h3>Following</h3>
-          </NavLink>
+          </NavLink> */}
         </ul>
         </div>
         <Modal

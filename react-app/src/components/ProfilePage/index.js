@@ -69,7 +69,7 @@ export const ProfilePage = () => {
           <h3>PROFILE</h3>
           <h1>
             {user?.first_name
-              ? user?.first_name + user?.last_name
+              ? user?.first_name + " " + user?.last_name
               : user?.email}
           </h1>
           {/* <img alt="spotify" className="artistIcon" src={artistObj?.image} /> */}
@@ -83,14 +83,14 @@ export const ProfilePage = () => {
       ) : (
         <>
           <div id="following-menu">
-            <h4 id="following-title">
+            {/* <h4 id="following-title">
               {followers?.follows &&
               followers?.follows?.filter((user) => {
                 return user.id === +userId;
               }).length > 0
                 ? "Following"
                 : "Follow"}
-            </h4>
+            </h4> */}
             <div style={{ margin: 20 }}>
               {/* <div style={{ height: 100 }} /> */}
               <div id="menu-marg">
@@ -110,6 +110,9 @@ export const ProfilePage = () => {
           </div>
         </>
       )}
+      <br />
+      <hr />
+      <br />
       {playlists && <ContentList array={playlists} heading={"Playlists"} />}
     </>
   );

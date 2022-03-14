@@ -26,7 +26,7 @@ export const SearchResults = () => {
                             <ContentList array={searchValue?.Playlist} heading={'Playlists'} />
                         )}
                         {searchValue?.User[0] && (
-                            <ContentList array={searchValue?.User} heading={'User'} />
+                            <ContentList array={searchValue?.User} heading={'Users'} />
                         )}
 
                     </div>

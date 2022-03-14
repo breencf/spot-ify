@@ -19,6 +19,8 @@ const data = useSelector((state) => state.libraryReducer)
   return(
   <>
   <h2>{greet}</h2>
+  <br/>
+  <br/>
   <ContentList array={data?.albums} heading={"Albums"}/>
   </>
   )
