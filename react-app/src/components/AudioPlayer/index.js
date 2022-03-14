@@ -159,7 +159,7 @@ export const AudioPlayer = () => {
             <Link to={`/albums/${currentSong?.album_id}`}>
               <h4>{currentSong?.name}</h4>
             </Link>
-            <Link to={`/artist/${currentSong?.artist_id}`}>
+            <Link to={`/artists/${currentSong?.artist_id}`}>
               <h4>{currentSong?.artist}</h4>
             </Link>
           </div>
