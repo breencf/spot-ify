@@ -16,9 +16,7 @@ export const ContextMenu = ({ song, playlistId }) => {
   const dispatch = useDispatch();
   const playlistArr = Object.values(playLists);
 
-  const onClickAddNew = () => {
-    dispatch(addToPlaylist({ user_id: id, song, playlist_id: null }));
-  };
+ 
 
   const onClickDelete = () => {
     dispatch(delete_from_playlist({playlist_id: playlistId, song_id: song.id}))
@@ -49,7 +47,6 @@ export const ContextMenu = ({ song, playlistId }) => {
         {/* <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem> */}
         {/* <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem> */}
         <SubMenu className='menu-item-test submenu' direction='left' label="Add to playlist" id='testing2'>
-          <MenuItem className='menu-item-test' onClick={onClickAddNew}>Add to new playlist</MenuItem>
           {
             playlistArr?.map((playlist) => {
               return (

@@ -24,6 +24,7 @@ import { FaEllipsisH } from "react-icons/fa";
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
   const { playlistId } = useParams();
+
   const history = useHistory();
   useEffect(() => {
     dispatch(getOnePlaylist(playlistId));
@@ -39,7 +40,7 @@ const ViewOnePlaylist = () => {
   const data = useSelector((state) => state.libraryReducer)
   const [us, setus]= useState(false)
 
-  
+
 
   useEffect(() => {
 
