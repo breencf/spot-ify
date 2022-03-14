@@ -35,7 +35,7 @@ const LikedSongs = () => {
       <br />
       {/* <ContentList array={data?.songs} heading={'Songs'}/> */}
       {/* {data?.songs?.map((song) => <div key={song.id}><p>this is the added playlist id{song.id}{song.name}</p><button onClick={(() => {dispatch(delete_LibrarySong(userId, song.id))})}>Delete</button></div>)} */}
-      <SongsList songProp={data?.songs} />
+      <SongsList songProp={data?.songs} mediaId={{"users": userId}} />
     </>
   );
 };

@@ -119,7 +119,7 @@ const ViewOnePlaylist = () => {
       <hr />
 
       <br />
-      <SongsList songProp={playlistProp} playlistId={currPlaylist?.id} />
+      <SongsList songProp={playlistProp} mediaId={{"playlists": currPlaylist?.id}} />
     </>
   );
 };
