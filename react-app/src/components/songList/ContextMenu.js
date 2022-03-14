@@ -17,9 +17,7 @@ export const ContextMenu = ({ song, playlistId }) => {
   const playlistArr = Object.values(playLists);
   console.log(playlistId)
 
-  const onClickAddNew = () => {
-    dispatch(addToPlaylist({ user_id: id, song, playlist_id: null }));
-  };
+ 
 
   const onClickDelete = () => {
     dispatch(
@@ -75,34 +73,28 @@ export const ContextMenu = ({ song, playlistId }) => {
         )}
         {/* <MenuItem className='menu-item-test' onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Save to your liked songs</MenuItem> */}
         {/* <MenuItem className='menu-item-test'>Remove from this playlist</MenuItem> */}
-        <SubMenu
-          className="menu-item-test submenu"
-          direction="left"
-          label="Add to playlist"
-          id="testing2"
-        >
-          <MenuItem className="menu-item-test" onClick={onClickAddNew}>
-            Add to new playlist
-          </MenuItem>
-          {playlistArr?.map((playlist) => {
-            return (
-              <MenuItem
-                className="menu-item-test"
-                key={playlist?.id}
-                onClick={(e) => {
-                  dispatch(
-                    addToPlaylist({
-                      user_id: id,
-                      playlist_id: playlist?.id,
-                      song,
-                    })
-                  );
-                }}
-              >
-                {playlist?.name}
-              </MenuItem>
-            );
-          })}
+        <SubMenu className='menu-item-test submenu' direction='left' label="Add to playlist" id='testing2'>
+          {
+            playlistArr?.map((playlist) => {
+              return (
+                <MenuItem
+                className='menu-item-test'
+                  key={playlist?.id}
+                  onClick={(e) => {
+                    dispatch(
+                      addToPlaylist({
+                        user_id: id,
+                        playlist_id: playlist?.id,
+                        song,
+                      })
+                    );
+                  }}
+                >
+                  {playlist?.name}
+                </MenuItem>
+              );
+            })
+          }
         </SubMenu>
       </Menu>
       {/* <div style={{ margin: 20 }}> */}
