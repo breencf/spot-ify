@@ -2,7 +2,7 @@
 
 
 #Index
-   - [Features](github.com/breencf/spotify-clone/wiki)
+   - [Features](https://github.com/breencf/spotify-clone/wiki)
 
 ## Setup
 
