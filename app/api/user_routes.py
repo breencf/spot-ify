@@ -153,11 +153,23 @@ def delete_from_playlist(playlist_id, song_id):
 @login_required
 def load_library(userId):
     library_data = Library.query.filter(Library.user_id == userId).first()
+    # print('\n\n\n TESTING \n\n\n')
+    if not library_data:
+        return {'none': 'no data'}
+
+    return library_data.to_dict()
+
+@user_routes.route('/<int:userId>/library/albums')
+@login_required
+def load_library_artists(userId):
+    library_data = Library.query.filter(Library.user_id == userId).first()
 
     if not library_data:
         return {'none': 'no data'}
 
     return library_data.to_dict()
+
+
 
 
 @user_routes.route('/library/<int:albumId>/delete', methods=["POST"])

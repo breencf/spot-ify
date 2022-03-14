@@ -10,6 +10,9 @@ export const ContentCard = ({ content, heading }) => {
   // Determine route for given heading
   if (heading === "Songs") {
     source = content.album_image;
+    heading = 'Albums'
+    console.log('-----', content.album_id)
+    content.id = content.album_id
   } else if (heading === "Playlists") {
     if (!content.image) source = null;
   } else {
