@@ -51,3 +51,9 @@
      
 7. Create a user to explore the site or click on demo user to explore the site freely. 
 
+## Live Demo 
+
+   - Spot-ify.herokuapp.com
+
+
+
