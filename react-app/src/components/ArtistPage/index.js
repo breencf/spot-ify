@@ -15,7 +15,7 @@ export const ArtistPage = () => {
   const { artistId } = useParams();
   const dispatch = useDispatch();
 
-  
+
   const artistObj = useSelector((state) => state?.artistReducer?.artist);
   const userId = useSelector((state) => state.session.user.id);
   let albums = artistObj?.albums?.dict;
@@ -25,12 +25,12 @@ export const ArtistPage = () => {
   const data = useSelector((state) => state.libraryReducer)
   const [us, setus]= useState(false)
 
-  
-  
+
+
   useEffect(() => {
     dispatch(load_artist(artistId));
-    dispatch(load_Library(userId))
-    
+    // dispatch(load_Library(userId))
+
 
     // if (data?.artists && newArr?.length > 0){
     //   setus(false)
@@ -65,9 +65,9 @@ export const ArtistPage = () => {
   //   return "Follow"
   // }
 
-  
 
-  
+
+
 
   const menu = (
     <Menu id="user-menu-style">
@@ -75,7 +75,9 @@ export const ArtistPage = () => {
         id="testing_menu"
         onClick={() => {
           setus(false)
-          dispatch(add_Library_Artist(userId, artistId))}}
+          dispatch(add_Library_Artist(userId, artistId))
+          dispatch(load_Library(userId))
+        }}
         key="1"
       >
         Add Artist to Library
@@ -84,7 +86,10 @@ export const ArtistPage = () => {
         id="testing_menu"
         onClick={() => {
           setus(true)
-          dispatch(delete_LibraryArtist(userId, artistId))}}
+          dispatch(delete_LibraryArtist(userId, artistId))
+          dispatch(load_Library(userId))
+
+        }}
         key="2"
       >
         Remove Artist from Library
@@ -124,7 +129,7 @@ export const ArtistPage = () => {
       <hr />
       <br />
       <h2>{artistObj?.id ? "Popular" : ""}</h2>
-      {songs && <SongsList songProp={songs.length <= 5 ? songs : songs?.splice(0, 5)} />}
+      {songs && <SongsList songProp={songs.length <= 5 ? songs : songs?.slice(0, 5)} />}
       {albums && <ContentList array={albums} heading={"Albums"} />}
     </>
   );

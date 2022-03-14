@@ -26,7 +26,7 @@ export const AlbumPage = () => {
   const data = useSelector((state) => state.libraryReducer)
   const [us, setus]= useState(false)
 
-  
+
 
   useEffect(() => {
 
