@@ -83,7 +83,6 @@ const ViewOnePlaylist = () => {
   const handleDelete = () => {
     dispatch(delete_Playlist({ userId: id, playlistId: currPlaylist.id }));
     dispatch(delete_LibraryPlaylist(id, currPlaylist?.id));
-    dispatch(load_Playlists(id));
     return history.push("/");
   };
 

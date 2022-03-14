@@ -11,11 +11,14 @@ export const ContentCard = ({ content, heading }) => {
   if (heading === "Songs") {
     source = content.album_image;
     heading = 'Albums'
-    console.log('-----', content.album_id)
     content.id = content.album_id
   } else if (heading === "Playlists") {
     if (!content.image) source = null;
-  } else {
+  } else if (heading === "Users") {
+    content.name = content.username
+    source = content.profile_image
+  }
+   else {
     source = content.image;
     contentResult = content.id;
   }

@@ -52,21 +52,18 @@ export const addToQueue = (id) => async (dispatch) => {
   const response = await fetch(`/api/songs/${id}`);
 
   const { song } = await response.json();
-  console.log("song in queue thunk", song);
   dispatch(queue(song));
 };
 
 export const playMultipleSongs =
   ({ id, type, songId }) =>
   async (dispatch) => {
-    console.log(id)
     const response = await fetch(`/api/${type}/${id}`);
     const mediaDict = await response.json();
     let mediaArr;
     if (type === "playlists") mediaArr = Object.values(mediaDict)[0].songs.dict;
     else if (type === "albums") mediaArr = mediaDict.songs.dict;
     else if (type === "users") mediaArr = mediaDict.songs;
-    // console.log(mediaArr);
     if(songId) {
       for(const i in mediaArr) {
         if (mediaArr[i].id === songId) dispatch(playMultiple(mediaArr.splice(i)))
@@ -101,7 +98,6 @@ export default function songsReducer(state = initialState, action) {
     case ADD_TO_QUEUE:
       newState = { ...state };
       newState.queue.push(action.songObj);
-      console.log(newState.queue);
       return newState;
     case PLAY_MULTIPLE:
       newState = { ...state };

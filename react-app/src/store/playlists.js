@@ -122,7 +122,6 @@ const deleteOne = (updatedPlaylist) => {
 export const delete_from_playlist =
   ({ playlist_id, song_id }) =>
   async (dispatch) => {
-    console.log("========", playlist_id, song_id);
     const response = await fetch(
       `/api/playlists/${playlist_id}/${song_id}/delete`,
       {

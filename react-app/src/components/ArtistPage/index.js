@@ -20,7 +20,6 @@ export const ArtistPage = () => {
   const userId = useSelector((state) => state.session.user.id);
   let albums = artistObj?.albums?.dict;
   let songs = artistObj?.songs?.dict;
-  console.log(artistObj?.songs?.dict)
 
   const data = useSelector((state) => state.libraryReducer)
   const [us, setus]= useState(false)
@@ -37,7 +36,6 @@ export const ArtistPage = () => {
     // }else{
     //   setus(true)
     // }
-    // console.log(newArr)
   }, [dispatch, artistId]);
 
   useEffect(() => {
@@ -51,8 +49,7 @@ export const ArtistPage = () => {
     }else{
       setus(true)
     }
-    console.log(us)
-  }, [dispatch, artistObj, us]);
+  }, [dispatch, artistObj]);
 
 
   // const follo = () => {
