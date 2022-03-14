@@ -53,7 +53,7 @@
 
 ## Live Demo 
 
-   - Spot-ify.herokuapp.com
+   - [Spot-ify](Spot-ify.herokuapp.com)
 
 
 
