@@ -9,11 +9,12 @@ import {
   loadSong,
   pause,
   play,
+  playMultipleSongs,
   toggle_play,
 } from "../../store/songs";
 import { add_Library_Song, delete_LibrarySong } from "../../store/library";
 
-export const SongListing = ({ song, playlistId }) => {
+export const SongListing = ({ song, mediaId }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
   const { toggleState } = useSelector((state) => state.songsReducer.isPlaying);
   const { id } = useSelector((state) => state.session.user);
@@ -30,17 +31,24 @@ export const SongListing = ({ song, playlistId }) => {
     }
   };
 
-  // console.log('songsReducer', songs)
-
   useEffect(() => {
-    console.log('TESTING USE EFFECT')
     if (deleting) dispatch(load_Playlists(id));
     setDeleting(false);
   }, [dispatch, deleting]);
 
   useEffect(() => {
     if (songs) checkIfSaved();
-  }, [songs])
+  }, [songs]);
+
+  let mediaType;
+  let mId;
+  let playlistId = null;
+  if (mediaId) {
+    const mediaIdArr = Object.entries(mediaId);
+    mediaType = mediaIdArr[0][0];
+    mId = mediaIdArr[0][1];
+    if (mediaType === "playlists") playlistId = mId;
+  }
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -56,8 +64,13 @@ export const SongListing = ({ song, playlistId }) => {
   });
 
   const onClickPlay = () => {
-    dispatch(loadSong(song.id));
-    dispatch(loadSong(song.id));
+    if (mediaId) {
+      dispatch(
+        playMultipleSongs({ type: mediaType, id: mId, songId: song.id })
+      );
+    } else {
+      dispatch(loadSong(song.id));
+    }
   };
 
   const saveItem = () => {
@@ -68,13 +81,12 @@ export const SongListing = ({ song, playlistId }) => {
   };
 
   const handleButtonClick = () => {
-    console.log(saved);
     if (!saved) {
       saveItem();
-      setSaved(true)
+      setSaved(true);
     } else {
       removeSaveItem();
-      setSaved(false)
+      setSaved(false);
     }
   };
 
@@ -113,7 +125,7 @@ export const SongListing = ({ song, playlistId }) => {
         <Link to={`/albums/${song.album_id}`}>{song.album}</Link>
       </span>
 
-      <span className="song_icon_span">
+      {/* <span className="song_icon_span">
         <button
           className="button-none"
           onClick={() => dispatch(addToQueue(song.id))}
@@ -122,8 +134,7 @@ export const SongListing = ({ song, playlistId }) => {
             <FaList />
           </h4>
         </button>
-
-      </span>
+      </span> */}
       <span className="song_icon_span">
         {!saved && isHovering && (
           <svg
@@ -151,13 +162,8 @@ export const SongListing = ({ song, playlistId }) => {
       </span>
 
       <span id="contextMenu" className="song_icon_span">
-        {isHovering && <ContextMenu song={song} />}
+        {isHovering && <ContextMenu song={song} playlistId={mediaId} />}
       </span>
-
-      {/* <span className="song_icon_span">
-        <button className="button-none" onClick={handleDelete}>
-          <h4><FaTimes /></h4>
-        </button>
 
       {/* <button onClick={(() => dispatch(add_Library_Song(id, song.id)))}>Add to Lib</button> */}
     </div>

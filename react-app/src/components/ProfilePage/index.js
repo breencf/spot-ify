@@ -25,22 +25,34 @@ export const ProfilePage = () => {
     return user.id === +userId;
   });
 
+  const [us, setus]= useState(false)
+
+  // if(followers?.follows &&
+  //   followers?.follows?.filter((user) => {
+  //     return user.id === +userId;
+  //   }).length > 0){
+  //     setus(true)}
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+     {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Followers(loggedUser.id, userId))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Followers(loggedUser.id, userId))}}
         key="1"
       >
         Follow User
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(remove_Follower(loggedUser.id, userId))}
+        onClick={() => {
+          setus(true)
+          dispatch(remove_Follower(loggedUser.id, userId))}}
         key="2"
       >
         Unfollow
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
 
@@ -50,6 +62,16 @@ export const ProfilePage = () => {
   }, [dispatch, userId]);
 
   const playlists = user?.playlists?.dict;
+
+  const follo = () => {
+    setus(false)
+    return "Following"
+  }
+
+  const followw = () => {
+    setus(true)
+    return "Follow"
+  }
 
   return (
     <>
@@ -69,7 +91,7 @@ export const ProfilePage = () => {
           <h3>PROFILE</h3>
           <h1>
             {user?.first_name
-              ? user?.first_name + user?.last_name
+              ? user?.first_name + " " + user?.last_name
               : user?.email}
           </h1>
           {/* <img alt="spotify" className="artistIcon" src={artistObj?.image} /> */}
@@ -83,14 +105,14 @@ export const ProfilePage = () => {
       ) : (
         <>
           <div id="following-menu">
-            <h4 id="following-title">
+            {/* <h4 id="following-title">
               {followers?.follows &&
               followers?.follows?.filter((user) => {
                 return user.id === +userId;
               }).length > 0
                 ? "Following"
                 : "Follow"}
-            </h4>
+            </h4> */}
             <div style={{ margin: 20 }}>
               {/* <div style={{ height: 100 }} /> */}
               <div id="menu-marg">
@@ -110,6 +132,9 @@ export const ProfilePage = () => {
           </div>
         </>
       )}
+      <br />
+      <hr />
+      <br />
       {playlists && <ContentList array={playlists} heading={"Playlists"} />}
     </>
   );

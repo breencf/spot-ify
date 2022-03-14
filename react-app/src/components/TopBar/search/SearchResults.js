@@ -7,10 +7,6 @@ export const SearchResults = () => {
 
     const searchValue = useSelector(state => state.searchReducer);
 
-    // useEffect(() => {
-    //     console.log('=======', searchValue)
-    // }, [searchValue])
-
     return (
         <>
             {window.searchName && <div>
@@ -30,7 +26,7 @@ export const SearchResults = () => {
                             <ContentList array={searchValue?.Playlist} heading={'Playlists'} />
                         )}
                         {searchValue?.User[0] && (
-                            <ContentList array={searchValue?.User} heading={'User'} />
+                            <ContentList array={searchValue?.User} heading={'Users'} />
                         )}
 
                     </div>

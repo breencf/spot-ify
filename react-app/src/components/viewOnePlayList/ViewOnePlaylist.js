@@ -14,7 +14,7 @@ import {
   load_Playlists,
 } from "../../store/playlists";
 import { CompoundAlbumImage } from "./CompoundAlbumImage";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { PlayButton } from "../AudioPlayer/PlayButton";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
@@ -24,6 +24,7 @@ import { FaEllipsisH } from "react-icons/fa";
 const ViewOnePlaylist = () => {
   const dispatch = useDispatch();
   const { playlistId } = useParams();
+
   const history = useHistory();
   useEffect(() => {
     dispatch(getOnePlaylist(playlistId));
@@ -35,22 +36,46 @@ const ViewOnePlaylist = () => {
   const currPlaylist = useSelector(
     (state) => state?.playListReducer.currentPlaylist
   );
+
+  const data = useSelector((state) => state.libraryReducer)
+  const [us, setus]= useState(false)
+
+
+
+  useEffect(() => {
+
+    let newArr = data.playlists?.filter((user) => {
+      return user.id === parseInt(playlistId);
+    })
+
+    if (data?.playlists && newArr?.length > 0){
+      setus(false)
+    }else{
+      setus(true)
+    }
+  }, [dispatch, playLists ]);
+
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+      {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Library_Playlist(id, currPlaylist?.id))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Library_Playlist(id, currPlaylist?.id))}}
         key="1"
       >
         Add Playlist to Library
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(delete_LibraryPlaylist(id, currPlaylist?.id))}
+        onClick={() => {
+          setus(true)
+          dispatch(delete_LibraryPlaylist(id, currPlaylist?.id))}}
         key="2"
       >
         Remove Playlist from Library
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
   const playlistProp = currPlaylist?.songs?.dict;
@@ -119,7 +144,7 @@ const ViewOnePlaylist = () => {
       <hr />
 
       <br />
-      <SongsList songProp={playlistProp} playlistId={currPlaylist?.id} />
+      <SongsList songProp={playlistProp} mediaId={{"playlists": currPlaylist?.id}} />
     </>
   );
 };

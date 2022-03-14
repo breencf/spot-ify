@@ -34,7 +34,6 @@ export const AudioPlayer = () => {
   //on second play, it loads the next song, and loads the song that just ended to the last song state.
   useEffect(() => {
     if (newSong) {
-      console.log("new song loaded from state");
       setLastSong(currentSong);
       setCurrentSong(newSong);
     }
@@ -140,7 +139,7 @@ export const AudioPlayer = () => {
   const onLastClick = () => {
     let last = playedSongs.shift();
     compositeQueue.unshift(currentSong);
-    dispatch(loadSong(last.id));
+    dispatch(loadSong(last?.id));
   };
 
   return (

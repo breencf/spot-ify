@@ -8,7 +8,6 @@ import { CompoundAlbumImage } from "../viewOnePlayList/CompoundAlbumImage";
 const PlaylistsEdit = ({ playList, closeModal }) => {
   const dispatch = useDispatch();
 
-  console.log(playList);
   const [name, setName] = useState(playList.name);
   const [image, setImage] = useState(playList.image);
   const [description, setDescription] = useState(playList.description);

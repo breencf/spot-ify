@@ -36,7 +36,7 @@ export const CreatePlaylistForm = ({ closeModal }) => {
     // dispatch(load_Playlists(id));
 
     closeModal();
-    history.push(`/users/${id}/playlists/${value.playlist.id}`);
+    history.push(`/playlists/${value.playlist.id}`);
   };
 
   return (
@@ -68,6 +68,7 @@ export const CreatePlaylistForm = ({ closeModal }) => {
                 value={name}
                 type="text"
                 name="name"
+                required
                 placeholder="My Playlist #69"
               />
             </div>

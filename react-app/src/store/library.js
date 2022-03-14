@@ -153,7 +153,6 @@ const loadLibrary = (data) => {
 export const load_Library = (userId) => async dispatch => {
     const response = await fetch(`/api/users/${userId}/library`)
     const data = await response.json()
-    // console.log(data, 'any data coming back? ')
     dispatch(loadLibrary(data))
 }
 

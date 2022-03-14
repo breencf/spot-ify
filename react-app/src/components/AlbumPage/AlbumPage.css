@@ -31,3 +31,11 @@
   flex-direction: row;
   gap: 15px;
 }
+
+.album-details {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+}

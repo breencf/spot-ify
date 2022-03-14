@@ -2,7 +2,8 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .library_seed import seed_library
 from .seed_playlists import seed_playlists, undo_playlists
-from .seed_songs import seed_artists, seed_albums, seed_songs, undo_albums, undo_artists, undo_songs
+from .song_seeds_part_two import seed_artists_1, seed_albums_1, seed_songs_1, undo_albums_1, undo_artists_1, undo_songs_1
+from .seed_songs import undo_albums, undo_artists, undo_songs
 
 
 # Creates a seed group to hold our commands
@@ -14,10 +15,10 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_artists()
-    seed_albums()
+    seed_artists_1()
+    seed_albums_1()
     seed_library()
-    seed_songs()
+    seed_songs_1()
     seed_playlists()
     # Add other seed functions here
 
@@ -26,6 +27,9 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
+    undo_albums_1()
+    undo_artists_1()
+    undo_songs_1()
     undo_albums()
     undo_artists()
     undo_songs()

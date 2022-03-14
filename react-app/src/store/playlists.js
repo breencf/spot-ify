@@ -17,7 +17,7 @@ const get_one = (playlistObj) => {
 
 export const getOnePlaylist = (id) => async (dispatch) => {
   const response = await fetch(`/api/playlists/${id}`);
-  const {playlist} = await response.json();
+  const { playlist } = await response.json();
   dispatch(get_one(playlist));
 };
 
@@ -58,7 +58,7 @@ export const delete_Playlist =
       }),
     });
     const { deleted } = await response.json();
- 
+
     dispatch(deletePlaylist(deleted));
     return deleted;
   };
@@ -108,7 +108,6 @@ export const addToPlaylist =
     );
     if (response.ok) {
       const updatedPlaylist = await response.json();
-      console.log(updatedPlaylist);
       dispatch(add(updatedPlaylist));
     }
   };
@@ -123,6 +122,7 @@ const deleteOne = (updatedPlaylist) => {
 export const delete_from_playlist =
   ({ playlist_id, song_id }) =>
   async (dispatch) => {
+    console.log("========", playlist_id, song_id);
     const response = await fetch(
       `/api/playlists/${playlist_id}/${song_id}/delete`,
       {
@@ -135,7 +135,6 @@ export const delete_from_playlist =
       }
     );
     const updatedPlaylist = await response.json();
-    console.log("updated playlist", updatedPlaylist);
     dispatch(deleteOne(updatedPlaylist));
     return updatedPlaylist;
   };
@@ -183,7 +182,6 @@ const playListReducer = (state = initialState, action) => {
       return newState;
     case ADD_TO_PLAYLIST:
       newState = { ...state };
-      console.log(action.updatedPlaylist.id);
       newState.playLists[action.updatedPlaylist.id] = action.updatedPlaylist;
       return newState;
     case DELETE_FROM_PLAYLIST:

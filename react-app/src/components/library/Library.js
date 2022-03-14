@@ -24,16 +24,17 @@ const Library = () => {
     return (
         <div>
             <Route path={`/${userId}/library/albums`}>
-                <ContentList array={data?.albums} heading={'Albums'} />
+                {data?.albums.length && <ContentList array={data?.albums} heading={'Albums'}/>}
                 {/* <h4>TESTING</h4> */}
             </Route>
             <Route path='/:userId/library/artists'>
-                <ContentList array={data?.artists} heading={'Artists'} />
+                {data?.artists.length && <ContentList array={data?.artists} heading={'Artists'}/>}
             </Route>
             <Route path='/:userId/library/playlists'>
-                {data?.playlists && playLists && <ContentList array={[...data?.playlists, ...playLists]} heading={'Playlists'} />}
+                {data?.playlists && playLists && <ContentList array={[...data?.playlists, ...playLists]} heading={'Playlists'}/>}
             </Route>
-        </div>
+
+        </div >
     )
 }
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { load_album } from "../../store/album";
@@ -23,26 +23,49 @@ export const AlbumPage = () => {
   const albumObj = useSelector((state) => state.albumReducer);
   const userId = useSelector((state) => state.session.user.id);
 
+  const data = useSelector((state) => state.libraryReducer)
+  const [us, setus]= useState(false)
+
+
+
+  useEffect(() => {
+
+    let newArr = data.albums?.filter((user) => {
+      return user.id === parseInt(albumId);
+    })
+
+    if (data?.albums && newArr?.length > 0){
+      setus(false)
+    }else{
+      setus(true)
+    }
+    // console.log(newArr)
+  }, [dispatch, albumObj ]);
+
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+      {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Library_Album(userId, albumId))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Library_Album(userId, albumId))}}
         key="1"
       >
         Add to Library
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(delete_LibraryAlbum(userId, albumId))}
+        onClick={() => {
+          setus(true)
+          dispatch(delete_LibraryAlbum(userId, albumId))}}
         key="2"
       >
         Remove from Library
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
 
-  // console.log(albumObj?.album?.songs?.dict);
   let songs = albumObj?.album?.songs?.dict;
 
   return (
@@ -58,6 +81,7 @@ export const AlbumPage = () => {
         <div>
           <h4>ALBUM</h4>
           <h1>{albumObj?.album?.name}</h1>
+          <div className="album-details">
           <img
             alt="spotify"
             className="artistIcon"
@@ -66,6 +90,7 @@ export const AlbumPage = () => {
           <Link to={`/artists/${albumObj?.album?.artist_id}`}>
             {albumObj?.album?.artist}
           </Link>
+          </div>
         </div>
       </div>
       <br />
@@ -85,7 +110,9 @@ export const AlbumPage = () => {
       )}
       <hr />
       <br />
-      <SongsList songProp={songs} />
+      <SongsList songProp={songs} mediaId={{"albums": albumId}} />
+      <hr/>
+      <p>© {albumObj.album.year} {albumObj.album.artist}</p>
     </>
   );
 };

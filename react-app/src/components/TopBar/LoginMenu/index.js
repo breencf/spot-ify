@@ -23,7 +23,7 @@ export const LoginMenu = () => {
     let ret;
 
     if(user) {
-        ret=(<Menu menuButton={<button className="button-green">{user.username}</button>}>
+        ret=(<Menu menuButton={<button className="button-green">{user.firstName? `${user.firstName}  ${user.lastName}` : user.username}</button>}>
         <MenuItem key="name">
            <h4>{user.firstName? `${user.firstName}  ${user.lastName}` : user.email}</h4>
         </MenuItem>

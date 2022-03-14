@@ -11,7 +11,6 @@ export const PlayButton = ({ type, mediaId }) => {
 
   const onClick = () => {
     setToggleIcon(false);
-    console.log(type, mediaId)
     dispatch(playMultipleSongs({ type, id: mediaId }));
   };
 

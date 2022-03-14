@@ -1,11 +1,11 @@
 #songslist {
   width: 100%;
   padding: 0px 10px;
+  min-height: 300px;
   /* padding-bottom: 200px; */
   max-height: 500px;
   overflow-y: scroll;
 }
-
 
 .songListing {
   padding: 5px 16px;
@@ -17,7 +17,7 @@
 }
 
 .songListing:hover {
-  background: rgba(255,255,255,.3);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
 }
 
@@ -46,40 +46,11 @@
   width: 40px;
 }
 
-
 .contextMenu {
   z-index: 100000;
   padding-right: 50px;
 }
-#testing1{
-  background-color: #282828;
-    border-radius: 4px;
-    border: none;
-    width: 75px;
-    box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
-}
-
-.menu-item-test{
-  cursor: pointer;
-  color:white;
-}
-
-.menu-item-test .link{
-  border-top: none;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.menu-item-test:hover{
-  background-color: rgb(58, 57, 57);
-}
-
-.menu-item-test.link:hover{
-  background-color: rgb(58, 57, 57);
-}
-
-
-#testing2{
+#testing1 {
   background-color: #282828;
   border-radius: 4px;
   border: none;
@@ -87,15 +58,40 @@
   box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
 }
 
+.menu-item-test {
+  cursor: pointer;
+  color: white;
+}
 
-.szh-menu__submenu:hover{
+.menu-item-test .link {
+  border-top: none;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.menu-item-test:hover {
+  background-color: rgb(58, 57, 57);
+}
+
+.menu-item-test.link:hover {
+  background-color: rgb(58, 57, 57);
+}
+
+#testing2 {
+  background-color: #282828;
+  border-radius: 4px;
+  border: none;
+  width: 75px;
+  box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+}
+
+.szh-menu__submenu:hover {
   background-color: rgb(58, 57, 57) !important;
 }
 
 .contextMenu * {
   /* background-color: aqua; */
   z-index: 101;
-
 }
 
 .song_album_image {
@@ -103,8 +99,7 @@
   height: 40px;
 }
 
-
-#menu-heart{
+#menu-heart {
   display: flex;
   flex-direction: row;
   gap: 15px;

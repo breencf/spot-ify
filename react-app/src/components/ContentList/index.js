@@ -4,10 +4,6 @@ import "./ContentList.css"
 
 export const ContentList = ({ array, heading }) => {
 
-    useEffect(() => {
-        console.log('-------------', array)
-    }, [array])
-
     return (
         <>
             <h2>{heading}</h2>

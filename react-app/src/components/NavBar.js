@@ -24,7 +24,7 @@ const NavBar = () => {
   };
 
   function afterOpenModal() {
-    console.log("hvfuvhfd");
+    return null
   }
 
   const closeModal = () => {
@@ -63,7 +63,7 @@ const NavBar = () => {
       <nav id="sidebar">
         <Link id='spot-icon' to='/home'>
         <h2>
-          <FaSpotify /> Spotify
+          <FaSpotify /> Spot-ify
         </h2>
         </Link>
         <div className="navbar-playlist">
@@ -84,7 +84,7 @@ const NavBar = () => {
           <li>
             <NavLink to="/home" exact={true} activeClassName="active">
               <h3>
-                <FaHome /> Home
+                <FaHome />  Home
               </h3>
             </NavLink>
           </li>
@@ -117,9 +117,9 @@ const NavBar = () => {
           <NavLink to="/songs" exact={true} activeClassName="active">
             <h3><FaRegHeart /> Liked Songs</h3>
           </NavLink>
-          <NavLink to="/followers" exact={true} activeClassName="active">
+          {/* <NavLink to="/followers" exact={true} activeClassName="active">
             <h3>Following</h3>
-          </NavLink>
+          </NavLink> */}
         </ul>
         </div>
         <Modal
