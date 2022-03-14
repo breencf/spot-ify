@@ -2,7 +2,10 @@
 
 
 #Index
-   - [Features](https://github.com/breencf/spotify-clone/wiki)
+   - [Features List](https://github.com/breencf/spotify-clone/wiki)
+   - [Database Schema](https://github.com/breencf/spotify-clone/wiki/User-Stories)
+   - [User Stories](https://github.com/breencf/spotify-clone/wiki/User-Stories)
+   - [Live Site](https://Spot-ify.herokuapp.com)
 
 ## Setup
 
@@ -55,9 +58,9 @@
      
 7. Create a user to explore the site or click on demo user to explore the site freely. 
 
-## Live Demo 
 
-   - https://Spot-ify.herokuapp.com
+
+ 
 
 
 
