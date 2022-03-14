@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { load_album } from "../../store/album";
@@ -23,22 +23,46 @@ export const AlbumPage = () => {
   const albumObj = useSelector((state) => state.albumReducer);
   const userId = useSelector((state) => state.session.user.id);
 
+  const data = useSelector((state) => state.libraryReducer)
+  const [us, setus]= useState(false)
+
+
+
+  useEffect(() => {
+
+    let newArr = data.albums?.filter((user) => {
+      return user.id === parseInt(albumId);
+    })
+
+    if (data?.albums && newArr?.length > 0){
+      setus(false)
+    }else{
+      setus(true)
+    }
+    // console.log(newArr)
+  }, [dispatch, albumObj ]);
+
+
   const menu = (
     <Menu id="user-menu-style">
-      <MenuItem
+      {us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(add_Library_Album(userId, albumId))}
+        onClick={() => {
+          setus(false)
+          dispatch(add_Library_Album(userId, albumId))}}
         key="1"
       >
         Add to Library
-      </MenuItem>
-      <MenuItem
+      </MenuItem>}
+      {!us && <MenuItem
         id="testing_menu"
-        onClick={() => dispatch(delete_LibraryAlbum(userId, albumId))}
+        onClick={() => {
+          setus(true)
+          dispatch(delete_LibraryAlbum(userId, albumId))}}
         key="2"
       >
         Remove from Library
-      </MenuItem>
+      </MenuItem>}
     </Menu>
   );
 

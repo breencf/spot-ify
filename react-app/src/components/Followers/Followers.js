@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { load_Followers } from "../../store/follows";
 import { remove_Follower } from "../../store/follows";
+import { ContentList } from "../ContentList";
 import { Link } from "react-router-dom";
 import "./Follower.css";
 
@@ -19,7 +20,8 @@ const Followers = () => {
       <div>
         <h2>Following</h2>
         <div id="follow-cont">
-          {data?.follows?.map((follow) => {
+          <ContentList array={data?.follows} heading={"users"} />
+          {/* {data?.follows?.map((follow) => {
             return (
               <div id="follow-spacing" key={follow.id}>
                 <Link id="followers-name" to={`/users/${follow.id}`}>
@@ -29,7 +31,7 @@ const Followers = () => {
                 <img alt="spotify" src={follow.profile_image} />
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     </>
