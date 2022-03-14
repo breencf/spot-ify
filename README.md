@@ -5,6 +5,7 @@
    - [Features List](https://github.com/breencf/spotify-clone/wiki)
    - [Database Schema](https://github.com/breencf/spotify-clone/wiki/User-Stories)
    - [User Stories](https://github.com/breencf/spotify-clone/wiki/User-Stories)
+   - [Contributors]()
    - [Live Site](https://Spot-ify.herokuapp.com)
 
 ## Setup
