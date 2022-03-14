@@ -1,7 +1,7 @@
 # Spot-ify Clone
 
 
-#Index
+# Index
    - [Features List](https://github.com/breencf/spotify-clone/wiki)
    - [Database Schema](https://github.com/breencf/spotify-clone/wiki/User-Stories)
    - [User Stories](https://github.com/breencf/spotify-clone/wiki/User-Stories)
