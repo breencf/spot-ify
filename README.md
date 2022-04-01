@@ -9,6 +9,30 @@
    - [Contributors](https://github.com/breencf/spotify-clone/wiki/About)
    - [Live Site](https://Spot-ify.herokuapp.com)
 
+## Technologies Used
+
+* Python
+* Flask
+* SQLAlchemy
+* React
+* Redux
+* HTML
+* CSS
+
+## Splash page
+![Screen Shot 2022-03-31 at 4 31 25 PM](https://user-images.githubusercontent.com/90711743/161166052-b7cac744-1e75-4cc7-959a-6cf90c035738.png)
+
+## Search 
+![Screen Shot 2022-03-31 at 4 32 13 PM](https://user-images.githubusercontent.com/90711743/161166136-63da1bec-fa1b-4765-a335-a74eb04b3287.png)
+
+## Playlist
+![Screen Shot 2022-03-31 at 4 33 04 PM](https://user-images.githubusercontent.com/90711743/161166216-a22d5a88-d19d-4d5b-bcc5-484c3336386d.png)
+
+
+## Music player
+![Screen Shot 2022-03-31 at 4 33 49 PM](https://user-images.githubusercontent.com/90711743/161166271-39926620-113e-4fdf-ab88-1eaac27eadbd.png)
+
+
 ## Setup
 
 1. Clone the repository 
