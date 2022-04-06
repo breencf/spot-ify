@@ -14,7 +14,7 @@ import {
 } from "../../store/songs";
 import { add_Library_Song, delete_LibrarySong } from "../../store/library";
 
-export const SongListing = ({ song, mediaId }) => {
+export const SongListing = ({ song, mediaId, num }) => {
   const { currSong } = useSelector((state) => state.songsReducer);
   const { toggleState } = useSelector((state) => state.songsReducer.isPlaying);
   const { id } = useSelector((state) => state.session.user);
@@ -98,7 +98,7 @@ export const SongListing = ({ song, mediaId }) => {
     >
       {!isHovering && (
         <span className="song_track_number">
-          <p>{song.album_track_number}</p>
+          <p>{num}</p>
         </span>
       )}
       {isHovering && (

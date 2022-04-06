@@ -75,6 +75,14 @@ export const AboutPage = () => {
       <div className="about-div">
         <h3>Wilvanson Dutervil</h3>
         <a
+          href="https://www.linkedin.com/in/wilvanson-dutervil-509a2b174/"
+          className="a-about"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin />
+        </a>
+        <a
           href="http://www.github.com/wilvanson"
           className="a-about"
           target="_blank"

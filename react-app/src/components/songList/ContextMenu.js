@@ -1,7 +1,7 @@
 import "./songList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToPlaylist } from "../../store/playlists";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaEllipsisH, FaHeart } from "react-icons/fa";
 import { add_Library_Song } from "../../store/library";
 import { addToQueue } from "../../store/songs";
@@ -16,6 +16,8 @@ export const ContextMenu = ({ song, playlistId }) => {
   const {currentPlaylist} = useSelector((state)=> state.playListReducer)
   const dispatch = useDispatch();
   const playlistArr = Object.values(playLists);
+  const location = useLocation()
+  let prefix = location.pathname.split("/")[1]
 
 
   const onClickDelete = () => {
@@ -60,7 +62,7 @@ export const ContextMenu = ({ song, playlistId }) => {
             Go to album
           </Link>
         </MenuItem>
-        {currentPlaylist && currentPlaylist.user_id === id && (
+        { prefix.toLowerCase() === "playlists" && currentPlaylist && currentPlaylist.user_id === id && (
           <MenuItem className="menu-item-test">
             <button
               className="button-none menu-item-test link"
