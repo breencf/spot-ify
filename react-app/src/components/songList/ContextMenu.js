@@ -13,8 +13,10 @@ import "@szhsin/react-menu/dist/index.css";
 export const ContextMenu = ({ song, playlistId }) => {
   const { id } = useSelector((state) => state.session.user);
   const { playLists } = useSelector((state) => state.playListReducer);
+  const {currentPlaylist} = useSelector((state)=> state.playListReducer)
   const dispatch = useDispatch();
   const playlistArr = Object.values(playLists);
+
 
   const onClickDelete = () => {
     dispatch(
@@ -58,7 +60,7 @@ export const ContextMenu = ({ song, playlistId }) => {
             Go to album
           </Link>
         </MenuItem>
-        {playlistId && (
+        {currentPlaylist && currentPlaylist.user_id === id && (
           <MenuItem className="menu-item-test">
             <button
               className="button-none menu-item-test link"

@@ -4,7 +4,7 @@ const PLAY_SONG = "songs/PLAY_SONG";
 const TOGGLE_IS_PLAYING = "songs/TOGGLE_IS_PLAYING";
 const ADD_TO_QUEUE = "songs/ADD_TO_QUEUE";
 const PLAY_MULTIPLE = "songs/PLAY_MULTIPLE";
-
+const CLEAR = "songs/CLEAR";
 
 const playMultiple = (songsArr) => {
   return {
@@ -22,6 +22,7 @@ const queue = (songObj) => ({
   type: ADD_TO_QUEUE,
   songObj,
 });
+
 
 export const toggle_play = () => {
   return {
@@ -41,6 +42,12 @@ export const play = () => {
   };
 };
 
+export const clear = () => {
+  return {
+    type: CLEAR,
+  };
+};
+
 export const loadSong = (id) => async (dispatch) => {
   const response = await fetch(`/api/songs/${id}`);
 
@@ -55,6 +62,7 @@ export const addToQueue = (id) => async (dispatch) => {
   dispatch(queue(song));
 };
 
+
 export const playMultipleSongs =
   ({ id, type, songId }) =>
   async (dispatch) => {
@@ -64,17 +72,22 @@ export const playMultipleSongs =
     if (type === "playlists") mediaArr = Object.values(mediaDict)[0].songs.dict;
     else if (type === "albums") mediaArr = mediaDict.songs.dict;
     else if (type === "users") mediaArr = mediaDict.songs;
-    if(songId) {
-      for(const i in mediaArr) {
-        if (mediaArr[i].id === songId) dispatch(playMultiple(mediaArr.splice(i)))
+    if (songId) {
+      for (const i in mediaArr) {
+        if (mediaArr[i].id === songId)
+          dispatch(playMultiple(mediaArr.splice(i)));
       }
-    }
-    else {
+    } else {
       dispatch(playMultiple(mediaArr));
     }
   };
 
-const initialState = { playqueue: [], queue: [], newSong: null, isPlaying: false };
+const initialState = {
+  playqueue: [],
+  queue: [],
+  newSong: null,
+  isPlaying: false,
+};
 let newState;
 
 export default function songsReducer(state = initialState, action) {
@@ -102,8 +115,11 @@ export default function songsReducer(state = initialState, action) {
     case PLAY_MULTIPLE:
       newState = { ...state };
       newState.newSong = action.songsArr[0];
-      newState.playqueue = action.songsArr.splice(1)
+      newState.playqueue = action.songsArr.splice(1);
       // action.songsArr.splice(1).map((song) => newState.playqueue.push(song));
+      return newState;
+    case CLEAR:
+      newState = initialState;
       return newState;
     default:
       return state;

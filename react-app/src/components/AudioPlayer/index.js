@@ -94,7 +94,7 @@ export const AudioPlayer = () => {
 
   //this function is what animates our progressbar and updates the seconds on the left
   const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
+    if(progressBar.current) progressBar.current.value = audioPlayer.current?.currentTime;
     changePlayerCurrentTime();
     progressRef.current = requestAnimationFrame(whilePlaying);
   };

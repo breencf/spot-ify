@@ -17,7 +17,6 @@ export const remove_Follower = (userId, otherUserId) => async (dispatch) => {
     body: JSON.stringify({ userId, otherUserId }),
   });
   const data = await response.json();
-  console.log(data)
   dispatch(removeFollower(data));
 };
 
@@ -35,7 +34,6 @@ export const add_Followers = (userId, otherUserId) => async (dispatch) => {
     body: JSON.stringify({ userId, otherUserId }),
   });
   const follower = await response.json();
-  console.log(follower)
   dispatch(addFollowers(follower));
 };
 
@@ -58,17 +56,14 @@ const followsReducer = (state = {}, action) => {
     case LOAD_FOLLOWERS:
       newState = { ...state };
       newState = action.data;
-      console.log(newState);
       return newState;
     case REMOVE_FOLLOWERS:
       newState = { ...state };
       newState.follows = newState.follows.filter((ele) => ele === action.unfollowerObj);
-      console.log(newState);
       return newState;
     case ADD_FOLLOWERS:
       newState = { ...state };
       if (!newState.follows.includes(action.follower)) newState.follows.push(action.follower);
-      console.log(newState);
       return newState;
     default:
       return state;

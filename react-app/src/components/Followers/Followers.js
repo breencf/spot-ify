@@ -8,8 +8,7 @@ import "./Follower.css";
 
 const Followers = () => {
   const dispatch = useDispatch();
-  const {userid} = useParams();
-  console.log(userid)
+  const { userid } = useParams();
   const data = useSelector((state) => state.followsReducer);
 
   useEffect(() => {

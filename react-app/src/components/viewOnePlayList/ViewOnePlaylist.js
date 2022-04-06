@@ -99,7 +99,6 @@ const ViewOnePlaylist = () => {
     imag = <CompoundAlbumImage songs={playlistProp} />;
   }
 
-  console.log(currPlaylist);
   return (
     <>
       <div className="albumTop">
